@@ -5,7 +5,24 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk';
 
 
+
+const preloadedState = window.localStorage.getItem('state') || '{"isAuthenticated": false}'
+
+//   JSON.parse(preloadedState),
+//   composeWithDevTools()
+
+// )
+
+
 // Store
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(reducer, JSON.parse(preloadedState), composeWithDevTools(applyMiddleware(thunk)))
+
+
+//для авторизации
+store.subscribe(() => {
+  const state = store.getState()['isAuntificated']
+  window.localStorage.setItem('state', JSON.stringify(state))
+})
+
 
 export default store;

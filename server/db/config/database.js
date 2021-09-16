@@ -2,9 +2,9 @@ require('dotenv').config();
 
 module.exports ={
   "development": {
-    "username": process.env.DBUSER,
-    "password": process.env.PASSWORD,
-    "database": process.env.DBASE,
+    "username": "polzovatel",
+    "password": null,
+    "database": "final",
     "host": process.env.HOST,
     "dialect": process.env.DIALECT
   },
