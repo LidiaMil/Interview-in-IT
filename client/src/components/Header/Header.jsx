@@ -31,10 +31,6 @@ export default function Header()  {
 
   const isAuthenticated = useSelector(state => state.isAuntificated)
 
-
-  
-
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
