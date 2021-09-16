@@ -7,6 +7,8 @@ const redis = require('redis');
 const session = require('express-session');
 let RedisStore = require('connect-redis')(session);
 
+const questionRouter = require('./routes/questionRouter');
+
 let redisClient = redis.createClient()
 const cors = require("cors");
 
@@ -18,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/question', questionRouter);
 
 
 app.listen(PORT, () => {
