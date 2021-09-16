@@ -1,3 +1,16 @@
+import React from "react";
+import axios from "axios";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import Main from './components/Main/Main';
+import Header from './components/Header/Header';
+import NewPost from './components/NewPost/NewPost';
+import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
 import Question from './components/Question/Question'
 
