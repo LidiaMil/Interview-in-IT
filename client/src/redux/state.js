@@ -1,5 +1,7 @@
 export const initialState = {
-  organization: [], 
-  questions:[],
-  user:{}
+  organization: [],
+
+  question: [],
+
+  user: {}
 }
