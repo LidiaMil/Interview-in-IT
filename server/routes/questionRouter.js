@@ -3,7 +3,13 @@ const {Question,User} = require('../db/models');
 
 
 router.get('/', async(req, res) => {
-  const questions = await Question.findAll();
+
+  const questions = await Question.findAll({
+    include: [{
+      model: User,
+      as: 'User'
+    }],
+  });
   console.log(questions)
   res.json(questions);
 });
