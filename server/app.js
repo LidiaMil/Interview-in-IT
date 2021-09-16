@@ -24,14 +24,8 @@ app.use(express.urlencoded({extended:true}));
 // app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 
-const quoteAPI = require('quote-indo');
 
-(async () => {
-    const query = 'bucin'
-    const quote = await quoteAPI.Quotes(query);
 
-    console.log(quote);
-})()
 
 app.listen(PORT, ()=> {
   console.log('Server start on ', PORT)
