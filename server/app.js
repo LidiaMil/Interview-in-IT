@@ -13,6 +13,9 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // тут подключаем файлики
+const indexRouter = require('./routes/indexRouter');
+const organizations = require('./routes/organizationsRouter');
+
 
 
 app.set('view engine', 'hbs');
@@ -32,6 +35,10 @@ const quoteAPI = require('quote-indo');
 
     console.log(quote);
 })()
+
+
+app.use('/', indexRouter);
+app.use('/organizations', organizations)
 
 app.listen(PORT, ()=> {
   console.log('Server start on ', PORT)
