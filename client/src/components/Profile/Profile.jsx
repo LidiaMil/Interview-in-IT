@@ -1,17 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Box, Avatar, IconButton } from '@material-ui/core';
 import { PhotoCamera, } from '@material-ui/icons/';
 
-<<<<<<< HEAD:client/src/components/Profile/Profile.jsx
 
-
-
-
-
-
-=======
->>>>>>> main:frontend/src/components/Profile/Profile.jsx
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -26,42 +18,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoNvAGeLUnT6o3GAdfd9HIqdNGykBe2Gy3Gw&usqp=CAU"
+const id = 1
+
 
 function Profile() {
   const classes = useStyles();
 
+  const [img, setImg] = useState("")
+
+  useEffect(() => {
+    let user = fetch(`http://localhost:3000/edit/${id}`)
+      .then(res => res.json())
+      .then(data => setImg(data.photo))
+  }, [])
+
+
   function submintForm(e) {
     e.preventDefault()
-    const dataForm = Object.fromEntries(new FormData(e.target))
+    const formData = new FormData();
+    const imagefile = document.querySelector('#icon-button-file');
+    const name = document.querySelector('#firstName');
+    formData.append('image', imagefile.files[0]);
+    formData.append('nickname', name.value);
+    formData.append('id',id)
     e.target.reset()
-    console.log(dataForm.foto);
+    fetch("http://localhost:3000/edit/upload", {
+      method: 'POST',
+      body: formData,
+    })
+      .then(result => result.text())
+      .then(text => console.log(text))
+  }
 
+
+
+  function getMyPosts() {
+    alert(55)
   }
 
 
   return (
     <Box component="div" m={1}>
       <img></img>
-      <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off">
+      <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off" enctype="multipart/form-data" action="/profile">
         <Box component="div" style={{ height: "100px" }} m={5}>
           <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} />
         </Box>
 
         <div className={classes.root}>
-          <input
+          {/* <input
             accept="image/*"
             className={classes.input}
             id="contained-button-file"
             multiple
             type="file"
-          />
+          /> */}
           <label htmlFor="contained-button-file">
             <Button variant="contained" color="primary" component="span">
               Upload
             </Button>
           </label>
-          <input accept="image/*" className={classes.input} id="icon-button-file" name="foto" type="file" />
+          <input accept="image/*" className={classes.input} id="icon-button-file" name="photo" type="file" />
           <label htmlFor="icon-button-file">
             <IconButton color="primary" aria-label="upload picture" component="span">
               <PhotoCamera />
@@ -74,13 +91,15 @@ function Profile() {
           <button variant="contained" color="primary">
             Изменить
           </button>
-          {/* 
-          <Button variant="contained" color="primary" type="submit" disableElevation>
-            Disable elevation
-          </Button> */}
-
         </div>
       </form >
+
+      <Box>
+        <Button onClick={getMyPosts} variant="contained" color="primary" type="submit" disableElevation>
+          Показать мои посты
+        </Button>
+      </Box>
+
     </Box >
 
 
