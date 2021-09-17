@@ -11,7 +11,6 @@ let RedisStore = require('connect-redis')(session);
 //переделал авторизацию через node-localstorage(nodeLocalStorage)
 let LocalStorage = require('node-localstorage').LocalStorage,
 localStorage = new LocalStorage('./scratch');
-const questionRouter=require('./routes/questionRouter')
 
 //let redisClient = redis.createClient()
 const cors = require("cors");
@@ -19,6 +18,7 @@ const cors = require("cors");
 const app = express();
 
 // тут подключаем файлики
+const questionRouter=require('./routes/questionRouter')
 const indexRouter = require('./routes/indexRouter');
 const organizations = require('./routes/organizationsRouter');
 
@@ -38,13 +38,12 @@ const db = [{
   password: '123'
 }]
 
-app.use('/question', questionRouter);
 
 
 
 //для авторизации
 app.post("/login", (req, res) => {
- // console.log(req.body);
+  // console.log(req.body);
   const {email, password} = req.body
   const user = db.find((user) => user.email === email && user.password === password)
   console.log(user);
@@ -72,15 +71,13 @@ app.get('/logout', (req, res) => {
     res.end()
   }
   
-  })
-
-
-
+})
 
 
 
 
 app.use('/', indexRouter);
+app.use('/question', questionRouter);
 app.use('/organizations', organizations)
 
 app.listen(PORT, ()=> {

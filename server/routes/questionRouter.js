@@ -1,14 +1,22 @@
 const router = require('express').Router();
-const {Question,User} = require('../db/models');
+const {Question,User,Language,Organization} = require('../db/models');
 
 
 router.get('/', async(req, res) => {
 
   const questions = await Question.findAll({
-    include: [{
+    include: [
+      {
       model: User,
       as: 'User'
-    }],
+    },
+    {
+      model: Language
+    },
+    {
+      model: Organization
+    },
+  ]
   });
   console.log(questions)
   res.json(questions);
