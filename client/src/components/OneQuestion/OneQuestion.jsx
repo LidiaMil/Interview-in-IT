@@ -3,16 +3,24 @@ import * as React from 'react';
 import { styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
 
 
-export default function ComplexGrid({ id, text, data, user_id , User}) {
+export default function ComplexGrid({ id, text, data, user_id , User,Languages,Organizations}) {
+  let arrQuest=[]
+  let arrOrg=[]
+
+  for(let i=0;i<Languages.length;i++){
+    arrQuest.push(Languages[i].programmingLanguage)
+  }
+  for(let i=0;i<Organizations.length;i++){
+    arrOrg.push(Organizations[i].title)
+  }
   return (
-    <Paper sx={{ p: 2, margin: 'auto', maxWidth: 400, flexGrow: 1 }}>
+    <Paper sx={{ p: 4, margin: 'auto', maxWidth: 400, flexGrow: 2 }}>
       <Grid container spacing={3}>
         <Grid item>
-          <ButtonBase sx={{ width: 256, height: 256 }}>
-            <Avatar
-              alt="Remy Sharp"
+          <ButtonBase >
+            <Avatar sx={{ width: 256, height: 256 }}
+              alt={User.firstName}
               src= {User.photo}
-              sx={{ width: 256, height: 256 }}
             />
           </ButtonBase>
         </Grid>
@@ -21,6 +29,9 @@ export default function ComplexGrid({ id, text, data, user_id , User}) {
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
                 {User.firstName}
+              </Typography>
+              <Typography gutterBottom variant="subtitle1" component="div">
+                {arrOrg.join(' ')}
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {text}
@@ -34,7 +45,7 @@ export default function ComplexGrid({ id, text, data, user_id , User}) {
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-              $19.00
+              {arrQuest.join(' ')}
             </Typography>
           </Grid>
         </Grid>

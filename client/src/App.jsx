@@ -24,6 +24,14 @@ function App() {
 
       <div className="row my-3">
         <Switch>
+{/* 
+          <Route exact path="/login">
+            <Login />
+          </Route> */}
+          
+          <Route exact path="/">
+            <Main />
+          </Route>
 
           
 
