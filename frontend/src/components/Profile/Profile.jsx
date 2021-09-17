@@ -8,6 +8,7 @@ import { PhotoCamera, } from '@material-ui/icons/';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -31,15 +32,15 @@ function Profile() {
     e.preventDefault()
     const dataForm = Object.fromEntries(new FormData(e.target))
     e.target.reset()
-    // console.log(dataForm);
+    console.log(dataForm.foto);
 
   }
 
 
   return (
-
     <Box component="div" m={1}>
-      <form onSubmit={submintForm} className={classes.root} noValidate autoComplete="off">
+      <img></img>
+      <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off">
         <Box component="div" style={{ height: "100px" }} m={5}>
           <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} />
         </Box>
@@ -57,7 +58,7 @@ function Profile() {
               Upload
             </Button>
           </label>
-          <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+          <input accept="image/*" className={classes.input} id="icon-button-file" name="foto" type="file" />
           <label htmlFor="icon-button-file">
             <IconButton color="primary" aria-label="upload picture" component="span">
               <PhotoCamera />
@@ -67,12 +68,14 @@ function Profile() {
           <TextField id="firstName" label="nickname" name="firstName" />
           {/* <TextField id="name" label="Имя" name="name" /> */}
 
-          {/* <button variant="contained" color="primary">
+          <button variant="contained" color="primary">
             Изменить
-          </button> */}
-          <Button variant="contained" color="primary" disableElevation>
+          </button>
+          {/* 
+          <Button variant="contained" color="primary" type="submit" disableElevation>
             Disable elevation
-          </Button>
+          </Button> */}
+
         </div>
       </form >
     </Box >
