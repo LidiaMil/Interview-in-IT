@@ -1,5 +1,6 @@
 export const initialState = {
   organization: [], 
-  questions:[],
-  user:{}
+  question:[],
+  user:{},
+  isAuntificated: false
 }

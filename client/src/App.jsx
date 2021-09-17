@@ -13,6 +13,9 @@ import NewPost from './components/NewPost/NewPost';
 import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
 import Question from './components/Question/Question'
+//авторицация
+import Login from './components/Login/Login'
+import Logout from './components/Logout/Logout'
 
 function App() {
   return (
@@ -21,14 +24,9 @@ function App() {
 
       <div className="row my-3">
         <Switch>
-{/* 
-          <Route exact path="/login">
-            <Login />
-          </Route> */}
+
           
-          <Route exact path="/">
-            <Main />
-          </Route>
+
 
           <Route exact path="/profile">
             <Profile />
@@ -45,6 +43,19 @@ function App() {
           <Route exact path="/newpost">
             <NewPost />
           </Route>
+        {/* авторизация логин */}
+          <Route path='/login'>
+              <Login />
+           </Route>
+           <Route path='/logout'>
+              <Logout />
+           </Route>
+
+
+          <Route exact path="/">
+            <Main />
+          </Route>
+
 
         </Switch>
       </div>

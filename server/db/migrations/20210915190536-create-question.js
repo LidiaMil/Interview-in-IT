@@ -21,7 +21,7 @@ module.exports = {
             tableName: "Users" 
           },
           key: "id"
-      },
+        },
       },
       createdAt: {
         allowNull: false,
