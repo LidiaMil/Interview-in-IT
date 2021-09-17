@@ -7,6 +7,10 @@ import {
   Link
 } from "react-router-dom";
 
+import { useHistory } from "react-router-dom";
+
+import { useState, useEffect } from 'react';
+
 import Main from './components/Main/Main';
 import Header from './components/Header/Header';
 import NewPost from './components/NewPost/NewPost';
@@ -17,17 +21,41 @@ import Question from './components/Question/Question'
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
 
+import {useDispatch} from 'react-redux'
+import { setAuth } from '../../client/src/redux/actions/auth.action'
+
+
+
 function App() {
+  
+const dispatch = useDispatch()
+let history = useHistory()
+
+console.log(history);
+
+useEffect(()=>{
+    if(window.localStorage.getItem('state') === 'true'){
+      console.log('привет из сессии', window.localStorage.getItem('state'));
+      dispatch(setAuth())
+  }
+}, [])
+
+
+
+
+
+
+
+
+
+
   return (
     <Router>
       <Header />
 
       <div className="row my-3">
         <Switch>
-{/* 
-          <Route exact path="/login">
-            <Login />
-          </Route> */}
+
           
 
 

@@ -28,7 +28,7 @@ export default function Header()  {
   const classes = useStyles();
 
 
-
+  // const isAuthenticated = useSelector(state => state.isAuntificated)||window.local.getItem('state') || false
   const isAuthenticated = useSelector(state => state.isAuntificated)
 
   return (
@@ -41,7 +41,7 @@ export default function Header()  {
           <Typography variant="h6" className={classes.title}>
             Собес в IT
           </Typography>
-          <Button color="inherit"><Link className="nav-link" to="/">Main</Link></Button>
+          <Link className="nav-link" to="/"><Button color="inherit">Main</Button></Link>
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/question">Вопросы</Link></Button>

@@ -11,7 +11,7 @@ let RedisStore = require('connect-redis')(session);
 //переделал авторизацию через node-localstorage(nodeLocalStorage)
 let LocalStorage = require('node-localstorage').LocalStorage,
 localStorage = new LocalStorage('./scratch');
-
+const questionRouter=require('./routes/questionRouter')
 
 //let redisClient = redis.createClient()
 const cors = require("cors");
@@ -24,10 +24,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session(({
-  secret: 'dgsgsgsdhrd',
 
-})))
+
+app.use('/question', questionRouter);
+
+app.use(session({
+    name:'sId',
+    saveUninitialized: false,
+    secret: 'gdfgdfgdfgdfg',
+    resave: false,
+}))
 
 const db = [{
   email: 'a@a.a',
@@ -44,12 +50,11 @@ app.post("/login", (req, res) => {
   const user = db.find((user) => user.email === email && user.password === password)
   console.log(user);
   if (user) {
-    req.session.user = {
-      email,
-    }
+    req.session.user = {email: user.email}
+    console.log('сессия тут', req.session);
     localStorage.setItem('in_user', user.email)
     console.log('fgdfgdfgdf', localStorage.getItem('in_user'));
-    return res.end()
+    return res.status(200).end()
   }
   
   res.status(401).end()
@@ -68,10 +73,6 @@ app.get('/logout', (req, res) => {
   }
   
   })
-
-
-
-
 
 
 app.listen(PORT, () => {
