@@ -3,38 +3,81 @@ const express = require('express');
 const morgan = require('morgan');
 const hbs = require('hbs');
 const path = require('path');
-//session
 const redis = require('redis');
 const session = require('express-session');
 let RedisStore = require('connect-redis')(session);
-let redisClient = redis.createClient()
 
-const PORT = process.env.PORT || 3000;
+
+//переделал авторизацию через node-localstorage(nodeLocalStorage)
+let LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
+const questionRouter=require('./routes/questionRouter')
+
+//let redisClient = redis.createClient()
+const cors = require("cors");
+
 const app = express();
 
 // тут подключаем файлики
 const indexRouter = require('./routes/indexRouter');
 const organizations = require('./routes/organizationsRouter');
 
+const PORT = 3000;
 
-
-app.set('view engine', 'hbs');
-
-
-//session middleware
-
-app.use(express.urlencoded({extended:true}));
-// app.use(express.static(path.join(__dirname, 'public')))
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const quoteAPI = require('quote-indo');
+app.use(session(({
+  secret: 'dgsgsgsdhrd',
+  
+})))
 
-(async () => {
-    const query = 'bucin'
-    const quote = await quoteAPI.Quotes(query);
+const db = [{
+  email: 'a@a.a',
+  password: '123'
+}]
 
-    console.log(quote);
-})()
+app.use('/question', questionRouter);
+
+
+
+//для авторизации
+app.post("/login", (req, res) => {
+ // console.log(req.body);
+  const {email, password} = req.body
+  const user = db.find((user) => user.email === email && user.password === password)
+  console.log(user);
+  if (user) {
+    req.session.user = {
+      email,
+    }
+    localStorage.setItem('in_user', user.email)
+    console.log('fgdfgdfgdf', localStorage.getItem('in_user'));
+    return res.end()
+  }
+  
+  res.status(401).end()
+});
+
+
+app.get('/logout', (req, res) => {
+  console.log(req.session);
+  if(req.session) {req.session.destroy(() => {
+    localStorage.removeItem('in_user')
+    res.clearCookie('connect.sid')
+    res.end()
+  })}
+  else {
+    res.end()
+  }
+  
+  })
+
+
+
+
+
 
 
 app.use('/', indexRouter);
@@ -43,3 +86,4 @@ app.use('/organizations', organizations)
 app.listen(PORT, ()=> {
   console.log('Server start on ', PORT)
 })
+

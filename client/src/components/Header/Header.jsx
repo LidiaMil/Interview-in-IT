@@ -9,6 +9,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {
   Link
 } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Header()  {
   const classes = useStyles();
 
+
+
+  const isAuthenticated = useSelector(state => state.isAuntificated)
+
+
+  
+
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -35,12 +45,13 @@ export default function Header()  {
           <Typography variant="h6" className={classes.title}>
             Собес в IT
           </Typography>
-          <Button color="inherit"><Link className="nav-link" to="/">Main</Link></Button>
+          <Link className="nav-link" to="/"><Button color="inherit">Main</Button></Link>
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/question">Вопросы</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/newpost">Создать новый вопрос</Link></Button>
-
+          {!isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/login">Логин</Link></Button>}
+          {isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/logout">Логаут</Link></Button>}
         </Toolbar>
       </AppBar>
     </div>

@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getOrg } from '../../redux/actions/organization.action'
 import Cards from "../Card/Card.jsx"
@@ -12,12 +12,15 @@ function Organization(){
       dispatch(getOrg())
   }, [])
 
+console.log(organization)
+
   return (
     <>
     <h1>Organization</h1>
     <div className="row my-3">
     {organization && organization.map((item, index) => <div className="col-4" key={item.id}><Cards {...item} /></div>)}
     </div>
-    </>  )
+    </>
+  )
 }
 export default Organization
