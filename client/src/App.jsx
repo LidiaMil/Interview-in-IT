@@ -16,13 +16,14 @@ import Question from './components/Question/Question'
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
+import Container from '@mui/material/Container';
 
 function App() {
   return (
     <Router>
       <Header />
 
-      <div className="row my-3">
+      <Container>
         <Switch>
 {/* 
           <Route exact path="/login">
@@ -66,7 +67,7 @@ function App() {
 
 
         </Switch>
-      </div>
+      </Container>
     </Router>
   );
 }
