@@ -8,6 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      
       title: {
         type: Sequelize.STRING
       },
@@ -17,6 +18,9 @@ module.exports = {
       photo: {
         type: Sequelize.TEXT
       },
+     address: Sequelize.STRING,
+     rating: Sequelize.INTEGER,
+     link: Sequelize.TEXT,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

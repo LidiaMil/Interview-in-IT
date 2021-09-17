@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { styled, Grid, Typography, Avatar, Paper, ButtonBase , CardMedia} from '@material-ui/core';
+import Container from '@mui/material/Container';
+
 
 const Img = styled('img')({
   margin: '20px',
@@ -12,6 +14,7 @@ const Img = styled('img')({
 export default function Cards({ id, photo, rating, address, link, areaOfActivity , title}) {
 
         return (
+      
           <Paper  sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems:'center'}} >
             <Grid container spacing={2} alignItems='center'>
               <Grid item>

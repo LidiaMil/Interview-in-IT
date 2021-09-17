@@ -23,7 +23,7 @@ function App() {
     <Router>
       <Header />
 
-      <Container>
+      <Container style={{color:'red'}}>
         <Switch>
 {/* 
           <Route exact path="/login">
