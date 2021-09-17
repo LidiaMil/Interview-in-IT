@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Question,User,Language,Organization} = require('../db/models');
+const {Question,User,Language,Organization,Comment} = require('../db/models');
 
 
 router.get('/', async(req, res) => {
@@ -15,6 +15,9 @@ router.get('/', async(req, res) => {
     },
     {
       model: Organization
+    },
+    {
+      model: Comment
     },
   ]
   });

@@ -3,6 +3,11 @@ import { styled, Grid, Typography, Avatar, Paper, ButtonBase, CardMedia } from '
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { getValue } from '../../redux/actions/raiting.action'
+import { useState } from 'react';
+
 
 
 const Img = styled('img')({
@@ -13,8 +18,24 @@ const Img = styled('img')({
 });
 
 
-export default function Cards({ id, photo, rating, address, link, areaOfActivity, title}) {
-  const [value, setValue] = React.useState(2);
+export default function Cards({ id, photo, Raitings, address, link, areaOfActivity, title}) {
+  const dispatch = useDispatch()
+ console.log(Raitings)
+  // const sum = Raitings.reduce((acc, cur) =>  acc + cur.number )
+let acc = 0
+const average = Raitings.map((el) => acc += el.number)
+
+  let result = average / Raitings.length
+  
+  const [value, setValue] = useState(result);
+  
+  useEffect(() => {
+    
+    dispatch(getValue(value))
+}, [])
+
+ 
+
 
   return (
 
@@ -49,7 +70,7 @@ export default function Cards({ id, photo, rating, address, link, areaOfActivity
               >
                 <Rating
                   name="simple-controlled"
-                  value={value}
+                  value={result}
                   onChange={(event, newValue) => {
                     setValue(newValue);
                   }}
