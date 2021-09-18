@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../db/models');
+const { User, Question } = require('../db/models');
 
 const multer = require("multer");
 const storageConfig = multer.diskStorage({
@@ -19,17 +19,27 @@ router.post("/upload", function (req, res, next) {
   upload(req, res, async (err) => {
     const id = Number(req.body.id);
     const firstName = req.body.nickname;
-    const photo = `http://localhost:3000/${req.file.path}`
+    if (req.file) {
+      const photo = `http://localhost:3000/${req.file.path}`
       // console.log("==>",photo);
-    if (err) {
-      res.json({
-        message: err,
-      });
+      if (err) {
+        res.json({
+          message: err,
+        });
+      } else {
+        User.update({ firstName, photo }, { where: { id } })
+      }
     } else {
-      User.update({ firstName, photo }, { where: { id } })
+      User.update({ firstName }, { where: { id } })
     }
   })
 });
+
+router.get('/getusersposts/:id', async (req, res) => {
+  const user_id = Number(req.params.id)
+  const posts = await Question.findAll({ where: { user_id } })
+  res.json(posts)
+})
 
 router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
@@ -41,11 +51,3 @@ router.get('/:id', async (req, res) => {
 module.exports = router
 
 
-// router.route('/edit')
-//   .post(checkAuthor, async (req, res) => {
-//     const { nameProduct, descriptionProduct, priceProduct, artProduct, imgProduct, id } = req.body;
-//     await Product.update({ nameProduct, descriptionProduct, priceProduct, artProduct, imgProduct }, {
-//       where: { id }
-//     })
-//     res.status(200).end()
-//   })
