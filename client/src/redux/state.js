@@ -1,6 +1,8 @@
 export const initialState = {
   organization: [], 
-  question:[],
+  oneQuestion:[],
+  interview:[],
+  comments:[],
   user:{},
   isAuntificated: false
 }

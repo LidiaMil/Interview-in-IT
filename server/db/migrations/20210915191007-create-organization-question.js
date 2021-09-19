@@ -17,11 +17,11 @@ module.exports = {
           key: "id"
         },
       },
-      question_id: {
+      interview_id: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Questions"
+            tableName: "Interviews"
           },
           key: "id"
         },

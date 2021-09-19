@@ -17,6 +17,15 @@ module.exports = {
       photo: {
         type: Sequelize.TEXT
       },
+      rating:{
+        type: Sequelize.INTEGER
+      },
+      address:{
+        type: Sequelize.STRING
+      },
+      link:{
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

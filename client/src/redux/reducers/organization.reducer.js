@@ -1,9 +1,19 @@
-export const organizationReducer = (state = [], action) => {
-  const { type, payload } = action
+import { SET_ERROR, SET_ORG } from '../types'
+
+
+export const organizationReducer = (organization = [], action) => {
+  const { type, payload, error} = action
 
   switch (type) {
+      case SET_ERROR: {
+          return { organization , isLoading: false, error }
+      }
+      case SET_ORG: {
+        const { organization } = payload
+        return organization 
+    }
       default: {
-          return state;
+          return organization;
       }
   }
 

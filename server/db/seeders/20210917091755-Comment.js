@@ -2,38 +2,42 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('OrganizationQuestions', [
+    await queryInterface.bulkInsert('Comments', [
       {
-        organization_id: 1,
-        interview_id: 2,
+        user_id: 2,
+        question_id: 1,
+        text: "Киты, удачки, всем! Вы все большие молодцы! У вас все получится!",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        organization_id: 3,
-        interview_id: 2,
+        user_id: 1,
+        question_id: 2,
+        text: "P3W1D4 - Redux",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        organization_id: 2,
-        interview_id: 2,
+        user_id: 3,
+        question_id: 2,
+        text: "lalala",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        organization_id: 1,
-        interview_id: 1,
+        user_id: 2,
+        question_id: 2,
+        text: "qweqweqwe",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        organization_id: 1,
-        interview_id: 3,
+        user_id: 1,
+        question_id: 3,
+        text: "P3W2D1 - Thunk, Saga",
         createdAt: new Date(),
         updatedAt: new Date()
-      }
-
+      },
     ], {});
   },
 
