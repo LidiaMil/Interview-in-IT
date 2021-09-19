@@ -23,14 +23,20 @@ router.post("/upload", function (req, res, next) {
       const photo = `http://localhost:3000/${req.file.path}`
       // console.log("==>",photo);
       if (err) {
-        res.json({
-          message: err,
-        });
+        res.json({ message: err, });
       } else {
         User.update({ firstName, photo }, { where: { id } })
+        res.status(200).end()
+      }
+    } else if (firstName) {
+      if (err) {
+        res.json({ message: err, });
+      } else {
+        User.update({ firstName }, { where: { id } })
+        res.status(201).end()
       }
     } else {
-      User.update({ firstName }, { where: { id } })
+      res.status(404).end()
     }
   })
 });
