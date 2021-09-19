@@ -18,7 +18,7 @@ const cors = require("cors");
 const app = express();
 
 // тут подключаем файлики
-const questionRouter=require('./routes/questionRouter')
+const interviewRouter=require('./routes/interviewRouter')
 const indexRouter = require('./routes/indexRouter');
 const organizations = require('./routes/organizationsRouter');
 
@@ -77,7 +77,7 @@ app.get('/logout', (req, res) => {
 
 
 app.use('/', indexRouter);
-app.use('/question', questionRouter);
+app.use('/interview', interviewRouter);
 app.use('/organizations', organizations)
 
 app.listen(PORT, ()=> {

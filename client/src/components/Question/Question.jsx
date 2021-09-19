@@ -1,27 +1,13 @@
-import { useEffect } from 'react'
-import OneQuestion from "../OneQuestion/OneQuestion"
-import { useDispatch, useSelector } from "react-redux";
-import { getQuestion } from '../../redux/actions/question.action'
 
-function Question() {
-  const dispatch = useDispatch()
-  const question = useSelector((state) => state.question)
+import * as React from 'react';
+import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
+import { Link } from "react-router-dom";
+import Question from '../Question/Question';
 
-
-  useEffect(() => {
-    dispatch(getQuestion())
-  }, [])
-
-  console.log(question)
+export default function ComplexGrid(interview ) {
+  console.log(interview )
 
   return (
-    <>
-
-      <div className="row my-3">
-        {question && question.map((item, index) => <div className="col-4" key={item.id}><OneQuestion {...item} /></div>)}
-      </div>
-
-    </>
-  )
+   <a href={`/question/${interview.id}`}>{interview.text}</a>
+  );
 }
-export default Question

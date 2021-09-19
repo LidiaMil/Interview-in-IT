@@ -5,31 +5,31 @@ module.exports = {
     await queryInterface.bulkInsert('OrganizationQuestions', [
       {
         organization_id: 1,
-        question_id: 2,
+        interview_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         organization_id: 3,
-        question_id: 2,
+        interview_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         organization_id: 2,
-        question_id: 2,
+        interview_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         organization_id: 1,
-        question_id: 1,
+        interview_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         organization_id: 1,
-        question_id: 3,
+        interview_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       }

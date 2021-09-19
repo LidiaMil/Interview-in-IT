@@ -1,6 +1,6 @@
-import { SET_QUESTION,SET_LOADING,SET_ERROR  } from '../types'
+import { SET_QUESTION  } from '../types'
 
-export const questionReducer = (state = [], action) => {
+export const interviewReducer = (state = [], action) => {
   const { type, payload } = action
   switch (type) {
 

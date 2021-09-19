@@ -18,6 +18,20 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        user_id: 3,
+        question_id: 2,
+        text: "lalala",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 2,
+        question_id: 2,
+        text: "qweqweqwe",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         user_id: 1,
         question_id: 3,
         text: "P3W2D1 - Thunk, Saga",
