@@ -6,7 +6,7 @@ export const getOrg = () => async (dispatch, getState) => {
     try {
 
         const response = await axios.get('http://localhost:3000/organizations')
-
+  console.log(response.data)
         dispatch(setOrganizations(response.data))
       
     } catch (error) {

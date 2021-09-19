@@ -7,20 +7,20 @@ import {setUndoAuth} from '../../redux/actions/auth.action'
 function Logout(){
   const dispatch = useDispatch()
  const history = useHistory()
-  useEffect(() => {
-    (async () => {
-     await fetch('/logout')  
-     dispatch(setUndoAuth())
-//  dispatch({
-//     type: 'LOGOUT'
-//   })
-  history.push('/')
+//   useEffect(() => {
+//     (async () => {
+//      await fetch('/logout')  
+//      dispatch(setUndoAuth())
+// //  dispatch({
+// //     type: 'LOGOUT'
+// //   })
+//   history.push('/')
 
 
-    })()
+//     })()
 
 
-  })
+//   }, [])
   return (
     <>Идет логаут...</>
 

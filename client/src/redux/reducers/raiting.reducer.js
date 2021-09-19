@@ -7,8 +7,8 @@ export const organizationReducer = (raiting = 0, action) => {
   switch (type) {
    
       case SET_RAT: {
-        const { num } = payload
-        return num 
+        const raiting  = payload
+        return raiting 
     }
       default: {
           return raiting;

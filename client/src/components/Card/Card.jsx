@@ -29,10 +29,11 @@ const average = Raitings.map((el) => acc += el.number)
   
   const [value, setValue] = useState(result);
   
+  console.log(value)
   useEffect(() => {
     
     dispatch(getValue(value))
-}, [])
+}, [value])
 
  
 

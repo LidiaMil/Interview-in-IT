@@ -4,8 +4,7 @@ import { SET_RAT, SET_ERROR } from '../types'
 // middleware
 export const getValue = (value) => async (dispatch, getState) => {
     
-
-        const response = await axios.post('http://localhost:3000/organizations/rating', value)
+        const response = await axios.post('http://localhost:3000/organizations/rating', {value})
 
         dispatch(setValue(response.data))
       
