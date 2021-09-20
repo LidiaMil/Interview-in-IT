@@ -6,5 +6,6 @@ export const initialState = {
   categories:[],
   user:{},
   lang:[],
+  org:[],
   isAuntificated: false
 }

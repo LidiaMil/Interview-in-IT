@@ -6,6 +6,7 @@ import {oneQuestionReducer} from './oneQuest.reducer'
 import {commentReducer} from './comment.reducer'
 import {categoriesReducer} from './categories.reducer'
 import {langReducer} from './lang.reducer'
+import {orgReducer} from './org.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -14,5 +15,6 @@ export const reducer = combineReducers({
   isAuntificated: auntificatedReducer,
   categories:categoriesReducer,
   lang:langReducer,
+  org:orgReducer,
   oneQuestion:oneQuestionReducer
 })

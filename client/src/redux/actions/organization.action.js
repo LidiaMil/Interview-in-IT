@@ -1,5 +1,14 @@
 import axios from "axios";
-import { SET_ORG, SET_ERROR } from '../types'
+import { SET_ORG, SET_ERROR,SET_ALLORG } from '../types'
+
+export const getAllOrg = () => async (dispatch) => {
+  const response = await axios.get("http://localhost:3000/interview/newOrg")
+  dispatch(setAllOrg(response.data))
+}
+export const setAllOrg = (lang) => ({
+  type: SET_ALLORG,
+  payload: { lang },
+})
 
 // middleware
 export const getOrg = () => async (dispatch, getState) => {
@@ -24,3 +33,4 @@ export const setError = (error) => ({
   type: SET_ERROR,
   error
 })
+

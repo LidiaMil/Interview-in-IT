@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Organization.belongsToMany(Interview, {
         through: OrganizationQuestion,
-        foreignKey:'interview_id'
+        foreignKey:"organization_id",
       });
       Organization.hasMany(Raiting, {
         foreignKey: "organization_id",
