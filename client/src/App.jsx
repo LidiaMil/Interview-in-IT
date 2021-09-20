@@ -14,10 +14,14 @@ import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
 import Interview from './components/Interview/Interview'
 import More from './components/More/More'
+import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
+
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
 import Container from '@mui/material/Container';
+
+
 
 function App() {
   return (
@@ -37,6 +41,10 @@ function App() {
 
           <Route exact path="/organization">
             <Organization />
+          </Route>
+
+          <Route exact path="/organization/:id">
+            <OrganizationInterview />
           </Route>
 
           <Route exact path="/question">

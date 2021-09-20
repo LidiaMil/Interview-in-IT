@@ -1,7 +1,7 @@
 export const initialState = {
-  raiting: 0,
   organization: [], 
   oneQuestion:[],
+  organizationInterview: [],
   interview:[],
   comments:[],
   user:{},
