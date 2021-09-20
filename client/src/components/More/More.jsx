@@ -7,6 +7,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { getOneQuestion } from '../../redux/actions/oneQuest.action'
@@ -25,16 +27,16 @@ export default function ImgMediaCard() {
   const classes = useStyles();
   const [newComment, setNewComment] = useState(null);
   const postId = useParams()
+  // console.log("post ",postId)
   const dispatch = useDispatch()
 
   const comments = useSelector((state) => state.comments)
   const oneQuestion = useSelector((state) => state.oneQuestion)
-  console.log(oneQuestion)
+  // console.log(oneQuestion)
 
   useEffect(() => {
     dispatch(getOneQuestion(postId.id))
     dispatch(getComment(postId.id))
-
   }, [])
 
   let arrLang = [];
@@ -47,15 +49,11 @@ export default function ImgMediaCard() {
   const handleSubmitAdd = (event) => {
     event.preventDefault()
     dispatch(addComment(
-      postId,
+      postId.id,
       {
-        nameUser: comments.nameUser,
         text: comments.text
       }))
     setNewComment(null);
-  }
-  const nameUserAdd = (event) => {
-    comments.nameUser = event.target.value
   }
   const textAdd = (event) => {
     comments.text = event.target.value
@@ -63,7 +61,6 @@ export default function ImgMediaCard() {
 
   return (
     <Card className={classes.root}>
-
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -75,30 +72,26 @@ export default function ImgMediaCard() {
         </CardContent>
       </CardActionArea>
       <Typography variant="body2" color="textSecondary" component="p">
-
         {postId === newComment ? (
           <>
             <form onSubmit={handleSubmitAdd} >
               <div>
-                <label className="form-label">text:</label>
-                <input type="text" className="form-control" value={comments?.text} name='text' onChange={textAdd} />
+                <TextField id="outlined-basic" label="text:" variant="outlined"  onChange={textAdd}/>
               </div>
-              <Button type="submit" size="small" color="primary">
-                Add
-              </Button>
+              <Stack direction="row" spacing={2}>
+                <Button type="submit" variant="contained">Add</Button>
+              </Stack>
             </form>
-
           </>
         ) : (
-          <Button onClick={() => setNewComment(postId)} size="small" color="primary">
-            Add new comment
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button onClick={() => setNewComment(postId)} variant="contained"> Add new comment</Button>
+          </Stack>
         )}
       </Typography>
       <CardActionArea>
-        {oneQuestion.Comments && oneQuestion.Comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
+        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
       </CardActionArea>
-
     </Card>
   );
 }

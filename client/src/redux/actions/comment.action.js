@@ -14,6 +14,7 @@ export const setComment = (comments)=>({
 //ADD COMMENT
 export const addComment = (postId,newCom) => async (dispatch) => {
   const response = await axios.post(`http://localhost:3000/interview/comment/${postId}`,newCom)
+  console.log(response.data)
   dispatch(setAddComment(response.data))
 }
 export const setAddComment = (newComment)=> ({

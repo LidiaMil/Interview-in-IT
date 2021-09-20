@@ -5,18 +5,14 @@ const hbs = require('hbs');
 const path = require('path');
 const redis = require('redis');
 const session = require('express-session');
-let RedisStore = require('connect-redis')(session);
 
+const authRouter=require('./routes/authRouter')
+const mainRouter=require('./routes/mainRouter')
 
-
-//переделал авторизацию через node-localstorage(nodeLocalStorage)
-let LocalStorage = require('node-localstorage').LocalStorage,
-  localStorage = new LocalStorage('./scratch');
+const cors = require("cors");
   
-  //let redisClient = redis.createClient()
-  const cors = require("cors");
   
-  const app = express();
+const app = express();
   
   // тут подключаем файлики
 const editAccountRouter = require('./routes/editAccountRouter')
@@ -25,6 +21,9 @@ const indexRouter = require('./routes/indexRouter');
 const organizations = require('./routes/organizationsRouter');
 
 const PORT = 3000;
+
+// тут подключаем файлики
+const questionRouter=require('./routes/questionRouter')
 
 
 app.use(cors());
@@ -48,48 +47,22 @@ app.use('/edit', editAccountRouter);
 
 
 
-
-
-//для авторизации
-app.post("/login", (req, res) => {
-  // console.log(req.body);
-  const {email, password} = req.body
-  const user = db.find((user) => user.email === email && user.password === password)
-  console.log(user);
-  if (user) {
-    req.session.user = {
-      email,
-    }
-    localStorage.setItem('in_user', user.email)
-    console.log('fgdfgdfgdf', localStorage.getItem('in_user'));
-    return res.end()
-  }
-
-  res.status(401).end()
-});
-
-
-app.get('/logout', (req, res) => {
-  console.log(req.session);
-  if (req.session) {
-    req.session.destroy(() => {
-      localStorage.removeItem('in_user')
-      res.clearCookie('connect.sid')
-      res.end()
-    })
-  }
-  else {
-    res.end()
-  }
-  
-})
+app.use(session({
+  name:'sId',
+  saveUninitialized: false,
+  secret: 'gdfgdfgdfgdfg',
+  resave: false,
+}))
 
 
 
 
 app.use('/', indexRouter);
-app.use('/interview', interviewRouter);
+app.use('/question', questionRouter);
 app.use('/organizations', organizations)
+app.use('/auth', authRouter)
+app.use('/main', mainRouter)
+app.use('/interview', interviewRouter);
 
 app.listen(PORT, ()=> {
   console.log('Server start on ', PORT)

@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
   Interview.init({
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
-    data: DataTypes.DATEONLY,
+    data:{
+      type:DataTypes.DATEONLY,
+      defaultValue: new Date()
+    } ,
     level: DataTypes.STRING,
     categorey_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
