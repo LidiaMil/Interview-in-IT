@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
   Organization.init({
     title: DataTypes.STRING,
     areaOfActivity: DataTypes.STRING,
-    photo: DataTypes.TEXT
+    photo: DataTypes.TEXT,
+    address: DataTypes.STRING,
+    link: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Organization',

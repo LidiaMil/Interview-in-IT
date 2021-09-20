@@ -24,6 +24,7 @@ import {Right} from './components/mainComponent/Right'
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
+import Container from '@mui/material/Container';
 
 import {useDispatch} from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
@@ -59,6 +60,14 @@ useEffect(()=>{
 
       <div>
         <Switch>
+{/* 
+          <Route exact path="/login">
+            <Login />
+          </Route> */}
+          
+          <Route exact path="/">
+            <Main />
+          </Route>
 
           
 

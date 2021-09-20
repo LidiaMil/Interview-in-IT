@@ -8,6 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      
       title: {
         type: Sequelize.STRING
       },
@@ -15,6 +16,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       photo: {
+        type: Sequelize.TEXT
+      },
+      address:{
+        type: Sequelize.STRING
+      },
+      link:{
         type: Sequelize.TEXT
       },
       createdAt: {
