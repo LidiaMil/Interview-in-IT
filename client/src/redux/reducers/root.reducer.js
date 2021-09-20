@@ -1,12 +1,14 @@
 import { combineReducers } from "redux"
 import { organizationReducer } from "./organization.reducer"
-import { questionReducer } from "./question.reducer"
+import { interviewReducer } from "./interview.reducer"
 import { auntificatedReducer } from './auntificated.reducer'
-
+import {oneQuestionReducer} from './oneQuest.reducer'
+import {commentReducer} from './comment.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
-  question:questionReducer,
-  isAuntificated: auntificatedReducer
-    
+  comments: commentReducer,
+  interview:interviewReducer,
+  isAuntificated: auntificatedReducer,
+  oneQuestion:oneQuestionReducer
 })

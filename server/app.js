@@ -8,35 +8,44 @@ const session = require('express-session');
 let RedisStore = require('connect-redis')(session);
 
 
+
 //переделал авторизацию через node-localstorage(nodeLocalStorage)
 let LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
-
-//let redisClient = redis.createClient()
-const cors = require("cors");
-
-const app = express();
-
-// тут подключаем файлики
-const questionRouter=require('./routes/questionRouter')
+  localStorage = new LocalStorage('./scratch');
+  
+  //let redisClient = redis.createClient()
+  const cors = require("cors");
+  
+  const app = express();
+  
+  // тут подключаем файлики
+const editAccountRouter = require('./routes/editAccountRouter')
+const interviewRouter=require('./routes/interviewRouter')
 const indexRouter = require('./routes/indexRouter');
 const organizations = require('./routes/organizationsRouter');
 
 const PORT = 3000;
 
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
 
 app.use(session(({
   secret: 'dgsgsgsdhrd',
-  
+
 })))
 
 const db = [{
   email: 'a@a.a',
   password: '123'
 }]
+
+
+//для редактирования профиля
+app.use('/edit', editAccountRouter);
+
 
 
 
@@ -55,18 +64,20 @@ app.post("/login", (req, res) => {
     console.log('fgdfgdfgdf', localStorage.getItem('in_user'));
     return res.end()
   }
-  
+
   res.status(401).end()
 });
 
 
 app.get('/logout', (req, res) => {
   console.log(req.session);
-  if(req.session) {req.session.destroy(() => {
-    localStorage.removeItem('in_user')
-    res.clearCookie('connect.sid')
-    res.end()
-  })}
+  if (req.session) {
+    req.session.destroy(() => {
+      localStorage.removeItem('in_user')
+      res.clearCookie('connect.sid')
+      res.end()
+    })
+  }
   else {
     res.end()
   }
@@ -77,7 +88,7 @@ app.get('/logout', (req, res) => {
 
 
 app.use('/', indexRouter);
-app.use('/question', questionRouter);
+app.use('/interview', interviewRouter);
 app.use('/organizations', organizations)
 
 app.listen(PORT, ()=> {

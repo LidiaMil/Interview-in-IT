@@ -4,23 +4,32 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Questions', [
       {
-        text: "1. Как правильно подключать скрипт и чем отличается атрибуты asinc и defer?",
-        data: new Date(),
-        user_id: 1,
+        text: "Что такое паттерн в реакте и какие знаешь?",
+        interview_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        text: "Типы данный. Чем отличается null от undefined?",
-        data: new Date(),
-        user_id: 2,
+        text: "React.pureComponent аналог React.memo. Или аналог метод shouldComponentUpdate(nextProps, nextState)",
+        interview_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        text: "Что не нравится в js?",
-        data: new Date(),
-        user_id: 1,
+        text: "Хуки",
+        interview_id: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        text: "компонент высшего порядка",
+        interview_id: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        text: "React.createContext",
+        interview_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       }

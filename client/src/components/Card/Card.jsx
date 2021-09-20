@@ -3,7 +3,7 @@ import { styled, Grid, Typography, Avatar, Paper, ButtonBase, CardMedia } from '
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import { useEffect } from 'react'
+import { useMemo, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getValue } from '../../redux/actions/raiting.action'
 import { useState } from 'react';
@@ -20,22 +20,21 @@ const Img = styled('img')({
 
 export default function Cards({ id, photo, Raitings, address, link, areaOfActivity, title}) {
   const dispatch = useDispatch()
- console.log(Raitings)
   // const sum = Raitings.reduce((acc, cur) =>  acc + cur.number )
 let acc = 0
-const average = Raitings.map((el) => acc += el.number)
+let  arrNum =  Raitings.map((el) => acc += el.number)
+let startRes = acc / Raitings.length
+let result = Math.round(acc / arrNum.length)
 
-  let result = average / Raitings.length
+  // const [value, setValue] = useState(result)
   
-  const [value, setValue] = useState(result);
   
-  console.log(value)
-  useEffect(() => {
-    
-    dispatch(getValue(value))
-}, [value])
-
- 
+  // console.log('State',value)
+  const ttry = useCallback((newValue) => {
+    console.log('inCallback',newValue)
+    dispatch(getValue(newValue, id))
+  }, [])
+  
 
 
   return (
@@ -51,6 +50,7 @@ const average = Raitings.map((el) => acc += el.number)
         </Grid>
         <Grid item xs={{ margin: '100px' }} sm container>
           <Grid item xs container direction="column" spacing={2}>
+
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
                 {title}
@@ -73,10 +73,14 @@ const average = Raitings.map((el) => acc += el.number)
                   name="simple-controlled"
                   value={result}
                   onChange={(event, newValue) => {
-                    setValue(newValue);
+                    
+                    // setValue(newValue);
+                    // console.log(value,'neewwvaaalue');
+                      ttry(newValue)
+                      
                   }}
                 />
-
+                  {startRes}
               </Box>
             </Grid>
 
