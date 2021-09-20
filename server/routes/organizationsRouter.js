@@ -5,9 +5,9 @@ const {Organization, Raiting, OrganizationQuestion, Question, Interview} = requi
  
 router.get('/', async (req, res) => {
   //  console.log( req.params.id)
-  const organization = await Organization.findAll() 
+  // const organization = await Organization.findAll() 
   // console.log(organization)
-    res.json(organization)
+    // res.json(organization)
   // const organization = await Organization.findAll() Raiting
   const rating = await Organization.findAll({include: Raiting})
 
