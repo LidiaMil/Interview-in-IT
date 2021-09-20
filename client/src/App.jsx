@@ -23,6 +23,8 @@ import {Downleft} from './components/mainComponent/Downleft'
 import {Right} from './components/mainComponent/Right'
 import Interview from './components/Interview/Interview'
 import More from './components/More/More'
+import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
+
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
@@ -75,6 +77,10 @@ useEffect(()=>{
 
           <Route exact path="/organization">
             <Organization />
+          </Route>
+
+          <Route exact path="/organization/:id">
+            <OrganizationInterview />
           </Route>
 
           <Route exact path="/question">
