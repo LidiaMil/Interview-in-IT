@@ -7,14 +7,20 @@ import {commentReducer} from './comment.reducer'
 import {categoriesReducer} from './categories.reducer'
 import {langReducer} from './lang.reducer'
 import {orgReducer} from './org.reducer'
+import { editImg } from "./editImg.reducer"
+import { editNickname } from "./editNickname.reducer"
+import { myInterviewsReducer } from "./myInterviews.reducer"
 
 export const reducer = combineReducers({
   organization: organizationReducer,
   comments: commentReducer,
-  interview:interviewReducer,
+  interview: interviewReducer,
   isAuntificated: auntificatedReducer,
   categories:categoriesReducer,
   lang:langReducer,
   org:orgReducer,
-  oneQuestion:oneQuestionReducer
+  oneQuestion: oneQuestionReducer,
+  img: editImg,
+  nickname: editNickname,
+  myInterviews: myInterviewsReducer
 })

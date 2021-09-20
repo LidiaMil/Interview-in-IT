@@ -7,5 +7,8 @@ export const initialState = {
   user:{},
   lang:[],
   org:[],
-  isAuntificated: false
+  isAuntificated: false,
+  img: "", //фото для профиля
+  nickname: "" ,//nickname для профиля  
+  myInterviews:[], //список собеседований пользователя
 }

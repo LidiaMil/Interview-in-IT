@@ -14,3 +14,6 @@ export const SET_ALLLANG='SET_ALLLANG'
 export const SET_ALLORG='SET_ALLORG'
 
 
+export const SET_IMG = 'SET_IMG'
+export const SET_NICKNAME= 'SET_NICKNAME'
+export const GET_MY_INTERVIEWS = 'GET_MY_INTERVIEWS'
