@@ -26,14 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header()  {
   const classes = useStyles();
-
-
-
   const isAuthenticated = useSelector(state => state.isAuntificated)
-
-
-  
-
 
   return (
     <div className={classes.root}>
@@ -49,7 +42,7 @@ export default function Header()  {
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/question">Вопросы</Link></Button>
-          <Button color="inherit"><Link className="nav-link" to="/newpost">Создать новый вопрос</Link></Button>
+          <Button color="inherit"><Link className="nav-link" to="/newcomment">Создать новый вопрос</Link></Button>
           {!isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/login">Логин</Link></Button>}
           {isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/logout">Логаут</Link></Button>}
         </Toolbar>

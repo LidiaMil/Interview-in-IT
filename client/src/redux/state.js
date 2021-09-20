@@ -3,6 +3,8 @@ export const initialState = {
   oneQuestion:[],
   interview:[],
   comments:[],
+  categories:[],
   user:{},
+  lang:[],
   isAuntificated: false
 }

@@ -9,7 +9,7 @@ import {
 
 import Main from './components/Main/Main';
 import Header from './components/Header/Header';
-import NewPost from './components/NewPost/NewPost';
+import NewInterview from './components/NewInterview/NewInterview';
 import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
 import Interview from './components/Interview/Interview'
@@ -45,8 +45,8 @@ function App() {
             <More />
           </Route>
 
-          <Route exact path="/newpost">
-            <NewPost />
+          <Route exact path="/newcomment">
+            <NewInterview />
           </Route>
     
           <Route path='/login'>
