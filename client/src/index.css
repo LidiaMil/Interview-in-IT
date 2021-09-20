@@ -83,3 +83,12 @@ p {
 
 html, body { height: 100%; width: 100%; margin: 0;}
 #whale {height: 99.5%; width: 100%;}
+
+.rightmainDivs {
+  overflow: scroll; /* Добавляем полосы прокрутки */
+  width: 300px; /* Ширина блока */
+  height: calc(100vh - 50px); /* Высота блока */
+  padding: 5px; /* Поля вокруг текста */
+  border: solid 1px black; /* Параметры рамки */
+
+}
