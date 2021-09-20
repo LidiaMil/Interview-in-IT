@@ -9,7 +9,7 @@ function Logout(){
  const history = useHistory()
   useEffect(() => {
     (async () => {
-     await fetch('/logout')  
+     await fetch('/auth/logout')  
      dispatch(setUndoAuth())
 //  dispatch({
 //     type: 'LOGOUT'

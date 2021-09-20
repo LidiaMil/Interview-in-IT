@@ -11,3 +11,71 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.mainContainer {
+display: flex;
+min-height: 80%;
+
+
+}
+
+
+.leftmainDivs {
+  height: calc(100vh - 50px);
+  width: 20%;
+
+}
+.rightmainDivs {
+  height: calc(100vh - 50px);
+  width: 30%;
+}
+
+
+.leftDivs {
+  margin: 2px;
+  height: 45%;
+  
+}
+
+p {
+  font-size: 10px;
+}
+
+
+
+.category-list * {transition: .4s linear;}
+.category-list {
+  background: white;
+  list-style-type: circle;
+  list-style-position: inside;
+  padding: 0 2px;
+  margin: 0;
+}
+.category-list li {
+  font-family: "Trebuchet MS", "Lucida Sans";
+  border-bottom: 1px solid #efefef;
+  padding: 2px 0;
+  font-size: 7px;
+}
+.category-list a {
+  text-decoration: none;
+  color: #555;
+}
+.category-list li span {
+  float: right;
+  display: inline-block;
+  border: 1px solid #efefef;
+  padding: 0 5px;
+  font-size: 10px;
+  color: #999;
+}
+.category-list li:hover a {color: #c93961;}
+.category-list li:hover span {
+  color: #c93961;
+  border: 1px solid #c93961;
+}
+
+
+html, body { height: 100%; width: 100%; margin: 0;}
+#whale {height: 99.5%; width: 100%;}

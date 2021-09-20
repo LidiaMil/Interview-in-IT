@@ -41,7 +41,7 @@ export default function Header()  {
           <Typography variant="h6" className={classes.title}>
             Собес в IT
           </Typography>
-          <Link className="nav-link" to="/"><Button color="inherit">Main</Button></Link>
+          <Link className="nav-link" to="/main"><Button color="inherit">Main</Button></Link>
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/question">Вопросы</Link></Button>

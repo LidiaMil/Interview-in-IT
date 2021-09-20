@@ -17,6 +17,10 @@ import NewPost from './components/NewPost/NewPost';
 import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
 import Question from './components/Question/Question'
+import {Upleft} from './components/mainComponent/Upleft'
+import {Center} from './components/mainComponent/Center'
+import {Downleft} from './components/mainComponent/Downleft'
+import {Right} from './components/mainComponent/Right'
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
@@ -53,7 +57,7 @@ useEffect(()=>{
     <Router>
       <Header />
 
-      <div className="row my-3">
+      <div>
         <Switch>
 
           
@@ -83,7 +87,7 @@ useEffect(()=>{
            </Route>
 
 
-          <Route exact path="/">
+          <Route exact path="/main">
             <Main />
           </Route>
 
