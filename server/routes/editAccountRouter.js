@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Question } = require('../db/models');
+const { User, Interview, Categorey, Organization, Question } = require('../db/models');
 
 const multer = require("multer");
 const storageConfig = multer.diskStorage({
@@ -15,18 +15,19 @@ const upload = multer({
 }).single('image');
 
 router.post("/upload", function (req, res, next) {
-  // console.log(req.body);
   upload(req, res, async (err) => {
     const id = Number(req.body.id);
     const firstName = req.body.nickname;
     if (req.file) {
       const photo = `http://localhost:3000/${req.file.path}`
-      // console.log("==>",photo);
       if (err) {
         res.json({ message: err, });
       } else {
-        User.update({ firstName, photo }, { where: { id } })
-        res.status(200).end()
+        await User.update({ firstName, photo }, { where: { id } })
+        const usersData = await User.findOne( { where: { id } })
+        res.json(usersData)
+        // res.status(200).end()
+
       }
     } else if (firstName) {
       if (err) {
@@ -43,9 +44,41 @@ router.post("/upload", function (req, res, next) {
 
 router.get('/getusersposts/:id', async (req, res) => {
   const user_id = Number(req.params.id)
-  const posts = await Question.findAll({ where: { user_id } })
+  const posts = await Interview.findAll(
+    {
+      where: {
+        user_id
+      },
+      include: [
+        {
+          model: Categorey
+        },
+        {
+          model: Organization
+        },
+        {
+          model: Question
+        }
+
+      ]
+    })
   res.json(posts)
 })
+
+
+router.get('/editinterview/:id', async (req, res) => {
+  const id = Number(req.params.id)
+
+})
+
+router.get('/delinterview/:id', async (req, res) => {
+  const id = Number(req.params.id)
+
+})
+
+
+
+
 
 router.get('/:id', async (req, res) => {
   const id = Number(req.params.id)
