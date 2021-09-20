@@ -10,6 +10,7 @@ import {orgReducer} from './org.reducer'
 import { editImg } from "./editImg.reducer"
 import { editNickname } from "./editNickname.reducer"
 import { myInterviewsReducer } from "./myInterviews.reducer"
+import {organizationInterviewReducer} from './organizationInterview.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -22,5 +23,6 @@ export const reducer = combineReducers({
   oneQuestion: oneQuestionReducer,
   img: editImg,
   nickname: editNickname,
-  myInterviews: myInterviewsReducer
+  myInterviews: myInterviewsReducer,
+  organizationInterview: organizationInterviewReducer
 })

@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 
 // Store
 const preloadedState = window.localStorage.getItem('state') || '{"isAuthenticated": false}'
+console.log('teeest', preloadedState);
 // Store
 const store = createStore(reducer, JSON.parse(preloadedState), composeWithDevTools(applyMiddleware(thunk)))
 

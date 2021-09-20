@@ -1,6 +1,7 @@
 export const initialState = {
   organization: [], 
   oneQuestion:[],
+  organizationInterview: [],
   interview:[],
   comments:[],
   categories:[],

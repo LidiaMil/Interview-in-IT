@@ -1,31 +1,34 @@
 import axios from "axios";
 import { SET_ORG, SET_ERROR,SET_ALLORG } from '../types'
 
-export const getAllOrg = () => async (dispatch) => {
-  const response = await axios.get("http://localhost:3000/interview/newOrg")
-  dispatch(setAllOrg(response.data))
-}
-export const setAllOrg = (lang) => ({
-  type: SET_ALLORG,
-  payload: { lang },
-})
 
 // middleware
 export const getOrg = () => async (dispatch, getState) => {
-    try {
+  try {
 
-        const response = await axios.get('http://localhost:3000/organizations')
+    const response = await axios.get('http://localhost:3000/organizations')
+    const arr = response.data
 
-        dispatch(setOrganizations(response.data))
-      
-    } catch (error) {
-        dispatch(setError(error))
-    }
+    let arrNum = arr.map((i) => {
+      i.result = i.Raitings.reduce((acc, el) => acc += el.number, 0 ) / i.Raitings.length
+      // const post_test = test[test.length]
+      return i
+    })
+
+    // let startRes = acc / arrNum.length
+    // let result = Math.round(acc / arrNum.length)
+
+    // console.log('oranize----', arrNum)
+    dispatch(setOrganizations(arrNum))
+
+  } catch (error) {
+    dispatch(setError(error))
+  }
 }
 // actionCreaters
-export const  setOrganizations = (organization) => ({
+export const setOrganizations = (organization) => ({
   type: SET_ORG,
-  payload: {organization},
+  payload: { organization },
 
 })
 
@@ -33,4 +36,5 @@ export const setError = (error) => ({
   type: SET_ERROR,
   error
 })
+
 
