@@ -6,6 +6,7 @@ import whale from '../../whale'
 
 function Main(){
 
+
   //для добавления кита
   //whale.init()
 
@@ -16,7 +17,10 @@ function Main(){
         <div className="leftDivs"><Downleft /></div>
       </div>
       {/* <div className="mainDivs"><Center /></div> */}
-      <div id="whale"></div>
+      <div id="whale">
+
+
+     </div>
       <div className="rightmainDivs">
         <div className="rightDivs"><Right /></div>
       </div>

@@ -12,7 +12,7 @@ function Organization(){
       dispatch(getOrg())
   }, [])
 
-console.log(organization)
+
 
   return (
     <>

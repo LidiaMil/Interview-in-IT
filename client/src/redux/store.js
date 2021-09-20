@@ -11,10 +11,5 @@ console.log('teeest', preloadedState);
 // Store
 const store = createStore(reducer, JSON.parse(preloadedState), composeWithDevTools(applyMiddleware(thunk)))
 
-//для авторизации
-store.subscribe(() => {
-  const state = store.getState()['isAuntificated']
-  window.localStorage.setItem('state', JSON.stringify(state))
-})
 
 export default store;

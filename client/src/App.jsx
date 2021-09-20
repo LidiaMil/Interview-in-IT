@@ -21,6 +21,8 @@ import {Upleft} from './components/mainComponent/Upleft'
 import {Center} from './components/mainComponent/Center'
 import {Downleft} from './components/mainComponent/Downleft'
 import {Right} from './components/mainComponent/Right'
+import Interview from './components/Interview/Interview'
+import More from './components/More/More'
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
@@ -55,22 +57,17 @@ useEffect(()=>{
 
 
   return (
+
+    
     <Router>
       <Header />
 
       <div>
         <Switch>
-{/* 
-          <Route exact path="/login">
-            <Login />
-          </Route> */}
           
           <Route exact path="/">
             <Main />
           </Route>
-
-          
-
 
           <Route exact path="/profile">
             <Profile />
@@ -81,13 +78,16 @@ useEffect(()=>{
           </Route>
 
           <Route exact path="/question">
-            <Question />
+            <Interview />
+          </Route>
+          <Route exact path="/question/:id">
+            <More />
           </Route>
 
           <Route exact path="/newpost">
             <NewPost />
           </Route>
-        {/* авторизация логин */}
+    
           <Route path='/login'>
               <Login />
            </Route>

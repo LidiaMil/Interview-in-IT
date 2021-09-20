@@ -9,26 +9,24 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Language,LanguageQuestion,User,Organization,OrganizationQuestion}) {
+    static associate({Language,LanguageQuestion,Interview,Comment}) {
       Question.belongsToMany(Language, {
         through: LanguageQuestion,
         foreignKey:'question_id'
       });
-      Question.belongsToMany(Organization, {
-        through: OrganizationQuestion,
-        foreignKey:'question_id'
+      Question.hasMany(Comment, {
+        foreignKey: "question_id",
       });
-      Question.belongsTo(User, {
-        foreignKey: "user_id",
-
-      });
+      Question.belongsTo(Interview,{
+        foreignKey: "interview_id",
+      })
       // define association here
     }
   };
   Question.init({
     text: DataTypes.TEXT,
-    data: DataTypes.DATEONLY,
-    user_id: DataTypes.INTEGER
+    interview_id: DataTypes.INTEGER,
+    
   }, {
     sequelize,
     modelName: 'Question',
