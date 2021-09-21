@@ -41,10 +41,9 @@ router.get('/newOrg', async (req, res) => {
 });
 
 router.post("/new", async(req, res) => {
-  const id=req.params.id
+
   console.log("-=-=-=-=",req.body)
   const { title,description,categories,level,questionsWITHlang,company_id} = req.body;
-
   if(title && categories && questionsWITHlang && level && company_id){
     const newInterview= await Interview.create({name:title,level,description:description,categorey_id:categories,user_id:1,favorites:false})
     const ququ= await OrganizationQuestion.create({organization_id:company_id,interview_id:newInterview.id})
