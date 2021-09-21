@@ -5,17 +5,7 @@ import Right from '../mainComponent/Right'
 import whale from '../../whale'
 import Interview from '../Interview/Interview'
 
-
-import React from "react";
-
-
-
-
 function Main(){
-
-
-
-
 
 
   //для добавления кита
@@ -24,13 +14,11 @@ function Main(){
   return (
     <div className="mainContainer">
       <div className="leftmainDivs">
-        
         <div className="leftDivs"><Upleft /></div>
         <div className="leftDivs"><Downleft /></div>
       </div>
       {/* <div className="mainDivs"><Center /></div> */}
-
-      <div class="whale">
+      <div id="whale">
       <form>
       <label for="site-search">Search the site:</label>
       <input type="search" id="site-search" name="q" aria-label="Search through site content" />
