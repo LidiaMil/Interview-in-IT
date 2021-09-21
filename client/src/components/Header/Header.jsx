@@ -47,7 +47,7 @@ export default function Header()  {
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/question">Interview</Link></Button>
-          <Button color="inherit"><Link className="nav-link" to="/newcomment">Создать interview</Link></Button>
+          <Button color="inherit"><Link className="nav-link" to="/newinterview">Создать interview</Link></Button>
           {!isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/login">Логин</Link></Button>}
           {isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/logout">Логаут</Link></Button>}
         </Toolbar>

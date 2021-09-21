@@ -61,6 +61,9 @@ useEffect(()=>{
             <Main />
           </Route>
 
+          <Route exact path="/newinterview">
+            <NewInterview />
+          </Route>
           <Route exact path="/interview/:id">
             <PageInterview />
           </Route>
@@ -85,9 +88,6 @@ useEffect(()=>{
             <More />
           </Route>
 
-          <Route exact path="/newcomment">
-            <NewInterview />
-          </Route>
     
           <Route path='/login'>
               <Login />

@@ -25,16 +25,25 @@ export default function ImgMediaCard(Comment) {
   const oneUser = useSelector((state) => state.oneUser)
   console.log(oneUser)
   useEffect(() => {
-    dispatch(getUser())
+    dispatch(getUser(Comment.user_id))
   }, [])
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
+      
       <Grid container spacing={3}>
+      <Grid item>
+          <ButtonBase sx={{ p: 5,width: 100, height: 100}} >
+            <Avatar  
+              alt={oneUser.firstName}
+              src={oneUser.photo}
+            />
+          </ButtonBase>
+        </Grid>
         <Grid item xs={10} sm container>
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
-                {Comment.user_id}
+                {oneUser.firstName}
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {Comment.text}

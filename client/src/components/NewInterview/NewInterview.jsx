@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
+import { Grid,Paper } from '@material-ui/core';
+
 import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategorey } from '../../redux/actions/categories.action';
@@ -29,7 +31,7 @@ export default function BasicTextFields() {
   const org = useSelector((state) => state.org)
   const lang = useSelector((state) => state.lang)
 
-  console.log("++++++++", org, '123', lang)
+  console.log(categories,"++++++++", org, '123', lang)
   useEffect(() => {
     dispatch(getAllCategorey())
     dispatch(getAllOrg())
@@ -39,7 +41,6 @@ export default function BasicTextFields() {
   const handleSubmitAdd = (event) => {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
-    // console.log("quest",input_data)
     dispatch(addInterview(
       {
         title,
@@ -89,6 +90,9 @@ export default function BasicTextFields() {
   }
 
   return (
+    <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
+      
+    <Grid container spacing={3}>
     <form onSubmit={handleSubmitAdd} >
       <Box sx={{ minWidth: 250 }}>
         <FormControl fullWidth>
@@ -145,5 +149,8 @@ export default function BasicTextFields() {
         <Button type="submit" variant="contained">Create</Button>
       </Stack>
     </form>
+    </Grid>
+
+</Paper>
   );
 }
