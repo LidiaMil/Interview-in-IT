@@ -24,29 +24,6 @@ router.get('/', async (req, res) => {
   res.json(questions);
 });
 
-router.get('/:id', async (req, res) => {
-  let thisId = req.params.id
-  console.log('++++', thisId);
-  const question = await Interview.findOne({
-    include: [
-      {
-        model: User
-      },
-      {
-        model: Question
-      },
-      {
-        model: Categorey
-      },
-      {
-        model: Organization
-      },
-    ],
-    where:{id:thisId}
-  });
-  console.log(question)
-  res.json(question);
-});
 
 router.get('/new', async (req, res) => {
   const categories = await Categorey.findAll();
@@ -164,6 +141,31 @@ router.post("/comment/:id", async(req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+
+router.get('/:id', async (req, res) => {
+  let thisId = req.params.id
+  console.log('++++', thisId);
+  const question = await Interview.findOne({
+    include: [
+      {
+        model: User
+      },
+      {
+        model: Question
+      },
+      {
+        model: Categorey
+      },
+      {
+        model: Organization
+      },
+    ],
+    where:{id:thisId}
+  });
+  console.log(question)
+  res.json(question);
 });
 
 module.exports = router
