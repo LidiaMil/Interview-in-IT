@@ -92,3 +92,9 @@ html, body { height: 100%; width: 100%; margin: 0;}
   border: solid 1px black; /* Параметры рамки */
 
 }
+
+.logo {
+max-height: 90px;
+max-width: 120px;
+  
+}

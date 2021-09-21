@@ -8,6 +8,7 @@ export const initialState = {
   categories:[],
   user:{},
   lang:[],
+  oneUser:[],
   org:[],
   isAuntificated: false,
   img: "", //фото для профиля

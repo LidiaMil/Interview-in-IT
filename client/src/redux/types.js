@@ -16,6 +16,7 @@ export const ADD_INTERVIEW='ADD_INTERVIEW'
 export const SET_ALLLANG='SET_ALLLANG'
 export const SET_ALLORG='SET_ALLORG'
 export const SET_ONE='SET_ONE'
+export const SET_USER='SET_USER'
 
 
 export const SET_IMG = 'SET_IMG'
