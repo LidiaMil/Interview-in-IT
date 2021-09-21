@@ -6,6 +6,7 @@ import Question from '../Question/Question';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import { getOrganizationInterview } from '../../redux/actions/organizationInterview.action'
+import OneInterview from "../OneInterview/OneInterview"
 
 
 
@@ -29,7 +30,9 @@ export default function OrganizationInterview() {
   
     <Typography gutterBottom variant="subtitle1" component="div">
         {/* <h1>{interview && interview[0].Organizations.name}</h1> */}
-    {interview && interview.map((item, index) => <div className="col-4" key={item.id}>{index+1}: <Question {...item} /></div>)}
-</Typography>
+        <div >
+        {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+      </div>
+      </Typography>
   );
 }
