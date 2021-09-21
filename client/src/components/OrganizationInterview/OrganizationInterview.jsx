@@ -23,9 +23,13 @@ export default function OrganizationInterview() {
   //   arrOrg.push(Organizations[i].title)
   // }
 
-
+  console.log('============', interview)
   return (
-    <p><a href={`/question/${interview.id}`}>{interview}</a> </p>
-
+    // // <p><a href={`/question/${interview.id}`}>{interview}</a> </p>
+  
+    <Typography gutterBottom variant="subtitle1" component="div">
+        {/* <h1>{interview && interview[0].Organizations.name}</h1> */}
+    {interview && interview.map((item, index) => <div className="col-4" key={item.id}>{index+1}: <Question {...item} /></div>)}
+</Typography>
   );
 }

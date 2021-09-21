@@ -31,10 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
-app.use(session(({
-  secret: 'dgsgsgsdhrd',
 
-})))
 
 const db = [{
   email: 'a@a.a',
