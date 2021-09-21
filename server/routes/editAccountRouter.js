@@ -71,13 +71,10 @@ router.get('/editinterview/:id', async (req, res) => {
 
 })
 
-router.get('/delinterview/', async (req, res) => {
-  const { id, usersId } = req.query
-  // console.log(id, usersId);
-  // await Interview.destroy({ where: { id, user_id: usersId } })
-  const data = await Interview.destroy({ where: { id:Number(id), user_id: Number(usersId) } })
-  console.log("===", data);
-
+router.delete('/interview/:id', async (req, res) => {
+  const { id } = req.params
+  await Interview.destroy({ where: { id: Number(id) } })
+  return res.status(200)
 })
 
 

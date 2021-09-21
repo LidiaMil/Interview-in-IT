@@ -1,9 +1,13 @@
 export const initialState = {
-  organization: [],
-  oneQuestion: [],
-  interview: [],
-  comments: [],
-  user: {},
+  organization: [], 
+  oneQuestion:[],
+  organizationInterview: [],
+  interview:[],
+  comments:[],
+  categories:[],
+  user:{},
+  lang:[],
+  org:[],
   isAuntificated: false,
   img: "", //фото для профиля
   nickname: "" ,//nickname для профиля  

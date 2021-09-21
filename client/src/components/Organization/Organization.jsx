@@ -12,13 +12,13 @@ function Organization(){
       dispatch(getOrg())
   }, [])
 
-console.log(organization)
+
 
   return (
     <>
     <h1>Organization</h1>
-    <div className="row my-3">
-    {organization && organization.map((item, index) => <div className="col-4" key={item.id}><Cards {...item} /></div>)}
+    <div>
+    {organization && organization.map((item, index) => <div key={item.id}><Cards {...item} /></div>)}
     </div>
     </>
   )

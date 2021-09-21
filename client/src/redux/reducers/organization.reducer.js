@@ -1,4 +1,4 @@
-import { SET_ERROR, SET_ORG } from '../types'
+import { SET_ERROR, SET_ORG, SET_RAT } from '../types'
 
 
 export const organizationReducer = (organization = [], action) => {
@@ -12,6 +12,10 @@ export const organizationReducer = (organization = [], action) => {
         const { organization } = payload
         return organization 
     }
+    case SET_RAT: {
+      const { value } = payload
+      return organization.result = value
+  }
       default: {
           return organization;
       }

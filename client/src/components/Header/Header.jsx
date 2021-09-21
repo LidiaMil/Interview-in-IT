@@ -28,12 +28,8 @@ export default function Header()  {
   const classes = useStyles();
 
 
-
+  // const isAuthenticated = useSelector(state => state.isAuntificated)||window.local.getItem('state') || false
   const isAuthenticated = useSelector(state => state.isAuntificated)
-
-
-  
-
 
   return (
     <div className={classes.root}>
@@ -45,11 +41,11 @@ export default function Header()  {
           <Typography variant="h6" className={classes.title}>
             Собес в IT
           </Typography>
-          <Link className="nav-link" to="/"><Button color="inherit">Main</Button></Link>
+          <Link className="nav-link" to="/main"><Button color="inherit">Main</Button></Link>
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
-          <Button color="inherit"><Link className="nav-link" to="/question">Вопросы</Link></Button>
-          <Button color="inherit"><Link className="nav-link" to="/newpost">Создать новый вопрос</Link></Button>
+          <Button color="inherit"><Link className="nav-link" to="/question">Interview</Link></Button>
+          <Button color="inherit"><Link className="nav-link" to="/newcomment">Создать interview</Link></Button>
           {!isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/login">Логин</Link></Button>}
           {isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/logout">Логаут</Link></Button>}
         </Toolbar>

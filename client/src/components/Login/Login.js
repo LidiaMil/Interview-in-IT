@@ -27,7 +27,7 @@ function Login(){
     event.preventDefault()
     axios({
       method: 'post',
-      url: 'http://localhost:3000/login',
+      url: 'http://localhost:3000/auth/login',
       data: {
         email,
         password 

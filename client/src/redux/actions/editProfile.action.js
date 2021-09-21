@@ -56,9 +56,15 @@ export const clearMyInterviews = () => ({
 
 
 export const deleteMyInterview = (id) => (dispatch) => {
-  console.log(`http://localhost:3000/edit/delinterview/${id}`);
-  fetch(`http://localhost:3000/edit/delinterview/${id}`)
-    .then(result => result.json())
-    .then(data => dispatch(getInterviews(data)))
+  fetch(`http://localhost:3000/edit/interview/${id}`, {
+    method: 'DELETE',
+  })
+    .then(result => console.log(result))
+    .then(dispatch(delInterview(id)))
 
 }
+
+export const delInterview = (id) => ({
+  type: DELETE_MY_INTERVIEW,
+  payload: id
+})

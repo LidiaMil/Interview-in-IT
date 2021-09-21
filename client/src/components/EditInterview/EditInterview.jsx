@@ -15,7 +15,8 @@ export default function EditInterview({ id, text, data, name, description, level
   }
 
   function deleteInterview() {
-    dispatch(deleteMyInterview(`?id=${id}&usersId=${usersId}`))
+    // dispatch(deleteMyInterview(`?id=${id}&usersId=${usersId}`))
+    dispatch(deleteMyInterview(id))
   }
 
   // ?F=Kalinin&I=Sergey

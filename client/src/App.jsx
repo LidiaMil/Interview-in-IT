@@ -7,23 +7,64 @@ import {
   Link
 } from "react-router-dom";
 
+import { useHistory } from "react-router-dom";
+
+import { useState, useEffect } from 'react';
+
 import Main from './components/Main/Main';
 import Header from './components/Header/Header';
-import NewPost from './components/NewPost/NewPost';
+import NewInterview from './components/NewInterview/NewInterview';
 import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
+import Question from './components/Question/Question'
+import {Upleft} from './components/mainComponent/Upleft'
+import {Center} from './components/mainComponent/Center'
+import {Downleft} from './components/mainComponent/Downleft'
+import {Right} from './components/mainComponent/Right'
 import Interview from './components/Interview/Interview'
 import More from './components/More/More'
+import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
+
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
+import Container from '@mui/material/Container';
+
+import {useDispatch} from 'react-redux'
+import { setAuth } from '../../client/src/redux/actions/auth.action'
+
+
 
 function App() {
+  
+const dispatch = useDispatch()
+let history = useHistory()
+
+console.log(history);
+
+useEffect(()=>{
+    if(window.localStorage.getItem('state') === 'true'){
+      console.log('привет из сессии', window.localStorage.getItem('state'));
+      dispatch(setAuth())
+  }
+}, [])
+
+
+
+
+
+
+
+
+
+
   return (
+
+    
     <Router>
       <Header />
 
-      <div className="row my-3">
+      <div>
         <Switch>
           
           <Route exact path="/">
@@ -38,6 +79,10 @@ function App() {
             <Organization />
           </Route>
 
+          <Route exact path="/organization/:id">
+            <OrganizationInterview />
+          </Route>
+
           <Route exact path="/question">
             <Interview />
           </Route>
@@ -45,8 +90,8 @@ function App() {
             <More />
           </Route>
 
-          <Route exact path="/newpost">
-            <NewPost />
+          <Route exact path="/newcomment">
+            <NewInterview />
           </Route>
     
           <Route path='/login'>
@@ -55,6 +100,11 @@ function App() {
            <Route path='/logout'>
               <Logout />
            </Route>
+
+
+          <Route exact path="/main">
+            <Main />
+          </Route>
 
 
         </Switch>
