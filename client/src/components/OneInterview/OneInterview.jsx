@@ -1,12 +1,12 @@
 
 import * as React from 'react';
 import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import Question from '../Question/Question';
 
 export default function ComplexGrid({ id, text, data, name, description, level, Questions, Categorey, User, Organizations }) {
   // console.log(id, text, data, name, description, level, Questions, Categorey, User, Organizations)
-
+const {id_interview} = useParams()
   let arrOrg = []
   for (let i = 0; i < Organizations.length; i++) {
     arrOrg.push(Organizations[i].title)
