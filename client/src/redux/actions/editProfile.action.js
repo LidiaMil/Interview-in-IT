@@ -1,4 +1,4 @@
-import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS } from "../types"
+import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS, CLEAR_MY_INTERVIEWS, DELETE_MY_INTERVIEW } from "../types"
 
 //////  IMG  //////
 export const setImgProfile = (id) => async (dispatch) => {
@@ -43,7 +43,22 @@ export const getMyInterviews = (id) => (dispatch) => {
     .then(result => result.json())
     .then(data => dispatch(getInterviews(data)))
 }
-export const getInterviews = (myInterviews) => ({
+export const getInterviews = (data) => ({
   type: GET_MY_INTERVIEWS,
-  payload: { myInterviews }
+  payload: data
 })
+
+
+export const clearMyInterviews = () => ({
+  type: CLEAR_MY_INTERVIEWS,
+  payload: []
+})
+
+
+export const deleteMyInterview = (id) => (dispatch) => {
+  console.log(`http://localhost:3000/edit/delinterview/${id}`);
+  fetch(`http://localhost:3000/edit/delinterview/${id}`)
+    .then(result => result.json())
+    .then(data => dispatch(getInterviews(data)))
+
+}

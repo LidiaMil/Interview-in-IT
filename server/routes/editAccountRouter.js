@@ -24,7 +24,7 @@ router.post("/upload", function (req, res, next) {
         res.json({ message: err, });
       } else {
         await User.update({ firstName, photo }, { where: { id } })
-        const usersData = await User.findOne( { where: { id } })
+        const usersData = await User.findOne({ where: { id } })
         res.json(usersData)
         // res.status(200).end()
 
@@ -67,12 +67,16 @@ router.get('/getusersposts/:id', async (req, res) => {
 
 
 router.get('/editinterview/:id', async (req, res) => {
-  const id = Number(req.params.id)
+  // const id = Number(req.params.id)
 
 })
 
-router.get('/delinterview/:id', async (req, res) => {
-  const id = Number(req.params.id)
+router.get('/delinterview/', async (req, res) => {
+  const { id, usersId } = req.query
+  // console.log(id, usersId);
+  // await Interview.destroy({ where: { id, user_id: usersId } })
+  const data = await Interview.destroy({ where: { id:Number(id), user_id: Number(usersId) } })
+  console.log("===", data);
 
 })
 

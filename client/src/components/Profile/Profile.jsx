@@ -4,7 +4,7 @@ import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMyInterviews, setImgProfile, setNicknameProfile } from '../../redux/actions/editProfile.action';
+import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile } from '../../redux/actions/editProfile.action';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,34 +28,16 @@ function Profile() {
   const dispatch = useDispatch()
   const img = useSelector(state => state.img.img)
   const nickname = useSelector(state => state.img.nickname)
-  const myInterviews = useSelector(state => state.myInterviews.myInterviews)
-  // const [posts, setPosts] = useState([])
+  const myInterviews = useSelector(state => state.myInterviews)
   const [nick, setNick] = useState("")
   const [statusUpload, setStatusUpload] = useState("")
   useEffect(() => {
     dispatch(setImgProfile(id))
   }, [nickname, img])
 
-  console.log(nickname);
+  // console.log("----",myInterviews);
   function submintForm(e) {
     e.preventDefault()
-
-    // const formData = new FormData();
-    // const imagefile = document.querySelector('#contained-button-file');
-    // const name = document.querySelector('#firstName');
-    // formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
-    // formData.append('nickname', name.value);
-    // formData.append('id', id)
-    // e.target.reset()
-    // if (name.value) {
-    //   fetch("http://localhost:3000/edit/upload", {
-    //     method: 'POST',
-    //     body: formData,
-    //   })
-    //     .then(result => setStatusUpload(result.status))
-    // } else {
-    //   alert("нет никнейма")
-    // }
 
     const formData = new FormData();
     const imagefile = document.querySelector('#contained-button-file');
@@ -72,15 +54,11 @@ function Profile() {
 
 
   function getMyPosts() {
-    // if (posts.length) {
-    // setPosts([])
-    // } else {
-    //   fetch(`http://localhost:3000/edit/getusersposts/${id}`)
-    //     .then(result => result.json())
-    //     .then(data => setPosts(data))
-    // }
-    dispatch(getMyInterviews(id))
-    console.log('+++',myInterviews);
+    if (myInterviews.length) {
+      dispatch(clearMyInterviews())
+    } else {
+      dispatch(getMyInterviews(id))
+    }
   }
 
 
@@ -117,15 +95,15 @@ function Profile() {
           </div>
         </form >
 
-        {/* <Box>
+        <Box>
           <Button onClick={getMyPosts} variant="contained" color="primary" type="submit" disableElevation>
             {myInterviews.length ? "Скрыть посты" : "Показать мои посты"}
           </Button>
-        </Box> */}
-<button onClick={getMyPosts}>ddd</button>
+        </Box>
       </Box >
 
-      {/* {myInterviews.map((e, index) => <EditInterview
+      {myInterviews.map((e, index) => <EditInterview
+        usersId={id}
         key={e.id}
         id={e.id}
         index={index}
@@ -136,7 +114,7 @@ function Profile() {
         categorey={e.Categorey.categorey}
         organization={e.Organizations[0].title}
         questions={e.Questions}
-      />)} */}
+      />)}
 
     </>
   );

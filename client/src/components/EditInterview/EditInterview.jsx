@@ -2,18 +2,23 @@
 import * as React from 'react';
 import { Button, Grid, Typography, Paper } from '@material-ui/core';
 import Question from '../Question/Question';
+import { deleteMyInterview } from '../../redux/actions/editProfile.action';
+import { useDispatch, useSelector } from 'react-redux'
 
-export default function EditInterview({ id, text, data, name, description, level, questions, categorey, organization }) {
+
+export default function EditInterview({ id, text, data, name, description, level, questions, categorey, organization, usersId }) {
+  const dispatch = useDispatch()
 
   function editInterview() {
-    fetch(`http://localhost:3000/edit/editinterview/${id}`)
+    // fetch(`http://localhost:3000/edit/editinterview/${id}`)
+
   }
 
   function deleteInterview() {
-    fetch(`http://localhost:3000/edit/delinterview/${id}`)
+    dispatch(deleteMyInterview(`?id=${id}&usersId=${usersId}`))
   }
 
-
+  // ?F=Kalinin&I=Sergey
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
       <Grid container spacing={3} alignItems='flex-start'>
