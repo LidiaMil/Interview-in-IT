@@ -11,11 +11,14 @@ import { editImg } from "./editImg.reducer"
 import { editNickname } from "./editNickname.reducer"
 import { myInterviewsReducer } from "./myInterviews.reducer"
 import {organizationInterviewReducer} from './organizationInterview.reducer'
+import {oneInterviewReducer} from './oneInterview.reducer'
+import {oneUserReducer} from './user.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
   comments: commentReducer,
   interview: interviewReducer,
+  oneInterview:oneInterviewReducer,
   isAuntificated: auntificatedReducer,
   categories:categoriesReducer,
   lang:langReducer,
@@ -24,5 +27,6 @@ export const reducer = combineReducers({
   img: editImg,
   nickname: editNickname,
   myInterviews: myInterviewsReducer,
-  organizationInterview: organizationInterviewReducer
+  organizationInterview: organizationInterviewReducer,
+  oneUser:oneUserReducer
 })

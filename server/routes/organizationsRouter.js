@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {Organization, Raiting, OrganizationQuestion, Question, Interview} = require('../db/models')
+const { Organization, Raiting, OrganizationQuestion, Question, Interview } = require('../db/models')
 
- 
+
 router.get('/', async (req, res) => {
   const rating = await Organization.findAll({include: Raiting})
     res.json(rating)

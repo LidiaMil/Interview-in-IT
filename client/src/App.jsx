@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 import Main from './components/Main/Main';
+import PageInterview from './components/PageInterview/PageInterview';
 import Header from './components/Header/Header';
 import NewInterview from './components/NewInterview/NewInterview';
 import Organization from './components/Organization/Organization'
@@ -50,25 +51,18 @@ useEffect(()=>{
 }, [])
 
 
-
-
-
-
-
-
-
-
-  return (
-
-    
+  return (    
     <Router>
       <Header />
-
       <div>
         <Switch>
           
           <Route exact path="/">
             <Main />
+          </Route>
+
+          <Route exact path="/interview/:id">
+            <PageInterview />
           </Route>
 
           <Route exact path="/profile">
@@ -86,6 +80,7 @@ useEffect(()=>{
           <Route exact path="/question">
             <Interview />
           </Route>
+          
           <Route exact path="/question/:id">
             <More />
           </Route>
@@ -97,14 +92,10 @@ useEffect(()=>{
           <Route path='/login'>
               <Login />
            </Route>
+           
            <Route path='/logout'>
               <Logout />
            </Route>
-
-
-          <Route exact path="/main">
-            <Main />
-          </Route>
 
 
         </Switch>

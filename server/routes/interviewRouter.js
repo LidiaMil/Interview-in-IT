@@ -3,7 +3,6 @@ const { OrganizationQuestion,LanguageQuestion,Categorey,Interview,Question, User
 
 
 router.get('/', async (req, res) => {
-
   const questions = await Interview.findAll({
     include: [
       {
@@ -23,6 +22,30 @@ router.get('/', async (req, res) => {
   });
   // console.log(questions)
   res.json(questions);
+});
+
+router.get('/:id', async (req, res) => {
+  let thisId = req.params.id
+  console.log('++++', thisId);
+  const question = await Interview.findOne({
+    include: [
+      {
+        model: User
+      },
+      {
+        model: Question
+      },
+      {
+        model: Categorey
+      },
+      {
+        model: Organization
+      },
+    ],
+    where:{id:thisId}
+  });
+  console.log(question)
+  res.json(question);
 });
 
 router.get('/new', async (req, res) => {

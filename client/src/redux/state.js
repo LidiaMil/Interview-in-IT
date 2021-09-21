@@ -3,10 +3,12 @@ export const initialState = {
   oneQuestion:[],
   organizationInterview: [],
   interview:[],
+  oneInterview:[],
   comments:[],
   categories:[],
   user:{},
   lang:[],
+  oneUser:[],
   org:[],
   isAuntificated: false,
   img: "", //фото для профиля
