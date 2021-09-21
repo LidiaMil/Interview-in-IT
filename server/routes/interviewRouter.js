@@ -3,7 +3,6 @@ const { OrganizationQuestion,LanguageQuestion,Categorey,Interview,Question, User
 
 
 router.get('/', async (req, res) => {
-
   const questions = await Interview.findAll({
     include: [
       {
@@ -25,14 +24,14 @@ router.get('/', async (req, res) => {
   res.json(questions);
 });
 
+
 router.get('/new', async (req, res) => {
   const categories = await Categorey.findAll();
-  // console.log(categories)
+  console.log(categories)
   res.json(categories);
 });
 router.get('/newLang', async (req, res) => {
   const language = await Language.findAll();
-  // console.log(categories)
   res.json(language);
 });
 router.get('/newOrg', async (req, res) => {
@@ -55,9 +54,9 @@ router.post("/new", async(req, res) => {
       const lang= await LanguageQuestion.create({question_id:newQuestion.id,language_id:questionsWITHlang[`select-${i}`]})
       console.log(i,lang)
     }
-
+    
     const news = await Interview.findOne({
-    include: [
+      include: [
       {
         model: User
       },
@@ -74,73 +73,112 @@ router.post("/new", async(req, res) => {
     where:{id:newInterview.id}
   });
   return res.json(news);
-  }
+}
   else{
     return res.sendStatus(404);
   }
 });
 
-router.get('/question/:id', async (req, res) => {
+  
+router.get('/:id', async (req, res) => {
   let thisId = req.params.id
-  console.log("-----------", thisId);
-  const oneQuestions = await Question.findOne(
-    {
-      where: { 
-        id: thisId 
+  console.log('++++', thisId);
+  const question = await Interview.findOne({
+    include: [
+      {
+        model: User
       },
-      include: [
-        {
-          model:Interview,
-        },
-        {
-          model: Language
-        },
-        {
-          model: Comment
-        }
-      ]
-    });
-  //console.log(oneQuestions);
-  res.json(oneQuestions);
-})
-
-router.get('/comment/:id', async (req, res) => {
-  let thisId = req.params.id
-  console.log("+++++", thisId);
-  const oneQuestions = await Question.findOne(
-    {
-      where: { 
-        id: thisId 
+      {
+        model: Question
       },
-      include: [
-        {
-          model:Interview,
-        },
-        {
-          model: Language
-        },
-        {
-          model: Comment
-        }
-      ]
-    });
-  //console.log(oneQuestions);
-  res.json(oneQuestions);
-})
-
-
-
-router.post("/comment/:id", async(req, res) => {
-  const id=req.params.id
-  console.log(req.body)
-  const { text} = req.body;
-  try {
-    const newComment= await Comment.create({user_id:1,question_id:id,text:text})
-    console.log(newComment)
-    return res.json(newComment);
-  } catch (err) {
-    console.log(err);
-  }
+      {
+        model: Categorey
+      },
+      {
+        model: Organization
+      },
+    ],
+    where:{id:thisId}
+  });
+  console.log(question)
+  res.json(question);
 });
 
-module.exports = router
+router.get('/user/:id', async (req, res) => {
+  let thisId = req.params.id
+  console.log("lol", thisId);
+  const oneQuestions = await User.findOne(
+    {
+      where: { 
+        id: thisId 
+      },
+    });
+    console.log(oneQuestions);
+    res.json(oneQuestions);
+  })
+  
+  router.get('/question/:id', async (req, res) => {
+    let thisId = req.params.id
+    console.log("-----", thisId);
+    const oneQuestions = await Question.findOne(
+      {
+        where: { 
+          id: thisId 
+        },
+        include: [
+          {
+            model:Interview,
+          },
+          {
+            model: Language
+          },
+          {
+            model: Comment
+          }
+        ]
+    });
+    //console.log(oneQuestions);
+    res.json(oneQuestions);
+  })
+  
+  router.get('/comment/:id', async (req, res) => {
+    let thisId = req.params.id
+    console.log("+++++", thisId);
+    const oneQuestions = await Question.findOne(
+      {
+        where: { 
+          id: thisId 
+        },
+        include: [
+          {
+            model:Interview,
+          },
+          {
+            model: Language
+          },
+          {
+          model: Comment
+        }
+      ]
+    });
+    //console.log(oneQuestions);
+    res.json(oneQuestions);
+  })
+  
+  
+  
+  router.post("/comment/:id", async(req, res) => {
+    const id=req.params.id
+    console.log(req.body)
+    const { text} = req.body;
+    try {
+      const newComment= await Comment.create({user_id:1,question_id:id,text:text})
+      console.log(newComment)
+      return res.json(newComment);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  module.exports = router
+  

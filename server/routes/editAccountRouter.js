@@ -78,7 +78,10 @@ router.delete('/interview/:id', async (req, res) => {
 })
 
 
-
+// router.get('/datainterview/:id', async (req, res) => {
+//   const { id } = req.params
+//   console.log("====>", +id);
+// })
 
 
 router.get('/:id', async (req, res) => {

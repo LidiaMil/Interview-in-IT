@@ -1,10 +1,9 @@
-import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS, CLEAR_MY_INTERVIEWS, DELETE_MY_INTERVIEW } from "../types"
+import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS, CLEAR_MY_INTERVIEWS, DELETE_MY_INTERVIEW, GET_MY_INTERVIEW_FOR_FORM } from "../types"
 
 //////  IMG  //////
 export const setImgProfile = (id) => async (dispatch) => {
   fetch(`http://localhost:3000/edit/${id}`)
     .then(res => res.json())
-    // .then(data=>console.log(data.firstName))
     .then(data => dispatch(setImg(data.photo, data.firstName)))
 }
 export const setImg = (img, nickname) => ({
@@ -59,12 +58,26 @@ export const deleteMyInterview = (id) => (dispatch) => {
   fetch(`http://localhost:3000/edit/interview/${id}`, {
     method: 'DELETE',
   })
-    .then(result => console.log(result))
+    // .then(result => console.log(result))
     .then(dispatch(delInterview(id)))
 
 }
-
 export const delInterview = (id) => ({
   type: DELETE_MY_INTERVIEW,
   payload: id
 })
+
+
+
+// export const editMyInterview = (id) => (dispatch) => {
+//   fetch(`http://localhost:3000/edit/datainterview/${id}`)
+//     .then(result => console.log(result))
+//     .then(data=>dispatch(editInterview(data)))
+
+// }
+// export const editInterview = (data) => ({
+//   type: GET_MY_INTERVIEW_FOR_FORM,
+//   payload: data
+// })
+
+

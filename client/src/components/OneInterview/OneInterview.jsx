@@ -6,15 +6,18 @@ import Question from '../Question/Question';
 
 export default function ComplexGrid({ id, text, data, name, description, level, Questions, Categorey, User, Organizations }) {
   // console.log(id, text, data, name, description, level, Questions, Categorey, User, Organizations)
-const {id_interview} = useParams()
+
   let arrOrg = []
-  for (let i = 0; i < Organizations.length; i++) {
-    arrOrg.push(Organizations[i].title)
+  if(Organizations.length){
+    for (let i = 0; i < Organizations.length; i++) {
+      arrOrg.push(Organizations[i].title)
+    }
+
   }
 
   return (
     <Paper sx={{ p: 2, margin:'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-      <Grid container spacing={3} alignItems='flex-start'>
+      {User && Categorey && <Grid container spacing={3} alignItems='flex-start'>
         <Grid item>
           <ButtonBase sx={{ p: 5,width: 100, height: 100}} >
             <Avatar  
@@ -30,34 +33,37 @@ const {id_interview} = useParams()
                 {User.firstName}
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="div">
-                {arrOrg.join(' ')}
+                Организация: {arrOrg.join(' ')}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {Categorey.categorey}
+                Категория: {Categorey.categorey}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {text}
+                Название собеседования: {name}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {description}
+                Дата собеедования: {data}
               </Typography>
-              <Typography gutterBottom variant="subtitle1" component="div">
+              <Typography variant="body2" gutterBottom>
+                Описание: {description}
+              </Typography>
+              {/* <Typography gutterBottom variant="subtitle1" component="div">
                   {Questions && Questions.map((item, index) => <div className="col-4" key={item.id}>{index+1}: <Question {...item} /></div>)}
-              </Typography>
+              </Typography> */}
             </Grid>
             <Grid item>
               <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                <Button variant="outlined"> <Link to={`/question/${id}`}>More</Link></Button>
+                <Button variant="outlined"> <Link to={`/interview/${id}`}>More</Link></Button>
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-              {level}
+              Позиция: {level}
             </Typography>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid>}
     </Paper>
   );
 }

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import logo from '../1.png'
 import {
   Link
 } from "react-router-dom";
@@ -36,7 +37,8 @@ export default function Header()  {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            {/* <MenuIcon /> */}
+              <img className="logo" src={logo} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Собес в IT
@@ -45,7 +47,7 @@ export default function Header()  {
           <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
           <Button color="inherit"><Link className="nav-link" to="/question">Interview</Link></Button>
-          <Button color="inherit"><Link className="nav-link" to="/newcomment">Создать interview</Link></Button>
+          <Button color="inherit"><Link className="nav-link" to="/newinterview">Создать interview</Link></Button>
           {!isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/login">Логин</Link></Button>}
           {isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/logout">Логаут</Link></Button>}
         </Toolbar>
