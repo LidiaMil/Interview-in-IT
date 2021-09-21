@@ -3,6 +3,7 @@ export const initialState = {
   oneQuestion:[],
   organizationInterview: [],
   interview:[],
+  oneInterview:[],
   comments:[],
   categories:[],
   user:{},
