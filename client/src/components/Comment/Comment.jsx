@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 export default function ImgMediaCard(Comment) {
   const dispatch = useDispatch()
   const oneUser = useSelector((state) => state.oneUser)
+  console.log(oneUser)
   useEffect(() => {
     dispatch(getUser())
   }, [])

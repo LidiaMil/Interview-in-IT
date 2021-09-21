@@ -103,9 +103,22 @@ router.post("/new", async(req, res) => {
   }
 });
 
+router.get('/user/:id', async (req, res) => {
+  let thisId = req.params.id
+  console.log("lol", thisId);
+  const oneQuestions = await User.findOne(
+    {
+      where: { 
+        id: thisId 
+      },
+    });
+  console.log(oneQuestions);
+  res.json(oneQuestions);
+})
+
 router.get('/question/:id', async (req, res) => {
   let thisId = req.params.id
-  console.log("-----------", thisId);
+  console.log("-----", thisId);
   const oneQuestions = await Question.findOne(
     {
       where: { 
