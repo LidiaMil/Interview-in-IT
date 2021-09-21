@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Question from '../Question/Question';
 
 export default function ComplexGrid({ id, text, data, name, description, level, Questions, Categorey, User, Organizations }) {
-  // console.log(id, text, data, name, description, level, Questions, Categorey, User, Organizations)
 
   let arrOrg = []
   for (let i = 0; i < Organizations.length; i++) {

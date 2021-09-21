@@ -4,7 +4,6 @@ import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS } from "../types"
 export const setImgProfile = (id) => async (dispatch) => {
   fetch(`http://localhost:3000/edit/${id}`)
     .then(res => res.json())
-    // .then(data=>console.log(data.firstName))
     .then(data => dispatch(setImg(data.photo, data.firstName)))
 }
 export const setImg = (img, nickname) => ({
