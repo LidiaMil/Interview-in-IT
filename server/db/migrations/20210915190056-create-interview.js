@@ -20,6 +20,9 @@ module.exports = {
       level: {
         type: Sequelize.STRING
       },
+      favorites: {
+        type: Sequelize.BOOLEAN 
+      },
       categorey_id:{
         type: Sequelize.Sequelize.INTEGER,
         references: {

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import { Grid,Paper } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 
 import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
@@ -15,14 +15,14 @@ import { addInterview } from '../../redux/actions/interview.action'
 import { getAllLang } from '../../redux/actions/lang.action'
 import { getAllOrg } from '../../redux/actions/org.action'
 import { useEffect, useState } from "react"
-
+import { useInput } from '../../hooks/inputHook'
+import Input from '../Input/Input'
 
 export default function BasicTextFields() {
   const dispatch = useDispatch()
   const [cat, setCat] = useState("")
   const [company, setCompany] = useState("")
-  const [language, setLanguage] = useState("")
-  const [newForm, setNewForm] = useState(1)
+  const [newForm, setNewForm] = useState([{name: '0'}])
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [level, setLevel] = useState()
@@ -31,16 +31,18 @@ export default function BasicTextFields() {
   const org = useSelector((state) => state.org)
   const lang = useSelector((state) => state.lang)
 
-  console.log(categories,"++++++++", org, '123', lang)
   useEffect(() => {
     dispatch(getAllCategorey())
     dispatch(getAllOrg())
     dispatch(getAllLang())
   }, [])
+  console.log(newForm)
+
 
   const handleSubmitAdd = (event) => {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
+    console.log(input_data)
     dispatch(addInterview(
       {
         title,
@@ -51,9 +53,9 @@ export default function BasicTextFields() {
         company_id: company,
 
       }))
+
   }
   const titleAdd = (event) => {
-    // console.log("title",event.target.value)
     setTitle(event.target.value)
 
   }
@@ -64,93 +66,69 @@ export default function BasicTextFields() {
     setLevel(event.target.value)
   }
 
-  let fields = [];
-  for (let i = 0; i < newForm; i++) {
-    fields.push(<>
-      <TextField id="outlined-basic" name={i} label={`Question ${i}`} variant="outlined" />
-      <Box sx={{ minWidth: 250 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Language</InputLabel>
-          <Select
-            name={`select-${i}`}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={language}
-            label="Language"
-            onChange={(event) => {
-              // console.log(event.target.value)
-              setLanguage(event.target.value);
-            }}
-          >
-            {lang.map((item, index) => <MenuItem id={10} value={item.id}>{item.id}.{item.programmingLanguage}</MenuItem>)}
-          </Select>
-        </FormControl>
-      </Box>
-    </>);
-  }
 
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-      
-    <Grid container spacing={3}>
-    <form onSubmit={handleSubmitAdd} >
-      <Box sx={{ minWidth: 250 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Company</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={company}
-            label="Company"
-            onChange={(event) => {
-              console.log(event.target.value)
-              setCompany(event.target.value);
-            }}
-          >
-            {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box sx={{ minWidth: 500 }}>
-        <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
-      </Box>
-      <Box sx={{ minWidth: 250 }}>
-        <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} />
-      </Box>
-      <Box sx={{ minWidth: 500 }}>
-        <TextField id="outlined-basic" label="Description" variant="outlined" onChange={descriptionAdd} />
-      </Box>
 
-      <Box sx={{ minWidth: 250 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={cat}
-            label="Organization"
-            onChange={(event) => {
-              setCat(event.target.value);
-            }}
-          >
-            {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
-          </Select>
-        </FormControl>
-      </Box>
+      <Grid container spacing={3}>
+        <form onSubmit={handleSubmitAdd} >
+          <Box sx={{ minWidth: 250 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Company</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={company}
+                label="Company"
+                onChange={(event) => {
+                  console.log(event.target.value)
+                  setCompany(event.target.value);
+                }}
+              >
+                {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 500 }}>
+            <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
+          </Box>
+          <Box sx={{ minWidth: 250 }}>
+            <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} />
+          </Box>
+          <Box sx={{ minWidth: 500 }}>
+            <TextField id="outlined-basic" label="Description" variant="outlined" onChange={descriptionAdd} />
+          </Box>
 
-      <Box sx={{ minWidth: 500 }}>
-        {fields}
-        <Button onClick={() => setNewForm(newForm + 1)} variant="contained">
-          Add question
-        </Button>
-      </Box>
+          <Box sx={{ minWidth: 250 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={cat}
+                label="Organization"
+                onChange={(event) => {
+                  setCat(event.target.value);
+                }}
+              >
+                {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
+              </Select>
+            </FormControl>
+          </Box>
 
-      <Stack spacing={2} direction="row">
-        <Button type="submit" variant="contained">Create</Button>
-      </Stack>
-    </form>
-    </Grid>
+          <Box sx={{ minWidth: 500 }}>
+            {newForm.map((el, i) => <Input key={el.name}  index={el.name} lang={lang}/>)}
+            <Button onClick={() => setNewForm([...newForm, {name: `${newForm.length}`}])} variant="contained">
+              Add question
+            </Button>
+          </Box>
 
-</Paper>
+          <Stack spacing={2} direction="row">
+            <Button type="submit" variant="contained">Create</Button>
+          </Stack>
+        </form>
+      </Grid>
+
+    </Paper>
   );
 }

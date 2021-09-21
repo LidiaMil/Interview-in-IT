@@ -42,15 +42,19 @@ router.get('/newOrg', async (req, res) => {
 
 router.post("/new", async(req, res) => {
   const id=req.params.id
-  console.log(req.body)
+  console.log("-=-=-=-=",req.body)
   const { title,description,categories,level,questionsWITHlang,company_id} = req.body;
+
   if(title && categories && questionsWITHlang && level && company_id){
-    const newInterview= await Interview.create({name:title,level,description:description,categorey_id:categories,user_id:1})
+    const newInterview= await Interview.create({name:title,level,description:description,categorey_id:categories,user_id:1,favorites:false})
     const ququ= await OrganizationQuestion.create({organization_id:company_id,interview_id:newInterview.id})
     console.log(ququ,"+++++++")
     for(let i=0;i<Object.keys(questionsWITHlang).length/2;i++){
       const newQuestion= await Question.create({interview_id:newInterview.id,text:questionsWITHlang[i]})
       console.log(i,newQuestion)
+      let index=`select-${i}`
+      console.log("---",questionsWITHlang[i])
+      console.log("+++",questionsWITHlang[`select-${i}`])
       const lang= await LanguageQuestion.create({question_id:newQuestion.id,language_id:questionsWITHlang[`select-${i}`]})
       console.log(i,lang)
     }
