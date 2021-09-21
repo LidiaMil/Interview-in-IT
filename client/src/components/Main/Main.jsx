@@ -3,6 +3,7 @@ import Center from '../mainComponent/Center'
 import Downleft from '../mainComponent/Downleft'
 import Right from '../mainComponent/Right'
 import whale from '../../whale'
+import Interview from '../Interview/Interview'
 
 function Main(){
 
@@ -18,7 +19,12 @@ function Main(){
       </div>
       {/* <div className="mainDivs"><Center /></div> */}
       <div id="whale">
-
+      <form>
+      <label for="site-search">Search the site:</label>
+      <input type="search" id="site-search" name="q" aria-label="Search through site content" />
+      <button>Search</button>
+      </form>
+      <Interview />
 
      </div>
       <div className="rightmainDivs">
