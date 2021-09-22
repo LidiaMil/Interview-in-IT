@@ -48,9 +48,12 @@ export default function ComplexGrid() {
               <Typography gutterBottom variant="subtitle1" component="div">
                 Организация: {arrOrg.join(' ')}
               </Typography>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="subtitle1" gutterBottom>
                 Категория: {oneInterview?.Categorey.categorey}
               </Typography>
+              <Typography variant="subtitle1" component="div">
+                Позиция: {oneInterview?.level}
+             </Typography>
               <Typography variant="body2" gutterBottom>
                 Название собеседования: {oneInterview?.name}
               </Typography>
@@ -68,7 +71,7 @@ export default function ComplexGrid() {
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-              Позиция: {oneInterview?.level}
+              ): {oneInterview?.favorites}
             </Typography>
           </Grid>
         </Grid> 

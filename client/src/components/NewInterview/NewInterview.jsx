@@ -15,15 +15,16 @@ import { addInterview } from '../../redux/actions/interview.action'
 import { getAllLang } from '../../redux/actions/lang.action'
 import { getAllOrg } from '../../redux/actions/org.action'
 import { useEffect, useState } from "react"
+import { useInput } from '../../hooks/inputHook'
 import { useParams } from 'react-router';
 
+import Input from '../Input/Input'
 
 export default function BasicTextFields() {
   const dispatch = useDispatch()
   const [cat, setCat] = useState("")
   const [company, setCompany] = useState("")
-  const [language, setLanguage] = useState("")
-  const [newForm, setNewForm] = useState(1)
+  const [newForm, setNewForm] = useState([{ name: '0' }])
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [level, setLevel] = useState()
@@ -41,10 +42,13 @@ export default function BasicTextFields() {
     dispatch(getAllOrg())
     dispatch(getAllLang())
   }, [])
+  console.log(newForm)
+
 
   const handleSubmitAdd = (event) => {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
+    console.log(input_data)
     dispatch(addInterview(
       {
         title,
@@ -54,6 +58,7 @@ export default function BasicTextFields() {
         questionsWITHlang: input_data,
         company_id: company,
       }))
+
   }
 
   const editInterview = (event) => {
@@ -62,7 +67,6 @@ export default function BasicTextFields() {
   }
 
   const titleAdd = (event) => {
-    // console.log("title",event.target.value)
     setTitle(event.target.value)
 
   }
@@ -73,36 +77,12 @@ export default function BasicTextFields() {
     setLevel(event.target.value)
   }
 
-  let fields = [];
-  for (let i = 0; i < newForm; i++) {
-    fields.push(<>
-      <TextField id="outlined-basic" name={i} label={`Question ${i}`} variant="outlined" />
-      <Box sx={{ minWidth: 250 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Language</InputLabel>
-          <Select
-            name={`select-${i}`}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={language}
-            label="Language"
-            onChange={(event) => {
-              // console.log(event.target.value)
-              setLanguage(event.target.value);
-            }}
-          >
-            {lang.map((item, index) => <MenuItem id={10} value={item.id}>{item.id}.{item.programmingLanguage}</MenuItem>)}
-          </Select>
-        </FormControl>
-      </Box>
-    </>);
-  }
 
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-      <h3>{id ? "Изменить собеседование" : "Создать собеседование"}</h3>
+      <h3>{id ? "Редактировать собеседование" : "Создать собеседование"}</h3>
       <Grid container spacing={3}>
-        <form onSubmit={id ? editInterview :  handleSubmitAdd } >
+        <form onSubmit={id ? editInterview : handleSubmitAdd} >
           <Box sx={{ minWidth: 250 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Company</InputLabel>
@@ -148,16 +128,15 @@ export default function BasicTextFields() {
           </Box>
 
           <Box sx={{ minWidth: 500 }}>
-            {fields}
-            <Button onClick={() => setNewForm(newForm + 1)} variant="contained">
+            {newForm.map((el, i) => <Input key={el.name} index={el.name} lang={lang} />)}
+            <Button onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} variant="contained">
               Добавить вопрос
             </Button>
           </Box>
 
           <Stack spacing={2} direction="row">
-            <Button type="submit" variant="contained">{id ? "Сохранить" : "Создать"}</Button>
+            <Button type="submit" variant="contained">{id ? "Сохранить изменения" : "Создать"}</Button>
           </Stack>
-
         </form>
       </Grid>
 
