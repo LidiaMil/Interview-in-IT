@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
 import Question from '../Question/Question';
 import { getOneInterview } from '../../redux/actions/oneInterview.action'
+import { useState } from "react"
+import {changesFavorite,newFavorite} from '../../redux/actions/changeFavorite.action'
+
 
 export default function ComplexGrid() {
   
@@ -13,6 +16,7 @@ export default function ComplexGrid() {
   console.log("post ",postId.id)
   const dispatch = useDispatch()
   const oneInterview = useSelector((state) => state.oneInterview)
+  const [favorite,setFavorite]=useState(oneInterview.favorites)
   const {User, Categorey} = oneInterview
   console.log("0",oneInterview)
 
@@ -21,6 +25,10 @@ export default function ComplexGrid() {
     dispatch(getOneInterview(postId.id))
   }, [])
 
+  const handleFavorite = (id) => {
+    dispatch(newFavorite(id))
+    setFavorite(!favorite)
+  }
 
   let arrOrg = []
   for (let i = 0; i < oneInterview?.Organizations?.length; i++) {
@@ -70,12 +78,9 @@ export default function ComplexGrid() {
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-             {oneInterview.favorites ? 
-             <button> В избранное
-             </button> :
-             <button> Удалить из избранного
-             </button>
-               }
+  
+             <button onClick={() => handleFavorite(oneInterview.id)} type="button"> {favorite ? 'Удалить из избранного': 'В избранное'}</button> 
+
             </Typography>
           </Grid>
         </Grid> 

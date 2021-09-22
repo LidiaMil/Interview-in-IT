@@ -4,8 +4,8 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Interviews', [
       {
-        name: "1. Как правильно подключать скрипт и чем отличается атрибуты asinc и defer?",
-        description:'ffvgbh njkm nb',
+        name: "Java – разработчик в Сбере",
+        description:'Сбер сегодня — это более 60 компаний экосистемы, которые создают уникальные, технологичные продукты для миллионов пользователей. Мы собираем лучшие технологии и управленческие методы из мировой практики, а масштабы компании и система поддержки сотрудников открывают возможности для карьеры в любом направлении и с любым уровнем амбиции.',
         data: new Date(),
         level: "middle",
         favorites:false,
@@ -15,8 +15,8 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: "Типы данный. Чем отличается null от undefined?",
-        description:'fuuuuuuuuuuuck',
+        name: "Backend C# разработчик",
+        description:'доработка клиентского API для сайтов, мобильных приложений, телеграм ботов в связи с новыми идеями от продактов (а идей очень много);',
         data: new Date(),
         level: "middle + ",
         favorites:true,
@@ -26,8 +26,8 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: "Что не нравится в js?",
-        description:'eeeeeeeeeeeeee',
+        name: "IT-рекрутер",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
         data: new Date(),
         level: "senior",
         favorites:false,

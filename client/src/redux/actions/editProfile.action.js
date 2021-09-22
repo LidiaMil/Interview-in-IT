@@ -1,4 +1,4 @@
-import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS,GET_MY_FAV_INTERVIEWS } from "../types"
+import {SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS, CLEAR_MY_INTERVIEWS, DELETE_MY_INTERVIEW, GET_MY_INTERVIEW_FOR_FORM,GET_MY_FAV_INTERVIEWS } from "../types"
 import axios from "axios";
 
 
@@ -44,19 +44,53 @@ export const getMyInterviews = (id) => (dispatch) => {
     .then(result => result.json())
     .then(data => dispatch(getInterviews(data)))
 }
-export const getInterviews = (myInterviews) => ({
+export const getInterviews = (data) => ({
   type: GET_MY_INTERVIEWS,
-  payload: { myInterviews }
+  payload: data
 })
 
 
 //favorite
 export const getMyFavoriteInterviews = ()=> async (dispatch, getState) => {
   const response = await axios.get(`http://localhost:3000/interview/favorite`)
+  // console.log(response.data)
   dispatch(getFavoriteInterviews(response.data))
 }
 export const getFavoriteInterviews = (favInterviews) => ({
   type: GET_MY_FAV_INTERVIEWS,
   payload: { favInterviews }
 })
+
+export const clearMyInterviews = () => ({
+  type: CLEAR_MY_INTERVIEWS,
+  payload: []
+})
+
+
+export const deleteMyInterview = (id) => (dispatch) => {
+  fetch(`http://localhost:3000/edit/interview/${id}`, {
+    method: 'DELETE',
+  })
+    // .then(result => console.log(result))
+    .then(dispatch(delInterview(id)))
+
+}
+export const delInterview = (id) => ({
+  type: DELETE_MY_INTERVIEW,
+  payload: id
+})
+
+
+
+// export const editMyInterview = (id) => (dispatch) => {
+//   fetch(`http://localhost:3000/edit/datainterview/${id}`)
+//     .then(result => console.log(result))
+//     .then(data=>dispatch(editInterview(data)))
+
+// }
+// export const editInterview = (data) => ({
+//   type: GET_MY_INTERVIEW_FOR_FORM,
+//   payload: data
+// })
+
 

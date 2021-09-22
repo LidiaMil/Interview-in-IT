@@ -6,7 +6,7 @@ export const myFavoriteInterviewsReducer = (state = [], action) => {
   switch (type) {
     case GET_MY_FAV_INTERVIEWS: {
       const { favInterviews } = payload
-      return { favInterviews }
+      return favInterviews 
     } default: {
       return state;
     }

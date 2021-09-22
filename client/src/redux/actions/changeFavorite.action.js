@@ -1,7 +1,7 @@
 import {  CHANGE_FAVORITE,NEW_FAVORITE } from '../types'
 import axios from "axios";
 
-export const changeFavorite = (id) => async (dispatch, getState) => {
+export const changesFavorite = (id) => async (dispatch, getState) => {
   // console.log('1',id)
   const response = await axios.get(`http://localhost:3000/interview/favorite/${id}`)
   dispatch(setChangeFavorite(response.data))
