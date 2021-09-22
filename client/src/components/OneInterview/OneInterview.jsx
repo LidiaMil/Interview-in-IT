@@ -17,7 +17,6 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
   // useEffect(() => {
   //   dispatch(changeFavorite(id))
   // }, [])
-  console.log("lllplplp",changeFavorite)
 
   let arrOrg = []
   if(Organizations.length){

@@ -29,14 +29,22 @@ export default function BasicTextFields() {
   const [newForm, setNewForm] = useState([{ name: '0' }])
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
-  const [level, setLevel] = useState()
+  const { id } = useParams()
+  const myInterviews = useSelector(state => state.myInterviews)
+  const data = myInterviews.filter(e => e.id === Number(id))[0]
+  // console.log("======", data.level)
+
+  const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
   const categories = useSelector((state) => state.categories)
   const org = useSelector((state) => state.org)
   const lang = useSelector((state) => state.lang)
-
-  const { id } = useParams()
-  // console.log("===>",+id)
+  useEffect(() => {
+    // data = myInterviews.figitlter(e => e.id === Number(id))[0]
+    if (data) {
+      setLevel(data.level)
+    }
+  }, [data])
 
   // console.log(categories,"++++++++", org, '123', lang)
   useEffect(() => {
@@ -66,10 +74,8 @@ export default function BasicTextFields() {
       }, 5000);
       
   }
-
   const editInterview = (event) => {
     event.preventDefault()
-    // console.log(555)
   }
 
   const titleAdd = (event) => {
