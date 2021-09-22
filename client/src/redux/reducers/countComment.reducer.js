@@ -1,6 +1,6 @@
 import {  COUNT_COMMENT } from '../types'
 
-export const commentCountReducer = (state = 0, action) => {
+export const commentCountReducer = (state = [], action) => {
   const { type, payload } = action
 
   switch (type) {

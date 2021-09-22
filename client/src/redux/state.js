@@ -17,5 +17,6 @@ export const initialState = {
   nickname: "" ,//nickname для профиля  
   myInterviews:[], //список собеседований пользователя
   dataInterviewForm:{},
-  countComment:0
+  filter:[],
+  countComment:[]
 }

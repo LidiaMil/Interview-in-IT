@@ -24,6 +24,31 @@ router.get('/', async (req, res) => {
   res.json(questions);
 });
 
+router.post('/filter', async (req, res) => {
+  console.log(req.body)
+  const {categories} = req.body;
+  const questions = await Interview.findAll({
+    where:{categorey_id : categories},
+    include: [
+      {
+        model: User,
+        as: 'User'
+      },
+      {
+        model: Question
+      },
+      {
+        model: Categorey
+      },
+      {
+        model: Organization
+      },
+    ]
+  });
+  console.log(questions)
+  res.json(questions);
+});
+
 router.get('/favorite', async (req, res) => {
   const favoritePosts = await Interview.findAll(
     {

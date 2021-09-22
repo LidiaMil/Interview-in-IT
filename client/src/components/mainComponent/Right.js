@@ -46,7 +46,7 @@ function Right(){
 <>
     <h1>Organization</h1>
     <div>
-      1
+      
     {organization && organization.map((item, index) => <div key={item.id}><Cards {...item} /></div>)}
     </div>
     </>
