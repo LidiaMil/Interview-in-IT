@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { Link,useParams } from "react-router-dom";
 import Question from '../Question/Question';
-import {changeFavorite,newFavorite} from '../../redux/actions/changeFavorite.action'
+import {changesFavorite,newFavorite} from '../../redux/actions/changeFavorite.action'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react"
 
@@ -10,13 +10,13 @@ import { useEffect, useState } from "react"
 
 
 export default function ComplexGrid({ id, data, name, description, level, Questions, Categorey, User, Organizations,favorites }) {
-
+  const [favorite,setFavorite]=useState(favorites)
   const dispatch=useDispatch()
   const changeFavorite=useSelector(state=>state.changeFavorite)
-
-  // useEffect(() => {
-  //   dispatch(changeFavorite(id))
-  // }, [])
+  console.log("changeFavorite",favorite)
+  useEffect(() => {
+    dispatch(changesFavorite(id))
+  }, [])
 
   let arrOrg = []
   if(Organizations.length){
@@ -27,6 +27,7 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
 
   const handleFavorite = (id) => {
     dispatch(newFavorite(id))
+    setFavorite(!favorite)
   }
   
   return (
@@ -74,7 +75,7 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
           <Grid item>
             <Typography variant="subtitle1" component="div">
               
-             <button onClick={() => handleFavorite(id)} type="button"> {favorites ? 'Удалить из избранного': 'В избранное'}</button> 
+             <button onClick={() => handleFavorite(id)} type="button"> {favorite ? 'Удалить из избранного': 'В избранное'}</button> 
             </Typography>
           </Grid>
         </Grid>

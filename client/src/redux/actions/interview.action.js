@@ -2,7 +2,6 @@ import axios from "axios";
 import { SET_QUESTION,ADD_INTERVIEW,CHANGE_FAVORITE} from '../types'
 
 export const getInterview = () => async (dispatch, getState) => {
-  console.log('12323')
   const response = await axios.get("http://localhost:3000/interview")
   dispatch(setInterview(response.data))
 }
