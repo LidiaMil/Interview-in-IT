@@ -15,18 +15,23 @@ import { styled, Grid, Typography, Avatar, Paper, ButtonBase } from '@material-u
 import { useState } from "react"
 import { getAllCategorey } from '../../redux/actions/categories.action';
 import { filterInterview } from '../../redux/actions/interview.action'
+import { getAllOrg } from '../../redux/actions/org.action'
+
+
 function Question() {
   const dispatch = useDispatch()
   const [cat, setCat] = useState("")
+  const [company, setCompany] = useState("")
   const [filterPoint, setFilterPoint] = useState(null)
   const categories = useSelector((state) => state.categories)
+  const org = useSelector((state) => state.org)
   const filter = useSelector((state) => state.filter)
   const interview = useSelector((state) => state.interview)
 
   useEffect(() => {
     dispatch(getInterview())
     dispatch(getAllCategorey())
-
+    dispatch(getAllOrg())
   }, [])
 
   const handleSubmit = (event) => {
@@ -36,10 +41,14 @@ function Question() {
     dispatch(filterInterview(
       {
         categories: cat,
+        company_id: company,
       }))
     setFilterPoint(true)
   }
-
+  
+  const handleNull = () => {
+    setFilterPoint(null)
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -60,13 +69,35 @@ function Question() {
             </Select>
           </FormControl>
         </Box>
+        <Box sx={{ minWidth: 250 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Company</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={company}
+                  label="Company"
+                  onChange={(event) => {
+                    // console.log(event.target.value)
+                    setCompany(event.target.value);
+                  }}
+                >
+                  {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
+                </Select>
+              </FormControl>
+            </Box>
         <button type="submit">Применить</button>
       </form>
+      <button onClick={() => handleNull()}>Сбросить фильтр</button>
 
       <div className="searched-jobs">
         {filterPoint ?
           <div className="job-cards">
-            {filter && filter.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+            {filter.length ? filter.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>) : 
+            <div>
+            <div>Упс, 😢😢😢😢😢😢😢😢😢</div>
+            <div>Пока что интервью с такими критериями нет на нашем сайте</div>
+            </div>}
           </div> :
           <div className="job-cards">
             {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
