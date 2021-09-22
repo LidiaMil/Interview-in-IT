@@ -12,11 +12,12 @@ import { useEffect, useState } from "react"
 export default function ComplexGrid({ id, data, name, description, level, Questions, Categorey, User, Organizations,favorites }) {
   const [favorite,setFavorite]=useState(favorites)
   const dispatch=useDispatch()
-  const changeFavorite=useSelector(state=>state.changeFavorite)
+  // const changeFavorite=useSelector(state=>state.changeFavorite)
   console.log("changeFavorite",favorite)
-  useEffect(() => {
-    dispatch(changesFavorite(id))
-  }, [])
+
+  // useEffect(() => {
+  //   dispatch(changesFavorite(id))
+  // }, [])
 
   let arrOrg = []
   if(Organizations.length){
