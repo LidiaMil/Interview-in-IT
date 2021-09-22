@@ -1,7 +1,7 @@
-//$(document).ready(function() {
-//$('.search-box').focus();
-//});
-
+// $(document).ready(function() {
+// $('.search-box').focus();
+// });
+alert(1)
 const wrapper = document.querySelector(".wrapper");
 const header = document.querySelector(".header");
 

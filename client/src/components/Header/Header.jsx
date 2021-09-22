@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     flexGrow: 1,
@@ -19,54 +18,26 @@ import { useSelector } from 'react-redux';
 export default function Header()  {
   // const classNamees = useStyles();
 
-
   // const isAuthenticated = useSelector(state => state.isAuntificated)||window.local.getItem('state') || false
   const isAuthenticated = useSelector(state => state.isAuntificated)
+
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  
+  //   script.src = "Interview-in-IT/client/public/style.js";
+  //   script.async = true;
+  
+  //   document.body.appendChild(script);
+  
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   }
+  // }, []);
 
 
 
   return (
-    // <div className={classes.root}>
-    //   <AppBar position="static">
-    //     <Toolbar>
-    //       <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-    //         {/* <MenuIcon /> */}
-    //           <img className="logo" src={logo} />
-    //       </IconButton>
-    //       <Typography variant="h6" className={classes.title}>
-    //         Собес в IT
-    //       </Typography>
-    //       <Link className="nav-link" to="/main"><Button color="inherit">Main</Button></Link>
-    //       <Button color="inherit"><Link className="nav-link" to="/profile">Профиль</Link></Button>
-    //       <Button color="inherit"><Link className="nav-link" to="/organization">Организации</Link></Button>
-    //       <Button color="inherit"><Link className="nav-link" to="/question">Interview</Link></Button>
-    //       <Button color="inherit"><Link className="nav-link" to="/newinterview">Создать interview</Link></Button>
-    //       {!isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/login">Логин</Link></Button>}
-    //       {isAuthenticated && <Button color="inherit"><Link className="nav-link" to="/logout">Логаут</Link></Button>}
-    //     </Toolbar>
-    //   </AppBar>
-    // </div>
-    // <div classNameName={classNamees.root}>
-    //   <AppBar position="static">
-    //     <Toolbar>
-    //       <IconButton edge="start" classNameName={classNamees.menuButton} color="inherit" aria-label="menu">
-    //         {/* <MenuIcon /> */}
-    //           <img classNameName="logo" src={logo} />
-    //       </IconButton>
-    //       <Typography variant="h6" classNameName={classNamees.title}>
-    //         Собес в IT
-    //       </Typography>
-    //       <Link classNameName="nav-link" to="/main"><Button color="inherit">Main</Button></Link>
-    //       <Button color="inherit"><Link classNameName="nav-link" to="/profile">Профиль</Link></Button>
-    //       <Button color="inherit"><Link classNameName="nav-link" to="/organization">Организации</Link></Button>
-    //       <Button color="inherit"><Link classNameName="nav-link" to="/question">Interview</Link></Button>
-    //       <Button color="inherit"><Link classNameName="nav-link" to="/newcomment">Создать interview</Link></Button>
-    //       {!isAuthenticated && <Button color="inherit"><Link classNameName="nav-link" to="/login">Логин</Link></Button>}
-    //       {isAuthenticated && <Button color="inherit"><Link classNameName="nav-link" to="/logout">Логаут</Link></Button>}
-    //     </Toolbar>
-    //   </AppBar>
-    // </div>
-
+    
     <div className="header">
 
   <div className="logo" href="/">
@@ -100,12 +71,15 @@ export default function Header()  {
     </div>
     <img className="user-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png" alt="" />
     <div className="user-name">Suhayel Nasim</div>
-    <button color="inherit"><Link classNameName="nav-link" to="/logout">Логаут</Link></button>}
+    <button color="inherit"><Link classNameName="nav-link" to="/logout">Логаут</Link></button>
    </div>
-}
+    }
+    
+
   
   
   
+{/* <script defer src='Interview-in-IT/client/public/style.js'></script> */}
   
 
  </div>

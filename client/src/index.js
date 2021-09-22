@@ -5,6 +5,7 @@ import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import store from './redux/store'
+// import 'Interview-in-IT/client/public/style.js'
 
 
 ReactDOM.render(
