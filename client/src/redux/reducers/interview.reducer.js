@@ -1,4 +1,4 @@
-import { SET_QUESTION ,ADD_INTERVIEW } from '../types'
+import { SET_QUESTION ,ADD_INTERVIEW ,SET_ONE} from '../types'
 
 export const interviewReducer = (state = [], action) => {
   const { type, payload } = action
@@ -7,6 +7,11 @@ export const interviewReducer = (state = [], action) => {
     case SET_QUESTION: {
       const { question } = payload
       return  question 
+    }
+    case SET_ONE: {
+      const {oneInterview}=payload
+      return oneInterview
+
     }
     case ADD_INTERVIEW: {
       const { newInterview } = payload

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Question from '../Question/Question';
 
 export default function ComplexGrid(interview ) {
-  // console.log(interview )
+  console.log(interview )
 
   return (
    <a href={`/question/${interview.id}`}>{interview.text}</a>

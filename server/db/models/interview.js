@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: new Date()
     } ,
     level: DataTypes.STRING,
+    favorites: DataTypes.BOOLEAN,
     categorey_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
   }, {

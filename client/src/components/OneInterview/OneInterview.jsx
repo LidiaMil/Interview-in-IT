@@ -1,20 +1,38 @@
-
 import * as React from 'react';
 import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import Question from '../Question/Question';
+import {changeFavorite,newFavorite} from '../../redux/actions/changeFavorite.action'
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react"
 
-export default function ComplexGrid({ id, text, data, name, description, level, Questions, Categorey, User, Organizations }) {
-  // console.log(id, text, data, name, description, level, Questions, Categorey, User, Organizations)
+
+
+
+export default function ComplexGrid({ id, data, name, description, level, Questions, Categorey, User, Organizations,favorites }) {
+
+  const dispatch=useDispatch()
+  const changeFavorite=useSelector(state=>state.changeFavorite)
+
+  // useEffect(() => {
+  //   dispatch(changeFavorite(id))
+  // }, [])
+  console.log("lllplplp",changeFavorite)
 
   let arrOrg = []
-  for (let i = 0; i < Organizations.length; i++) {
-    arrOrg.push(Organizations[i].title)
+  if(Organizations.length){
+    for (let i = 0; i < Organizations.length; i++) {
+      arrOrg.push(Organizations[i].title)
+    }
   }
 
+  const handleFavorite = (id) => {
+    dispatch(newFavorite(id))
+  }
+  
   return (
     <Paper sx={{ p: 2, margin:'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-      <Grid container spacing={3} alignItems='flex-start'>
+      {User && Categorey && <Grid container spacing={3} alignItems='flex-start'>
         <Grid item>
           <ButtonBase sx={{ p: 5,width: 100, height: 100}} >
             <Avatar  
@@ -30,34 +48,38 @@ export default function ComplexGrid({ id, text, data, name, description, level, 
                 {User.firstName}
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="div">
-                {arrOrg.join(' ')}
+                Организация: {arrOrg.join(' ')}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {Categorey.categorey}
+                Категория: {Categorey.categorey}
+              </Typography>
+              <Typography variant="subtitle1" component="div">
+              Позиция: {level}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {text}
+                Должность: {name}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {description}
+                Дата собеедования: {data}
               </Typography>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                  {Questions && Questions.map((item, index) => <div className="col-4" key={item.id}>{index+1}: <Question {...item} /></div>)}
+              <Typography variant="body2" gutterBottom>
+                Описание: {description}
               </Typography>
             </Grid>
             <Grid item>
               <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                <Button variant="outlined"> <Link to={`/question/${id}`}>More</Link></Button>
+                <Button variant="outlined"> <Link to={`/interview/${id}`}>More</Link></Button>
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-              {level}
+              
+             <button onClick={() => handleFavorite(id)} type="button"> {favorites ? 'Удалить из избранного': 'В избранное'}</button> 
             </Typography>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid>}
     </Paper>
   );
 }

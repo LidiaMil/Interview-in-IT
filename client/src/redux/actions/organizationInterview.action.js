@@ -4,9 +4,7 @@ import { SET_ORGINT, SET_ERROR } from '../types'
 // middleware
 export const getOrganizationInterview = (id) => async (dispatch, getState) => {
     try {
-
         const response = await axios.get(`http://localhost:3000/organizations/${id}`)
-  // console.log('',response.data)
         dispatch(setOrganizationsInterview (response.data))
       
     } catch (error) {
