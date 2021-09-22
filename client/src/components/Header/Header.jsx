@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     flexGrow: 1,
@@ -19,13 +18,26 @@ import { useSelector } from 'react-redux';
 export default function Header()  {
   // const classNamees = useStyles();
 
-
   // const isAuthenticated = useSelector(state => state.isAuntificated)||window.local.getItem('state') || false
   const isAuthenticated = useSelector(state => state.isAuntificated)
+
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  
+  //   script.src = "Interview-in-IT/client/public/style.js";
+  //   script.async = true;
+  
+  //   document.body.appendChild(script);
+  
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   }
+  // }, []);
 
 
 
   return (
+    
     // <div className={classes.root}>
     //   <AppBar position="static">
     //     <Toolbar>
@@ -100,12 +112,14 @@ export default function Header()  {
     </div>
     <img className="user-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png" alt="" />
     <div className="user-name">Suhayel Nasim</div>
-    <button color="inherit"><Link classNameName="nav-link" to="/logout">Логаут</Link></button>}
+    <button color="inherit"><Link classNameName="nav-link" to="/logout">Логаут</Link></button>
+    }
    </div>
 }
   
   
   
+{/* <script defer src='Interview-in-IT/client/public/style.js'></script> */}
   
 
  </div>

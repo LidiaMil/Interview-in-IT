@@ -46,11 +46,11 @@ function Main(){
   //whale.init()
 
   return (
+
     <div className="mainContainer">
       <div className="leftmainDivs">
         <div id="myContainer">
 
-          
         </div>
         <div className="leftDivs"><Upleft /></div>
         <div className="leftDivs"><Downleft /></div>
@@ -69,6 +69,7 @@ function Main(){
         <div className="rightDivs"><Right /></div>
       </div>
     </div>
+  
   )
 }
 export default Main

@@ -46,10 +46,13 @@ function Question() {
           </Select>
         </FormControl>
       </Box> */}
-    
+     <div className="searched-jobs">
+  
       <div className="job-cards">
         {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
       </div>
+      </div>
+
 
     </>
   )

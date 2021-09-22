@@ -51,14 +51,14 @@ function App() {
     }
   }, [])
 
-
+  
   return (
     <Router>
 
-      {/* <div className="job"> */}
+      <div className="job">
         <Header />
 
-        <div>
+    
           <Switch>
 
             <Route exact path="/">
@@ -111,8 +111,7 @@ function App() {
 
 
           </Switch>
-        </div>
-      {/* </div> */}
+          </div>
     </Router>
   );
 }
