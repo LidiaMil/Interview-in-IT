@@ -88,6 +88,10 @@ function App() {
               <More />
             </Route>
 
+            <Route exact path="/newcomment/:id">
+              <NewInterview />
+            </Route>
+
             <Route exact path="/newcomment">
               <NewInterview />
             </Route>
