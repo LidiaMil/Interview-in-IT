@@ -16,6 +16,8 @@ import { getAllLang } from '../../redux/actions/lang.action'
 import { getAllOrg } from '../../redux/actions/org.action'
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
+import { useInput } from '../../hooks/inputHook'
+import { useParams } from 'react-router';
 import Input from '../Input/Input'
 
 export default function BasicTextFields() {
@@ -24,7 +26,7 @@ export default function BasicTextFields() {
   let history = useHistory();
   const [cat, setCat] = useState("")
   const [company, setCompany] = useState("")
-  const [newForm, setNewForm] = useState([{name: '0'}])
+  const [newForm, setNewForm] = useState([{ name: '0' }])
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [level, setLevel] = useState()
@@ -33,18 +35,22 @@ export default function BasicTextFields() {
   const org = useSelector((state) => state.org)
   const lang = useSelector((state) => state.lang)
 
+  const { id } = useParams()
+  // console.log("===>",+id)
+
+  // console.log(categories,"++++++++", org, '123', lang)
   useEffect(() => {
     dispatch(getAllCategorey())
     dispatch(getAllOrg())
     dispatch(getAllLang())
   }, [])
-  console.log(newForm)
+  // console.log(newForm)
 
 
   const handleSubmitAdd = (event) => {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
-    console.log(input_data)
+    // console.log(input_data)
     dispatch(addInterview(
       {
         title,
@@ -60,6 +66,12 @@ export default function BasicTextFields() {
       }, 5000);
       
   }
+
+  const editInterview = (event) => {
+    event.preventDefault()
+    // console.log(555)
+  }
+
   const titleAdd = (event) => {
     setTitle(event.target.value)
 
@@ -137,12 +149,10 @@ export default function BasicTextFields() {
      : <>
      <h1>Запись успешно добавленна</h1>
      <div>
-
      <a href='/'>перейти в личный кабинет</a> 
      </div>
      <div>
      <a href='/profile'>На главную</a> 
-
      </div>
       </>}
     </Paper>

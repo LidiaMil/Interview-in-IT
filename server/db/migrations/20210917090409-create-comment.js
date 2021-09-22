@@ -25,6 +25,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete:'CASCADE'
       },
       text: {
         type: Sequelize.TEXT
