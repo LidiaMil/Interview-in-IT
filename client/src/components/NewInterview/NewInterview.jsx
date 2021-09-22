@@ -32,7 +32,7 @@ export default function BasicTextFields() {
   const { id } = useParams()
   const myInterviews = useSelector(state => state.myInterviews)
   const data = myInterviews.filter(e => e.id === Number(id))[0]
-  // console.log("======", data.name)
+  // console.log("======", data.Questions)
 
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
@@ -44,6 +44,7 @@ export default function BasicTextFields() {
       setLevel(data.level)
       setDescription(data.description)
       setTitle(data.name)
+      setCompany(data.Organizations[0].title)
     }
   }, [data])
 
