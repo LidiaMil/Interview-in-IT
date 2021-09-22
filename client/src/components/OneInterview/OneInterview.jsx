@@ -5,13 +5,14 @@ import Question from '../Question/Question';
 import { changesFavorite, newFavorite } from '../../redux/actions/changeFavorite.action'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react"
-
-
+import { useHistory } from "react-router-dom"
 
 
 export default function ComplexGrid({ id, data, name, description, level, Questions, Categorey, User, Organizations, favorites }) {
   const [favorite, setFavorite] = useState(favorites)
+  let history = useHistory();
   const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.isAuntificated)
 
   let arrOrg = []
   if (Organizations.length) {
@@ -21,8 +22,13 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
   }
 
   const handleFavorite = (id) => {
-    dispatch(newFavorite(id))
-    setFavorite(!favorite)
+    if(isAuthenticated){
+      dispatch(newFavorite(id))
+      setFavorite(!favorite)
+    }
+    else{
+      history.push("/login")
+    }
   }
 
   return (

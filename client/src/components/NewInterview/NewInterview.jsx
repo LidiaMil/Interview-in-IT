@@ -112,7 +112,6 @@ export default function BasicTextFields() {
                   value={company}
                   label="Company"
                   onChange={(event) => {
-                    // console.log(event.target.value)
                     setCompany(event.target.value);
                   }}
                 >
