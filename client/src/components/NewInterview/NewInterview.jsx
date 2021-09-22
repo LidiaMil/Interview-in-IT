@@ -38,7 +38,7 @@ export default function BasicTextFields() {
   const org = useSelector((state) => state.org)
   const lang = useSelector((state) => state.lang)
   useEffect(() => {
-    // data = myInterviews.filter(e => e.id === Number(id))[0]
+    // data = myInterviews.figitlter(e => e.id === Number(id))[0]
     if (data) {
       setLevel(data.level)
     }
