@@ -1,4 +1,6 @@
-import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS } from "../types"
+import { SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS,GET_MY_FAV_INTERVIEWS } from "../types"
+import axios from "axios";
+
 
 //////  IMG  //////
 export const setImgProfile = (id) => async (dispatch) => {
@@ -46,3 +48,15 @@ export const getInterviews = (myInterviews) => ({
   type: GET_MY_INTERVIEWS,
   payload: { myInterviews }
 })
+
+
+//favorite
+export const getMyFavoriteInterviews = ()=> async (dispatch, getState) => {
+  const response = await axios.get(`http://localhost:3000/interview/favorite`)
+  dispatch(getFavoriteInterviews(response.data))
+}
+export const getFavoriteInterviews = (favInterviews) => ({
+  type: GET_MY_FAV_INTERVIEWS,
+  payload: { favInterviews }
+})
+

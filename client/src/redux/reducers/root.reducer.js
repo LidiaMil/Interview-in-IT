@@ -13,6 +13,8 @@ import { myInterviewsReducer } from "./myInterviews.reducer"
 import {organizationInterviewReducer} from './organizationInterview.reducer'
 import {oneInterviewReducer} from './oneInterview.reducer'
 import {oneUserReducer} from './user.reducer'
+import {changeFavoriteReducer} from './changeFavorite.reducer'
+import {myFavoriteInterviewsReducer} from './favoriteInterview.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -28,5 +30,7 @@ export const reducer = combineReducers({
   nickname: editNickname,
   myInterviews: myInterviewsReducer,
   organizationInterview: organizationInterviewReducer,
-  oneUser:oneUserReducer
+  oneUser:oneUserReducer,
+  changeFavorite:changeFavoriteReducer,
+  favInterviews:myFavoriteInterviewsReducer
 })

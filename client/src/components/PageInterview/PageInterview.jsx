@@ -28,7 +28,6 @@ export default function ComplexGrid() {
   }
 
   return (
-  
     <Paper sx={{ p: 2, margin:'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
      {User && Categorey && <Grid container spacing={3} alignItems='flex-start'>
         <Grid item>
@@ -55,7 +54,7 @@ export default function ComplexGrid() {
                 Позиция: {oneInterview?.level}
              </Typography>
               <Typography variant="body2" gutterBottom>
-                Название собеседования: {oneInterview?.name}
+               Должность: {oneInterview?.name}
               </Typography>
               <Typography variant="body2" gutterBottom>
                 Дата собеедования: {oneInterview?.data}
@@ -71,7 +70,12 @@ export default function ComplexGrid() {
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-              ): {oneInterview?.favorites}
+             {oneInterview.favorites ? 
+             <button> В избранное
+             </button> :
+             <button> Удалить из избранного
+             </button>
+               }
             </Typography>
           </Grid>
         </Grid> 

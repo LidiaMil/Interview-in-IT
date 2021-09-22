@@ -17,7 +17,9 @@ export const SET_ALLLANG='SET_ALLLANG'
 export const SET_ALLORG='SET_ALLORG'
 export const SET_ONE='SET_ONE'
 export const SET_USER='SET_USER'
-
+export const CHANGE_FAVORITE='CHANGE_FAVORITE'
+export const NEW_FAVORITE = 'NEW_FAVORITE'
+export const GET_MY_FAV_INTERVIEWS='GET_MY_FAV_INTERVIEWS'
 
 export const SET_IMG = 'SET_IMG'
 export const SET_NICKNAME= 'SET_NICKNAME'

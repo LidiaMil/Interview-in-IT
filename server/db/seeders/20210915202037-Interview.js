@@ -19,7 +19,7 @@ module.exports = {
         description:'fuuuuuuuuuuuck',
         data: new Date(),
         level: "middle + ",
-        favorites:false,
+        favorites:true,
         categorey_id:2,
         user_id: 3,
         createdAt: new Date(),

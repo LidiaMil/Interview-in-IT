@@ -4,8 +4,7 @@ import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMyInterviews, setImgProfile, setNicknameProfile } from '../../redux/actions/editProfile.action';
-
+import { getMyInterviews, setImgProfile, setNicknameProfile,getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,9 +25,11 @@ const id = 1
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const [favorite,setFavorite]=useState(false)
   const img = useSelector(state => state.img.img)
   const nickname = useSelector(state => state.img.nickname)
   const myInterviews = useSelector(state => state.myInterviews.myInterviews)
+  const favInterviews = useSelector(state => state.myInterviews.favInterviews)
   // const [posts, setPosts] = useState([])
   const [nick, setNick] = useState("")
   const [statusUpload, setStatusUpload] = useState("")
@@ -69,7 +70,11 @@ function Profile() {
     setNick("")
   }
 
-
+  const handleViewFavorite=()=>{
+    dispatch(getMyFavoriteInterviews())
+    console.log(favInterviews)
+    setFavorite(!favorite)
+  }
 
   function getMyPosts() {
     // if (posts.length) {
@@ -122,8 +127,15 @@ function Profile() {
             {myInterviews.length ? "Скрыть посты" : "Показать мои посты"}
           </Button>
         </Box> */}
-<button onClick={getMyPosts}>ddd</button>
+      <button onClick={getMyPosts}>ddd</button>
       </Box >
+      <div>
+        
+           <button onClick={() => handleViewFavorite()}>
+           {favorite ? 'Избранное' : 'Скрыть избранное'}
+           </button>
+     
+      </div>
 
       {/* {myInterviews.map((e, index) => <EditInterview
         key={e.id}
