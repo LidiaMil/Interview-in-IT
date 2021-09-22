@@ -18,19 +18,21 @@ import { getAllCategorey } from '../../redux/actions/categories.action';
 function Question() {
   const dispatch = useDispatch()
   const [cat, setCat] = useState("")
-  // const categories = useSelector((state) => state.categories)
+  const categories = useSelector((state) => state.categories)
   const interview = useSelector((state) => state.interview)
 
   useEffect(() => {
     dispatch(getInterview())
-    // dispatch(getAllCategorey())
+    dispatch(getAllCategorey())
 
   }, [])
 
   return (
     <>
       <h1>All Interview</h1>
-      {/* <Box sx={{ minWidth: 250 }}>
+      <form>
+
+      <Box sx={{ minWidth: 250 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
           <Select
@@ -45,8 +47,11 @@ function Question() {
             {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
           </Select>
         </FormControl>
-      </Box> */}
-      <div >
+      </Box>
+      <button type="submit">Применить</button>
+      </form>
+    
+      <div className="job-cards">
         {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
       </div>
 

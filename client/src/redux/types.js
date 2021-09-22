@@ -20,6 +20,7 @@ export const SET_USER='SET_USER'
 export const CHANGE_FAVORITE='CHANGE_FAVORITE'
 export const NEW_FAVORITE = 'NEW_FAVORITE'
 export const GET_MY_FAV_INTERVIEWS='GET_MY_FAV_INTERVIEWS'
+export const COUNT_COMMENT=' COUNT_COMMENT'
 
 export const SET_IMG = 'SET_IMG'
 export const SET_NICKNAME = 'SET_NICKNAME'

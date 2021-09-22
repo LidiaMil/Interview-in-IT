@@ -209,11 +209,27 @@ router.get('/comment/:id', async (req, res) => {
   res.json(oneQuestions);
 })
 
+router.patch('/comment/:id', async (req, res) => {
+  let thisId = req.params.id
+  console.log("id",thisId )
+  const oneQuestions = await Question.findAll({ where: { interview_id: thisId }})
+  console.log(oneQuestions.length)
+  let arr=[]
+  for (let i = 0; i < oneQuestions.length; i++) {
+    arr.push(oneQuestions[i].id)
+  }
+  console.log(arr)
+  let mas=[]
+  for (let i = 0; i < oneQuestions.length; i++) {
+    mas.push(await Comment.count({ where: { question_id: arr[i]}}))
+  }
+  console.log(mas)
+  res.json(mas);
+})
 
 
 router.post("/comment/:id", async (req, res) => {
   const id = req.params.id
-  // console.log(req.body)
   const { text } = req.body;
   try {
     const newComment = await Comment.create({ user_id: 1, question_id: id, text: text })

@@ -16,5 +16,6 @@ export const initialState = {
   img: "", //фото для профиля
   nickname: "" ,//nickname для профиля  
   myInterviews:[], //список собеседований пользователя
-  dataInterviewForm:{}
+  dataInterviewForm:{},
+  countComment:0
 }

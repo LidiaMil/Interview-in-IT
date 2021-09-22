@@ -32,7 +32,6 @@ export default function BasicTextFields() {
   const { id } = useParams()
   const myInterviews = useSelector(state => state.myInterviews)
   const data = myInterviews.filter(e => e.id === Number(id))[0]
-  // console.log("======", data.name)
 
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
@@ -121,7 +120,6 @@ export default function BasicTextFields() {
                 <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
               }
             </Box>
-            {/* data.Organizations[0].title */}
 
             <Box sx={{ minWidth: 250 }}>
               {id ? <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} value={title}/> :

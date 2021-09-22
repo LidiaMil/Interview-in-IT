@@ -40,7 +40,7 @@ console.log("===__");
                 {description}
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="div">
-                {questions && questions.map((item, index) => <div className="col-4" key={item.id}>{index + 1}: <Question {...item} /></div>)}
+                {questions && questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index}/></div>)}
               </Typography>
             </Grid>
             <Grid item>

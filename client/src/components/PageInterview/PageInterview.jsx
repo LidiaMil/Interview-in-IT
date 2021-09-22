@@ -13,15 +13,14 @@ import {changesFavorite,newFavorite} from '../../redux/actions/changeFavorite.ac
 export default function ComplexGrid() {
   
   const postId = useParams()
-  console.log("post ",postId.id)
+  // console.log("post ",postId.id)
   const dispatch = useDispatch()
   const oneInterview = useSelector((state) => state.oneInterview)
   const [favorite,setFavorite]=useState(oneInterview.favorites)
   const {User, Categorey} = oneInterview
-  console.log("0",oneInterview)
+  // console.log("0",oneInterview)
 
   useEffect(() => {
-    console.log('123')
     dispatch(getOneInterview(postId.id))
   }, [])
 
@@ -72,7 +71,7 @@ export default function ComplexGrid() {
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="div">
                 Вопросы:
-                  {oneInterview?.Questions && oneInterview?.Questions.map((item, index) => <div className="col-4" key={item.id}>{index+1}: <Question {...item} /></div>)}
+                  {oneInterview?.Questions && oneInterview?.Questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index}/></div>)}
               </Typography>
             </Grid>
           </Grid>

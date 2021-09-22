@@ -16,6 +16,7 @@ import {oneUserReducer} from './user.reducer'
 import {changeFavoriteReducer} from './changeFavorite.reducer'
 import {myFavoriteInterviewsReducer} from './favoriteInterview.reducer'
 import { dataInterviewFormReducer } from "./dataInterviewForm.reducer"
+import {commentCountReducer} from './countComment.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -35,4 +36,5 @@ export const reducer = combineReducers({
   changeFavorite:changeFavoriteReducer,
   favInterviews:myFavoriteInterviewsReducer,
   dataInterviewForm: dataInterviewFormReducer,
+  countComment:commentCountReducer
 })

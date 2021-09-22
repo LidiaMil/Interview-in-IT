@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom'
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -21,6 +22,8 @@ export default function Header()  {
 
   // const isAuthenticated = useSelector(state => state.isAuntificated)||window.local.getItem('state') || false
   const isAuthenticated = useSelector(state => state.isAuntificated)
+
+
 
   return (
     // <div className={classes.root}>
@@ -63,7 +66,9 @@ export default function Header()  {
     //     </Toolbar>
     //   </AppBar>
     // </div>
+
     <div className="header">
+
   <div className="logo" href="/">
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <path xmlns="http://www.w3.org/2000/svg" d="M512 503.5H381.7a48 48 0 01-45.3-32.1L265 268.1l-9-25.5 2.7-124.6L338.2 8.5l23.5 67.1L512 503.5z" fill="#0473ff" data-original="#28b446" />
@@ -77,19 +82,34 @@ export default function Header()  {
    <a href="/profile" className="active">Профиль</a>
    <a href="/newcomment">Создать</a>
   </div>
-  <div className="user-settings">
-   <div className="dark-light">
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-     <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
-   </div>
-   <div className="user-menu">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-square">
-     <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /></svg>
-   </div>
-   <img className="user-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png" alt="" />
-   <div className="user-name">Suhayel Nasim</div>
+  {!isAuthenticated && 
+  <div class="forLogin">
+  <button color="inherit"><Link classNameName="nav-link" to="/login">Логин</Link></button>
+  <button color="inherit"><Link classNameName="nav-link" to="/registry">Регистрация</Link></button>
   </div>
+  }
+  {isAuthenticated && 
+    <div className="user-settings">
+    <div className="dark-light">
+     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+    </div>
+    <div className="user-menu">
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-square">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /></svg>
+    </div>
+    <img className="user-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png" alt="" />
+    <div className="user-name">Suhayel Nasim</div>
+    <button color="inherit"><Link classNameName="nav-link" to="/logout">Логаут</Link></button>}
+   </div>
+}
+  
+  
+  
+  
+
  </div>
+
   );
 }
 

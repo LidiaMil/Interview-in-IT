@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const id = 2
+
+//id пользователя
+const id = 1
 
 function Profile() {
   const classes = useStyles();
