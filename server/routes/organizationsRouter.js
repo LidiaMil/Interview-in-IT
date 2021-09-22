@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Organization, Raiting, OrganizationQuestion, Question, Interview } = require('../db/models')
+const { Organization, Raiting, OrganizationQuestion, Question, Interview, User, Categorey } = require('../db/models')
 
 
 router.get('/', async (req, res) => {
@@ -25,10 +25,19 @@ router.patch('/rating', async (req, res) => {
        console.log('it id',id)
        const oneQuestions = await Interview.findAll(
         { include: [
-            {
-              model:Organization,
-            },
-          ],
+          {
+            model: User
+          },
+          {
+            model: Question
+          },
+          {
+            model: Categorey
+          },
+          {
+            model: Organization
+          },
+        ],
           where: {id }
         });
     console.log(oneQuestions)

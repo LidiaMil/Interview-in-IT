@@ -4,11 +4,13 @@ export const initialState = {
   organizationInterview: [],
   interview:[],
   oneInterview:[],
+  favInterviews:[],
   comments:[],
   categories:[],
   user:{},
   lang:[],
   oneUser:[],
+  changeFavorite:[],
   org:[],
   isAuntificated: false,
   img: "", //фото для профиля

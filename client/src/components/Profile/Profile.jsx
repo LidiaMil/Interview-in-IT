@@ -4,8 +4,10 @@ import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile } from '../../redux/actions/editProfile.action';
+import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile,getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
 
+// import { getMyInterviews, setImgProfile, setNicknameProfile,getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import OneInterview from '../OneInterview/OneInterview'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,14 +23,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const id = 2
+const id = 1
 
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const [favorite,setFavorite]=useState(true)
   const img = useSelector(state => state.img.img)
   const nickname = useSelector(state => state.img.nickname)
   const myInterviews = useSelector(state => state.myInterviews)
+  const favInterviews = useSelector(state => state.favInterviews)
+  // const [posts, setPosts] = useState([])
   const [nick, setNick] = useState("")
   const [statusUpload, setStatusUpload] = useState("")
   useEffect(() => {
@@ -50,8 +55,12 @@ function Profile() {
     ))
     setNick("")
   }
+  console.log(favInterviews)
 
-
+  const handleViewFavorite=()=>{
+    dispatch(getMyFavoriteInterviews())
+    setFavorite(!favorite)
+  }
 
   function getMyPosts() {
     if (myInterviews.length) {
@@ -101,6 +110,22 @@ function Profile() {
           </Button>
         </Box>
       </Box >
+      <div>
+      {favorite ? 
+           <button onClick={() => handleViewFavorite()}>
+           Избранное
+           </button>
+           :
+           <>
+           <button onClick={() => setFavorite(!favorite)}>
+           Скрыть избранное
+           </button>
+
+           {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+           </>
+           }
+     
+      </div>
 
       {myInterviews.map((e, index) => <EditInterview
         usersId={id}

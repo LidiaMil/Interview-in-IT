@@ -26,20 +26,9 @@ const Img = styled('img')({
 
 export default function Cards({ id, photo, Raitings, address, link, areaOfActivity, title, result}) {
   const dispatch = useDispatch()
-  const [value, setValue] = React.useState(result);
-  // const sum = Raitings.reduce((acc, cur) =>  acc + cur.number )
-// let acc = 0
-// let  arrNum =  Raitings.map((el) => acc += el.number)
-// let startRes = acc / Raitings.length
-// let result = Math.round(acc / arrNum.length)
+  const [value, setValue] = useState(result);
 
-
-  //const  raiting = useSelector((state) => state.organization.result)
-
- 
-  
-  // console.log('State',value)
-  const ttry =  useCallback(async (newValue) => {
+  const getChange =  useCallback(async (newValue) => {
     setValue(newValue);
     console.log('inCallback',newValue)
     await axios.patch('http://localhost:3000/organizations/rating', {newValue, id})
@@ -89,7 +78,7 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
                     
                     // setValue(newValue);
                     // console.log(value,'neewwvaaalue');
-                      ttry(newValue)
+                    getChange(newValue)
                       
                   }}
                 />
