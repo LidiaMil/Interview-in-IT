@@ -3,9 +3,15 @@ import {useHistory, Link} from 'react-router-dom'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { setAuth } from '../../redux/actions/auth.action'
+import ReactDOM from 'react-dom';
 
 
 function Login(){
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+
   const dispatch = useDispatch()
   const [error, setError] = useState(false)
   const history = useHistory()
@@ -25,14 +31,29 @@ function Login(){
 
   async function handleSubmit(event){
     event.preventDefault()
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/auth/login',
-      data: {
-        email,
-        password 
-      }
-    })
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localhost:3000/auth/login',
+    //   data: {
+    //     email,
+    //     password 
+    //   },
+    //       withCredentials: true
+    // })
+    // axios.post('http://localhost:3000/auth/login', {
+    //   email,
+    //     password 
+    // },{
+    //   withCredentials: true
+    // }
+    // )
+    axios.post('http://localhost:3000/auth/login', {
+      email,
+      password
+  }, {
+      withCredentials: true,
+      headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
+  }})
       .then((data) => {
         console.log(data);
         dispatch(setAuth())
@@ -51,19 +72,20 @@ function Login(){
 
 
   return (
+
+
+<div class="login">
+	<h1>Login</h1>
     <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input name="email" type="email" required onChange={handleChange} value={email}></input>
-      </label>
-      <label>
-        Password:
-        <input name="password" type="password" required onChange={handleChange} value={password}></input>
-      </label>
-      <button type ="submit">Signin</button>
-      <div className="error">Тут ошибка: {error}</div>
-      <Link to="/">Домой</Link>
+    <input type="email" placeholder="email" autofocus name="email" required onChange={handleChange} value={email}></input>
+    <input type="password" placeholder="password" name="password" type="password" required onChange={handleChange} value={password}></input>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Войти</button>
+        <div className="error">Тут ошибка: {error}</div>
+        <Link to="/">Домой</Link>
     </form>
+</div>
+
+
 
 
   )
