@@ -5,6 +5,7 @@ import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyInterviews, setImgProfile, setNicknameProfile,getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import OneInterview from '../OneInterview/OneInterview'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,11 +26,11 @@ const id = 1
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const [favorite,setFavorite]=useState(false)
+  const [favorite,setFavorite]=useState(true)
   const img = useSelector(state => state.img.img)
   const nickname = useSelector(state => state.img.nickname)
-  const myInterviews = useSelector(state => state.myInterviews.myInterviews)
-  const favInterviews = useSelector(state => state.myInterviews.favInterviews)
+  const myInterviews = useSelector(state => state.myInterviews)
+  const favInterviews = useSelector(state => state.favInterviews)
   // const [posts, setPosts] = useState([])
   const [nick, setNick] = useState("")
   const [statusUpload, setStatusUpload] = useState("")
@@ -69,10 +70,10 @@ function Profile() {
     ))
     setNick("")
   }
+  console.log(favInterviews)
 
   const handleViewFavorite=()=>{
     dispatch(getMyFavoriteInterviews())
-    console.log(favInterviews)
     setFavorite(!favorite)
   }
 
@@ -130,10 +131,19 @@ function Profile() {
       <button onClick={getMyPosts}>ddd</button>
       </Box >
       <div>
-        
+      {favorite ? 
            <button onClick={() => handleViewFavorite()}>
-           {favorite ? 'Избранное' : 'Скрыть избранное'}
+           Избранное
            </button>
+           :
+           <>
+           <button onClick={() => setFavorite(!favorite)}>
+           Скрыть избранное
+           </button>
+
+           {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+           </>
+           }
      
       </div>
 

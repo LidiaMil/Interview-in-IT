@@ -53,6 +53,7 @@ export const getInterviews = (myInterviews) => ({
 //favorite
 export const getMyFavoriteInterviews = ()=> async (dispatch, getState) => {
   const response = await axios.get(`http://localhost:3000/interview/favorite`)
+  // console.log(response.data)
   dispatch(getFavoriteInterviews(response.data))
 }
 export const getFavoriteInterviews = (favInterviews) => ({
