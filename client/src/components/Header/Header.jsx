@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
 
@@ -21,6 +21,19 @@ export default function Header()  {
 
   // const isAuthenticated = useSelector(state => state.isAuntificated)||window.local.getItem('state') || false
   const isAuthenticated = useSelector(state => state.isAuntificated)
+
+  useEffect(() => {
+    const script = document.createElement('script');
+  
+    script.src = "Interview-in-IT/client/public/style.js";
+    script.async = true;
+  
+    document.body.appendChild(script);
+  
+    return () => {
+      document.body.removeChild(script);
+    }
+  }, []);
 
   return (
     // <div className={classes.root}>
@@ -63,7 +76,9 @@ export default function Header()  {
     //     </Toolbar>
     //   </AppBar>
     // </div>
+
     <div className="header">
+
   <div className="logo" href="/">
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <path xmlns="http://www.w3.org/2000/svg" d="M512 503.5H381.7a48 48 0 01-45.3-32.1L265 268.1l-9-25.5 2.7-124.6L338.2 8.5l23.5 67.1L512 503.5z" fill="#0473ff" data-original="#28b446" />
