@@ -45,7 +45,7 @@ console.log("===__");
             </Grid>
             <Grid item>
               <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                <Button variant="outlined" onClick={getUsersInterview}> <Link className="nav-link" to={`/newinterview/${id}`}>Редактировать</Link></Button>
+                <Button variant="outlined" onClick={getUsersInterview}> <Link className="nav-link" to={`/newcomment/${id}`}>Редактировать</Link></Button>
                 
                 <Button onClick={deleteInterview} variant="outlined"> Удалить</Button>
               </Typography>

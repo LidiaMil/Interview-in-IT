@@ -32,7 +32,7 @@ export default function BasicTextFields() {
   const { id } = useParams()
   const myInterviews = useSelector(state => state.myInterviews)
   const data = myInterviews.filter(e => e.id === Number(id))[0]
-  // console.log("======", data.level)
+  // console.log("======", data)
 
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
@@ -76,6 +76,7 @@ export default function BasicTextFields() {
   }
   const editInterview = (event) => {
     event.preventDefault()
+    // alert(555)
   }
 
   const titleAdd = (event) => {
@@ -92,10 +93,10 @@ export default function BasicTextFields() {
 
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-
+ <h3>{id ? "Редактировать собеседование" : "Создать собеседование"}</h3>
       {add?
       <Grid container spacing={3}>
-      <form onSubmit={handleSubmitAdd} >
+      <form onSubmit={id ? editInterview : handleSubmitAdd}>
         <Box sx={{ minWidth: 250 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Company</InputLabel>
@@ -113,15 +114,23 @@ export default function BasicTextFields() {
             </Select>
           </FormControl>
         </Box>
-        <Box sx={{ minWidth: 500 }}>
+        {/* <Box sx={{ minWidth: 500 }}>
           <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
-        </Box>
+        </Box> */}
+        <Box sx={{ minWidth: 500 }}>
+            {id ? <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
+              <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
+            }
+          </Box>
+
+
         <Box sx={{ minWidth: 250 }}>
           <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} />
         </Box>
         <Box sx={{ minWidth: 500 }}>
           <TextField id="outlined-basic" label="Description" variant="outlined" onChange={descriptionAdd} />
         </Box>
+        
 
         <Box sx={{ minWidth: 250 }}>
           <FormControl fullWidth>
@@ -143,12 +152,12 @@ export default function BasicTextFields() {
         <Box sx={{ minWidth: 500 }}>
           {newForm.map((el, i) => <Input key={el.name}  index={el.name} lang={lang}/>)}
           <Button onClick={() => setNewForm([...newForm, {name: `${newForm.length}`}])} variant="contained">
-            Add question
+          Добавить вопрос
           </Button>
         </Box>
 
         <Stack spacing={2} direction="row">
-          <Button type="submit" variant="contained">Create</Button>
+        <Button type="submit" variant="contained">{id ? "Сохранить изменения" : "Создать"}</Button>
         </Stack>
       </form>
     </Grid>
