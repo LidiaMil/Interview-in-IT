@@ -63,6 +63,12 @@ router.get('/logout', (req, res) => {
   })
 
 
+  router.post('/one_user', async (req, res) => {
+    //console.log('0000000', req.body.id);
+    const one_user = await User.findOne({where: {id: Number(req.body.id)}})
+    console.log(one_user);
+    res.send(one_user)
+    })
 
 
 

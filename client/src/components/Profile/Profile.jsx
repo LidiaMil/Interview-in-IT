@@ -85,66 +85,77 @@ function Profile() {
 
   return (
     <>
-      <h3>=={id}==</h3>
-      <div>
-        <h1>{statusUpload}</h1>
-        <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
+      <div className="center-div" >
+        <div className="job-cards">
+          <form
+            className={classes.root}
+            onSubmit={submintForm}
+            noValidate autoComplete="off"
+            encType="multipart/form-data"
+            action="/profile"
+          >
+            <div className="job-overview-card">
+              <img
+                style={{ width: "100px", height: "100px" }}
+                src={img} ref={ref}
+                alt="Avatar"
+                className="avatar" />
+            </div>
+
+            <div >
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                name="photo"
+                type="file"
+                onChange={inputChange}
+                value={inputValue}
+              />
+              <button style={{margin:'3px'}} className="search-buttons detail-button">
+                <label htmlFor="contained-button-file" >
+                  Загрузить фото
+                </label>
+              </button>
+              <input
+              style={{margin:'3px'}}
+                id="firstName"
+                label="nickname"
+                name="firstName"
+                onChange={(e) => setNick(e.target.value)}
+                value={nick}
+                placeholder="введите ваш nickname"
+              />
+
+              <button style={{margin:'3px'}} variant="contained" color="primary" class="search-buttons">
+                Изменить
+              </button>
+
+            </div>
+          </form >
+
           <div>
-            <img style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} ref={ref} />
-
-          </div>
-
-          <div className={classes.root}>
-            <input
-              accept="image/*"
-              className={classes.input}
-              id="contained-button-file"
-              name="photo"
-              type="file"
-              onChange={inputChange}
-              value={inputValue}
-            />
-            <label htmlFor="contained-button-file">
-                Загрузить фото
-            </label>
-
-            <input
-              id="firstName"
-              label="nickname"
-              name="firstName"
-              onChange={(e) => setNick(e.target.value)}
-              value={nick}
-              placeholder="введите ваш nickname"
-            />
-
-            <button>
-              Изменить
+            <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={getMyPosts}>
+              {myInterviews.length ? "Скрыть собеседования" : "Показать мои собеседования"}
             </button>
-
           </div>
-        </form >
-
-        <div>
-          <button onClick={getMyPosts}>
-            {myInterviews.length ? "Скрыть посты" : "Показать мои посты"}
-          </button>
         </div>
-      </div>
-      <div>
-        {favorite ?
-          <button onClick={() => handleViewFavorite()}>
-            Избранное
-          </button>
-          :
-          <>
-            <button onClick={() => setFavorite(!favorite)}>
-              Скрыть избранное
+        <div>
+          {favorite ?
+            <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={() => handleViewFavorite()}>
+              Избранное
             </button>
+            :
+            <>
+              <button className="search-buttons detail-button" onClick={() => setFavorite(!favorite)}>
+                Скрыть избранное
+              </button>
 
-            {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
-          </>
-        }
+              {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+            </>
+          }
 
+        </div>
       </div>
 
       {myInterviews.map((e, index) => <EditInterview

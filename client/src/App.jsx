@@ -45,25 +45,25 @@ function App() {
 
 
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     if (window.localStorage.getItem('user_id')) {
- //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
+      //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
       //добавить в локал стораж ид
       dispatch(setAuth())
     }
   }, [])
-  
+
   const isAuthenticated = useSelector(state => state.isAuntificated)
   console.log(isAuthenticated)
-  
+
   return (
     <Router>
 
       <div className="job">
         <Header />
 
-    
+        <div className="main-container">
           <Switch>
 
             <Route exact path="/">
@@ -76,7 +76,7 @@ function App() {
 
 
             <Route exact path="/profile">
-            {isAuthenticated ? <Profile /> : <Login />}
+              {isAuthenticated ? <Profile /> : <Login />}
             </Route>
 
             <Route exact path="/organization">
@@ -100,9 +100,9 @@ function App() {
             </Route>
 
             <Route exact path="/newcomment">
-            {!isAuthenticated ?  <Login />:<NewInterview />}
+              {!isAuthenticated ? <Login /> : <NewInterview />}
 
-              
+
             </Route>
 
             <Route path='/login'>
@@ -119,7 +119,8 @@ function App() {
 
 
           </Switch>
-          </div>
+        </div>
+      </div>
     </Router>
   );
 }
