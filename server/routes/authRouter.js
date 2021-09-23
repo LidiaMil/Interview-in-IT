@@ -2,9 +2,8 @@ const router = require('express').Router();
 const {Question,User} = require('../db/models');
 
 //переделал авторизацию через node-localstorage(nodeLocalStorage)
-let LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
-
+  let LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
 
 
 
@@ -27,14 +26,12 @@ router.post("/login", async (req, res) => {
   const {email, password} = req.body
   const user = await User.findOne({where: {email: email, parol: password}})
   //const user = db.find((user) => user.email === email && user.password === password)
-  console.log('fdfdvdfdfdf', user);
   if (user) {
-    console.log('testttt');
-    req.session.user = {email: user.email}
+    req.session.user = {id: user.id}
     console.log('сессия тут', req.session);
-    localStorage.setItem('in_user', user.email)
-    console.log('fgdfgdfgdf', localStorage.getItem('in_user'));
-    return res.status(200).end()
+    localStorage.setItem('in_user', true)
+    console.log('tttttt====>', localStorage.getItem('in_user'));
+    return res.json({id: user.id})
   }
   
   res.status(401).end()
@@ -57,7 +54,7 @@ router.get('/logout', (req, res) => {
   router.post('/registry', (req, res) => {
     console.log(req.body);
     const registry = User.create({
-      firstName: req.body.firstТame,
+      firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       parol: req.body.password,
