@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Interview, Categorey, Organization, Question } = require('../db/models');
+const { User, Interview, Categorey, Organization, Question, Language } = require('../db/models');
 
 const multer = require("multer");
 const storageConfig = multer.diskStorage({
@@ -58,8 +58,8 @@ router.get('/getusersposts/:id', async (req, res) => {
         },
         {
           model: Question
-        }
-
+        },
+    
       ]
     })
   res.json(posts)

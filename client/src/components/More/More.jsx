@@ -37,6 +37,7 @@ export default function ImgMediaCard() {
   useEffect(() => {
     dispatch(getOneQuestion(postId.id))
     dispatch(getComment(postId.id))
+    
   }, [])
 
   let arrLang = [];
