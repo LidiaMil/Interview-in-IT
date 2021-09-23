@@ -1,12 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { useEffect } from 'react'
 import OneInterview from "../OneInterview/OneInterview"
 import { useDispatch, useSelector } from "react-redux";
@@ -45,68 +37,62 @@ function Question() {
       }))
     setFilterPoint(true)
   }
-  
+
   const handleNull = () => {
     setFilterPoint(null)
   }
   return (
-    <>
-      <form onSubmit={handleSubmit}>
 
-        <Box sx={{ minWidth: 250 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={cat}
-              label="Категория"
-              onChange={(event) => {
-                setCat(event.target.value);
-              }}
-            >
-              {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box sx={{ minWidth: 250 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Company</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={company}
-                  label="Company"
-                  onChange={(event) => {
-                    // console.log(event.target.value)
-                    setCompany(event.target.value);
-                  }}
-                >
-                  {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
-                </Select>
-              </FormControl>
-            </Box>
-        <button type="submit">Применить</button>
-      </form>
-      <button onClick={() => handleNull()}>Сбросить фильтр</button>
+    <div className="CenterFormCard">
+
+      <div className="form-top">
+
+        <h3>Собеседования</h3>
+        <div className="filterForm">
+          {/* <label for="site-search">Search the site:</label>
+      <input className="formInput" type="text" onkeyup="filter();" placeholder="Поиск по сайту"/>
+      <button>Поиск по сайту</button> */}
+          <form onSubmit={handleSubmit}>
+
+            <label>Категория</label>
+            <select id="fruits" value={cat} label="Категория" onChange={(event) => {
+              setCat(event.target.value);
+            }}>
+              {categories.map((item, index) => <option value={item.id}>{item.categorey}</option>)}
+            </select>
+            <label>Компания</label>
+            <select id="fruits" value={company} label="Company" onChange={(event) => {
+              // console.log(event.target.value)
+              setCompany(event.target.value);
+            }}>
+              {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
+            </select>
+
+
+            <button type="submit">Применить</button>
+          </form>
+          <button onClick={() => handleNull()}>Сбросить фильтр</button>
+        </div>
+      </div>
 
       <div className="searched-jobs">
+
         {filterPoint ?
           <div className="job-cards">
-            {filter.length ? filter.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>) : 
-            <div>
-            <div>Упс, 😢😢😢😢😢😢😢😢😢</div>
-            <div>Пока что интервью с такими критериями нет на нашем сайте</div>
-            </div>}
+            {filter.length ? filter.map((item, index) => <OneInterview key={item.id} {...item} />) :
+              <div>
+                <div>Упс, 😢😢😢😢😢😢😢😢😢</div>
+                <div>Пока что интервью с такими критериями нет на нашем сайте</div>
+              </div>}
           </div> :
           <div className="job-cards">
-            {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+            {interview && interview.map((item, index) => <OneInterview key={item.id} {...item} />)}
           </div>}
       </div>
 
+    </div>
 
 
-    </>
   )
 }
 export default Question

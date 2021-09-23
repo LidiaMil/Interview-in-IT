@@ -27,26 +27,30 @@ import Registry from './components/Registry/Registry'
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
 import Container from '@mui/material/Container';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
 // const preloadedState = window.localStorage.getItem('in_user') || '{"isAuthenticated": false}'
 // console.log('amahere', preloadedState);
 function App() {
   const dispatch = useDispatch()
-  let history = useHistory()
-  console.log(history);
+  const isAuthenticated = useSelector(state => state.isAuntificated)
   useEffect(() => {
     if (window.localStorage.getItem('user_id')) {
- //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
+      //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
       //добавить в локал стораж ид
       dispatch(setAuth())
     }
   }, [])
+
+  // const isAuthenticated = true
+  // console.log(isAuthenticated)
+
   return (
     <Router>
-      {/* <div className="job"> */}
+      <div className="job">
         <Header />
-        <div>
+
+        <div className="main-container">
           <Switch>
             <Route exact path="/">
               <Main />
@@ -55,7 +59,7 @@ function App() {
               <PageInterview />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              {isAuthenticated ? <Profile /> : <Login />}
             </Route>
             <Route exact path="/organization">
               <Organization />
@@ -73,7 +77,9 @@ function App() {
               <NewInterview />
             </Route>
             <Route exact path="/newcomment">
-              <NewInterview />
+              {!isAuthenticated ? <Login /> : <NewInterview />}
+
+
             </Route>
             <Route path='/login'>
               <Login />
@@ -86,7 +92,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      {/* </div> */}
+      </div>
     </Router>
   );
 }
