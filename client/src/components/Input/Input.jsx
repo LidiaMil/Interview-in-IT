@@ -16,15 +16,31 @@ import { getAllLang } from '../../redux/actions/lang.action'
 import { getAllOrg } from '../../redux/actions/org.action'
 import { useEffect, useState } from "react"
 
-export default function BasicTextFields({index, lang}) {
+export default function BasicTextFields({ index, lang }) {
   let [language, setLanguage] = useState("")
 
-  console.log("name",index)
+  console.log("name", index)
   console.log(language)
 
   return (
     <>
-    <TextField id="outlined-basic" name={index} label={`Question ${index}`} variant="outlined" />
+       <label class="label" for="name">Текст вопроса</label>
+      <input type="text" id="name" required="" v-model="name"  name={index} />
+       <label class="label" for="name">Язык программирования </label>
+      <p class="select">
+        <select
+          class="budget"
+          v-model="selection.member"
+          value={language}
+          label="language"
+          onChange={(event) => {
+            console.log(event.target.value)
+            setLanguage(event.target.value);
+          }}>
+          {lang.map((item, index) => <option key={index} id={10} value={item.id}>{item.id}.{item.programmingLanguage}</option>)}
+        </select>
+      </p>
+      {/* <TextField id="outlined-basic" name={index} label={`Question ${index}`} variant="outlined" />
       <Box sx={{ minWidth: 250 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Language</InputLabel>
@@ -42,7 +58,7 @@ export default function BasicTextFields({index, lang}) {
             {lang.map((item, index) => <MenuItem key={index} id={10} value={item.id}>{item.id}.{item.programmingLanguage}</MenuItem>)}
           </Select>
         </FormControl>
-      </Box>
-      </>
+      </Box> */}
+    </>
   );
 }

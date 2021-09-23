@@ -42,8 +42,6 @@ import { setAuth } from '../../client/src/redux/actions/auth.action'
 function App() {
 
 
-
-
   const dispatch = useDispatch()
   
   useEffect(() => {

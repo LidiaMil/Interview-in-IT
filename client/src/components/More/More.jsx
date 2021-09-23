@@ -30,9 +30,10 @@ export default function ImgMediaCard() {
   // console.log("post ",postId)
   const dispatch = useDispatch()
 
+
   const comments = useSelector((state) => state.comments)
   const oneQuestion = useSelector((state) => state.oneQuestion)
-  // console.log(oneQuestion)
+
 
   useEffect(() => {
     dispatch(getOneQuestion(postId.id))

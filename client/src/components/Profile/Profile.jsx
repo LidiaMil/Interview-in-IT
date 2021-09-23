@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
-const id = 2//Number(localStorage.getItem('user_id'))
-// console.log("user_id = ",id);
 function Profile() {
+  const id = Number(localStorage.getItem('user_id'))
+  console.log("user_id = ",id);
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)

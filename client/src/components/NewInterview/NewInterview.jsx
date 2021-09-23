@@ -4,7 +4,6 @@ import InputLabel from '@mui/material/InputLabel';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import { Grid, Paper } from '@material-ui/core';
 
@@ -20,7 +19,7 @@ import { useInput } from '../../hooks/inputHook'
 import { useParams } from 'react-router';
 import Input from '../Input/Input'
 
-export default function BasicTextFields() {
+export default function Basicinputs() {
   const [add, setAdd] = useState(true)
   const dispatch = useDispatch()
   let history = useHistory();
@@ -33,6 +32,9 @@ export default function BasicTextFields() {
   const { id } = useParams()
   const myInterviews = useSelector(state => state.myInterviews)
   const data = myInterviews.filter(e => e.id === Number(id))[0]
+
+  const idUser = Number(localStorage.getItem('user_id'))
+  console.log("user_id = ",idUser);
 
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
@@ -62,6 +64,7 @@ export default function BasicTextFields() {
     // console.log(input_data)
     dispatch(addInterview(
       {
+        user:idUser,
         title,
         description,
         categories: cat,
@@ -90,89 +93,100 @@ export default function BasicTextFields() {
   const levelAdd = (event) => {
     setLevel(event.target.value)
   }
-  const companyAdd=(event) => {
+  const companyAdd = (event) => {
     setCompany(event.target.value)
   }
 
   return (
-    <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
+    <div>
       <h3>{id ? "Редактировать собеседование" : "Создать собеседование"}</h3>
       {add ?
-        <Grid container spacing={3}>
-          <form onSubmit={id ? editInterview : handleSubmitAdd}>
-            <Box sx={{ minWidth: 250 }}>
-            {newCompany ?
-                <TextField id="outlined-basic" label="Name company" variant="outlined" onChange={companyAdd} />
-               : 
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Company</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={company}
-                  label="Company"
-                  onChange={(event) => {
-                    setCompany(event.target.value);
-                  }}
-                >
-                  {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
-                </Select>
-              </FormControl>
+        <div id="app">
+          <form class="vue-form" onSubmit={id ? editInterview : handleSubmitAdd}>
+            <div>
+            <label class="label" for="name">Компания</label>
+              {newCompany ?
+
+                <input type="text" name="name" id="name" required="" v-model="name"  onChange={companyAdd} />
+                :
+                <p class="select">
+                  <select
+                    class="budget"
+                    label="Company"
+                    v-model="selection.member"
+                    value={company}
+                    onChange={(event) => {
+                      setCompany(event.target.value);
+                    }}>
+                    {org.map((item, index) => <option value={item.id}>{item.id}.{item.title}</option>)}
+                  </select>
+                </p>
               }
-              <Button onClick={() => setNewCompany(true)} variant="contained">
+              <button type="button" onClick={() => setNewCompany(true)} class="search-buttons card-buttons">
                 Компании нет в списке
-              </Button>
-              
-            </Box>
+              </button>
+            </div>
 
-            <Box sx={{ minWidth: 500 }}>
-              {id ? <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
-                <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
+            <div>
+              {id ? <input label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
+                <>
+                  <label class="label" for="name">Уровень</label>
+                  <input type="text" name="name" id="name" required="" v-model="name" onChange={levelAdd} />
+                </>
               }
-            </Box>
+            </div>
 
-            <Box sx={{ minWidth: 250 }}>
-              {id ? <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} value={title}/> :
-                <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} />}
-            </Box>
-
-            <Box sx={{ minWidth: 500 }}>
-              {id ? <TextField id="outlined-basic" label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
-                <TextField id="outlined-basic" label="Description" variant="outlined" onChange={descriptionAdd} />
+            <div>
+              {id ? <input label="Title" variant="outlined" onChange={titleAdd} value={title} /> :
+                <>
+                  <label class="label" for="name">Должность</label>
+                  <input type="text" name="name" id="name" required="" v-model="name" onChange={titleAdd} />
+                </>
               }
-            </Box>
+            </div>
+
+            <div>
+              {id ? <input label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
+               <>
+                <label class="label" for="name">Описание вакансии</label>
+                <input type="text" name="name" id="name" required="" v-model="name" onChange={descriptionAdd} />
+                </>
+              }
+            </div>
 
 
-            <Box sx={{ minWidth: 250 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={cat}
+            <div>
+             <label class="label" for="name">Категория </label>
+             <FormControl fullWidth>
+              <p class="select">
+                  <select
+                    class="budget"
+                    v-model="selection.member"
+                    value={cat}
                   label="Organization"
                   onChange={(event) => {
                     setCat(event.target.value);
-                  }}
-                >
-                  {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
-                </Select>
-              </FormControl>
-            </Box>
+                  }}>
+                    {categories.map((item, index) =>  <option value={item.id}>{item.id}.{item.categorey}</option>)}
+                  </select>
+                </p>
+                </FormControl>
+            </div>
 
-            <Box sx={{ minWidth: 500 }}>
+            <div>
               {newForm.map((el, i) => <Input key={el.name} index={el.name} lang={lang} />)}
-              <Button onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} variant="contained">
+              <button type="button" onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} class="search-buttons card-buttons">
                 Добавить вопрос
-              </Button>
-            </Box>
+              </button>
+            </div>
 
             <Stack spacing={2} direction="row">
-              <Button type="submit" variant="contained">{id ? "Сохранить изменения" : "Создать"}</Button>
+              <button type="submit" class="search-buttons card-buttons">{id ? "Сохранить изменения" : "Создать"}</button>
             </Stack>
           </form>
-        </Grid>
-        : <>
+        </div>
+        :
+        <>
           <h1>Запись успешно добавленна</h1>
           <div>
             <a href='/'>перейти в личный кабинет</a>
@@ -181,6 +195,94 @@ export default function BasicTextFields() {
             <a href='/profile'>На главную</a>
           </div>
         </>}
-    </Paper>
+    </div>
+
+    // <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
+    //   <h3>{id ? "Редактировать собеседование" : "Создать собеседование"}</h3>
+    //   {add ?
+    //     <Grid container spacing={3}>
+    //       <form onSubmit={id ? editInterview : handleSubmitAdd}>
+    //         <Box sx={{ minWidth: 250 }}>
+    //         {newCompany ?
+    //             <input  label="Name company" variant="outlined" onChange={companyAdd} />
+    //            : 
+    //           <FormControl fullWidth>
+    //             <InputLabel id="demo-simple-select-label">Company</InputLabel>
+    //             <Select
+    //               labelId="demo-simple-select-label"
+    //               id="demo-simple-select"
+    //               value={company}
+    //               label="Company"
+    //               onChange={(event) => {
+    //                 setCompany(event.target.value);
+    //               }}
+    //             >
+    //               {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
+    //             </Select>
+    //           </FormControl>
+    //           }
+    //           <Button onClick={() => setNewCompany(true)} variant="contained">
+    //             Компании нет в списке
+    //           </Button>
+
+    //         </Box>
+
+    //         <Box sx={{ minWidth: 500 }}>
+    //           {id ? <input  label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
+    //             <input  label="Level" variant="outlined" onChange={levelAdd} />
+    //           }
+    //         </Box>
+
+    //         <Box sx={{ minWidth: 250 }}>
+    //           {id ? <input  label="Title" variant="outlined" onChange={titleAdd} value={title}/> :
+    //             <input  label="Title" variant="outlined" onChange={titleAdd} />}
+    //         </Box>
+
+    //         <Box sx={{ minWidth: 500 }}>
+    //           {id ? <input  label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
+    //             <input  label="Description" variant="outlined" onChange={descriptionAdd} />
+    //           }
+    //         </Box>
+
+
+    //         <Box sx={{ minWidth: 250 }}>
+    //           <FormControl fullWidth>
+    //             <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
+    //             <Select
+    //               labelId="demo-simple-select-label"
+    //               id="demo-simple-select"
+    //               value={cat}
+    //               label="Organization"
+    //               onChange={(event) => {
+    //                 setCat(event.target.value);
+    //               }}
+    //             >
+    //               {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
+    //             </Select>
+    //           </FormControl>
+    //         </Box>
+
+    //         <Box sx={{ minWidth: 500 }}>
+    //           {newForm.map((el, i) => <Input key={el.name} index={el.name} lang={lang} />)}
+    //           <Button onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} variant="contained">
+    //             Добавить вопрос
+    //           </Button>
+    //         </Box>
+
+    //         <Stack spacing={2} direction="row">
+    //           <Button type="submit" variant="contained">{id ? "Сохранить изменения" : "Создать"}</Button>
+    //         </Stack>
+    //       </form>
+    //     </Grid>
+    //     : <>
+    //       <h1>Запись успешно добавленна</h1>
+    //       <div>
+    //         <a href='/'>перейти в личный кабинет</a>
+    //       </div>
+    //       <div>
+    //         <a href='/profile'>На главную</a>
+    //       </div>
+    //     </>}
+    // </Paper>
   );
 }
