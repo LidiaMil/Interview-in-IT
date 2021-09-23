@@ -11,6 +11,7 @@ function Logout(){
     (async () => {
      await fetch('/auth/logout')  
      dispatch(setUndoAuth())
+     localStorage.removeItem('user_id')
 //  dispatch({
 //     type: 'LOGOUT'
 //   })
