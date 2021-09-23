@@ -71,7 +71,7 @@ function App() {
             </Route>
 
             <Route exact path="/interview/:id">
-            {isAuthenticated ?  <Login />:<PageInterview />}
+              <PageInterview />
             </Route>
 
 

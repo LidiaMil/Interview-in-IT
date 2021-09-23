@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMyInterviews,getMyInterviews, setImgProfile, setNicknameProfile,getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
 import OneInterview from '../OneInterview/OneInterview'
 
 const useStyles = makeStyles((theme) => ({
@@ -23,41 +23,56 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
-const id = 1
-
+const id = 2//Number(localStorage.getItem('user_id'))
+// console.log("user_id = ",id);
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const [favorite,setFavorite]=useState(true)
+  const [favorite, setFavorite] = useState(true)
   const img = useSelector(state => state.img.img)
   const nickname = useSelector(state => state.img.nickname)
   const myInterviews = useSelector(state => state.myInterviews)
   const favInterviews = useSelector(state => state.favInterviews)
+  const [inputValue, setInputValue] = useState(null)
+  const ref = useRef(null)
+
   // const [posts, setPosts] = useState([])
-  const [nick, setNick] = useState("")
+  const [nick, setNick] = useState(nickname)
   const [statusUpload, setStatusUpload] = useState("")
   useEffect(() => {
     dispatch(setImgProfile(id))
+    setNick(nickname)
   }, [nickname, img])
 
-  // console.log("----",myInterviews);
+  function inputChange(e) {
+    const refCurrent = ref.current
+    const retChild = refCurrent.childNodes[0]
+    let reader = new FileReader();
+    reader.onloadend = function () {
+      retChild.src = reader.result
+    }
+    reader.readAsDataURL(e.target.files[0])
+  }
+
   function submintForm(e) {
     e.preventDefault()
-
     const formData = new FormData();
     const imagefile = document.querySelector('#contained-button-file');
     const name = document.querySelector('#firstName');
     formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
     formData.append('nickname', name.value);
     formData.append('id', id)
-    dispatch(setNicknameProfile(
-      formData
-    ))
-    setNick("")
+    if(nick){
+      dispatch(setNicknameProfile(
+        formData
+      ))
+      setNick(nick)
+    }else{
+      alert('не введён nickname')
+    }
   }
-  console.log(favInterviews)
 
-  const handleViewFavorite=()=>{
+  const handleViewFavorite = () => {
     dispatch(getMyFavoriteInterviews())
     setFavorite(!favorite)
   }
@@ -70,7 +85,6 @@ function Profile() {
     }
   }
 
-
   return (
     <>
       <h3>=={id}==</h3>
@@ -78,7 +92,7 @@ function Profile() {
         <h1>{statusUpload}</h1>
         <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
           <Box component="div" style={{ height: "100px" }} m={5}>
-            <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} />
+            <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} ref={ref} />
           </Box>
 
           <div className={classes.root}>
@@ -88,6 +102,8 @@ function Profile() {
               id="contained-button-file"
               name="photo"
               type="file"
+              onChange={inputChange}
+              value={inputValue}
             />
             <label htmlFor="contained-button-file">
               <Button variant="contained" color="primary" component="span">
@@ -95,7 +111,14 @@ function Profile() {
               </Button>
             </label>
 
-            <Input id="firstName" label="nickname" name="firstName" onChange={(e) => setNick(e.target.value)} value={nick} placeholder={nickname} />
+            <Input
+              id="firstName"
+              label="nickname"
+              name="firstName"
+              onChange={(e) => setNick(e.target.value)}
+              value={nick}
+              placeholder="введите ваш nickname"
+            />
 
             < Button type="submint" variant="contained" color="primary">
               Изменить
@@ -111,20 +134,20 @@ function Profile() {
         </Box>
       </Box >
       <div>
-      {favorite ? 
-           <button onClick={() => handleViewFavorite()}>
-           Избранное
-           </button>
-           :
-           <>
-           <button onClick={() => setFavorite(!favorite)}>
-           Скрыть избранное
-           </button>
+        {favorite ?
+          <button onClick={() => handleViewFavorite()}>
+            Избранное
+          </button>
+          :
+          <>
+            <button onClick={() => setFavorite(!favorite)}>
+              Скрыть избранное
+            </button>
 
-           {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
-           </>
-           }
-     
+            {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+          </>
+        }
+
       </div>
 
       {myInterviews.map((e, index) => <EditInterview
@@ -143,7 +166,5 @@ function Profile() {
 
     </>
   );
-
 }
 export default Profile
-
