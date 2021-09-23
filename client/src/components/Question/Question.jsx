@@ -29,7 +29,7 @@ export default function ComplexGrid(interview ) {
     <>
    <div>
     <div>Вопрос № {interview.index+1}</div>
-    <button onClick={() => handleLink(interview.id)} >{interview.text}</button>
+    <button className="search-buttons card-buttons" onClick={() => handleLink(interview.id)} >{interview.text}</button>
     <div>Всего комментариев к вопросу: {countComment[interview.index]}</div>
    </div>
    </>

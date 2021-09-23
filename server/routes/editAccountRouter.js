@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Interview, Categorey, Organization, Question } = require('../db/models');
+const { User, Interview, Categorey, Organization, Question, Language } = require('../db/models');
 
 const multer = require("multer");
 const storageConfig = multer.diskStorage({
@@ -58,8 +58,8 @@ router.get('/getusersposts/:id', async (req, res) => {
         },
         {
           model: Question
-        }
-
+        },
+    
       ]
     })
   res.json(posts)
@@ -73,6 +73,7 @@ router.get('/editinterview/:id', async (req, res) => {
 
 router.delete('/interview/:id', async (req, res) => {
   const { id } = req.params
+  console.log("id----", id);
   await Interview.destroy({ where: { id: Number(id) } })
   return res.status(200)
 })
