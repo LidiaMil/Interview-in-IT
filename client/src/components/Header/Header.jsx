@@ -24,6 +24,10 @@ export default function Header() {
         <span>Собеседушки</span>
       </Link>
       <div className="header-menu">
+
+      {/* <Link className="active" to="/"  >Главная</Link>
+        <Link  className="active" to="/profile" >Профиль</Link>
+        <Link  className="active" to="/newcomment" >Создать</Link> */}
         <a href="/" className="active" >Главная</a>
         <a href="/profile" className="active" >Профиль</a>
         <a href="/newcomment" className="active" >Создать</a>
