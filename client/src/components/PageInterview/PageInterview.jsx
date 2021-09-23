@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react'
@@ -35,9 +33,10 @@ export default function ComplexGrid() {
   }
 
   return (
-    <div className="job-cards">
-      {User && Categorey &&
-        <div>
+    <div className="job">
+      <div className="job-cards">
+        {User && Categorey &&
+          <div>
             <div className="job-overview-card">
               <div>
                 <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
@@ -76,8 +75,9 @@ export default function ComplexGrid() {
                 <button className="search-buttons detail-button" onClick={() => handleFavorite(oneInterview.id)} type="button"> {favorite ? 'Удалить из избранного' : 'В избранное'}</button>
               </div>
             </div>
-        </div>}
-    </div >
+          </div>}
+      </div >
+    </div>
   );
 }
 

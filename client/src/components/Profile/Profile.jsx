@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,8 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
-const id = 2//Number(localStorage.getItem('user_id'))
-// console.log("user_id = ",id);
+const id = Number(localStorage.getItem('user_id'))
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -46,10 +44,10 @@ function Profile() {
 
   function inputChange(e) {
     const refCurrent = ref.current
-    const retChild = refCurrent.childNodes[0]
+    // const retChild = refCurrent.childNodes[0]
     let reader = new FileReader();
     reader.onloadend = function () {
-      retChild.src = reader.result
+      refCurrent.src = reader.result
     }
     reader.readAsDataURL(e.target.files[0])
   }
@@ -62,12 +60,12 @@ function Profile() {
     formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
     formData.append('nickname', name.value);
     formData.append('id', id)
-    if(nick){
+    if (nick) {
       dispatch(setNicknameProfile(
         formData
       ))
       setNick(nick)
-    }else{
+    } else {
       alert('не введён nickname')
     }
   }
@@ -88,12 +86,13 @@ function Profile() {
   return (
     <>
       <h3>=={id}==</h3>
-      <Box component="div" m={1}>
+      <div>
         <h1>{statusUpload}</h1>
         <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
-          <Box component="div" style={{ height: "100px" }} m={5}>
-            <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} ref={ref} />
-          </Box>
+          <div>
+            <img style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} ref={ref} />
+
+          </div>
 
           <div className={classes.root}>
             <input
@@ -106,12 +105,10 @@ function Profile() {
               value={inputValue}
             />
             <label htmlFor="contained-button-file">
-              <Button variant="contained" color="primary" component="span">
                 Загрузить фото
-              </Button>
             </label>
 
-            <Input
+            <input
               id="firstName"
               label="nickname"
               name="firstName"
@@ -120,19 +117,19 @@ function Profile() {
               placeholder="введите ваш nickname"
             />
 
-            < Button type="submint" variant="contained" color="primary">
+            <button>
               Изменить
-            </Button>
+            </button>
 
           </div>
         </form >
 
-        <Box>
-          <Button onClick={getMyPosts} variant="contained" color="primary" type="submit" disableElevation>
+        <div>
+          <button onClick={getMyPosts}>
             {myInterviews.length ? "Скрыть посты" : "Показать мои посты"}
-          </Button>
-        </Box>
-      </Box >
+          </button>
+        </div>
+      </div>
       <div>
         {favorite ?
           <button onClick={() => handleViewFavorite()}>
