@@ -54,8 +54,9 @@ function Login(){
   }}
   )
       .then((data) => {
-        //console.log('fdfdfdfd=====>', data.data.id);
+        //console.log('fdfdfdfd=====>', data);
         dispatch(setAuth())
+
         localStorage.setItem('user_id', data.data.id);
         history.push('/')
       }

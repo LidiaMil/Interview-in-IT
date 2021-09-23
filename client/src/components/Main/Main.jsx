@@ -54,7 +54,7 @@ function Main(){
         <div className="leftDivs"><Downleft /></div>
       </div>
       {/* <div className="mainDivs"><Center /></div> */}
-      <div class="centerDiv">
+      <div className="centerDiv">
       <form>
       <label htmlFor="site-search">Search the site:</label>
       <input type="search" id="site-search" name="q" aria-label="Search through site content" />
