@@ -29,7 +29,7 @@ function Question() {
 
   return (
     <>
-      <h1>All Interview</h1>
+      <h2>Собеседования</h2>
       {/* <Box sx={{ minWidth: 250 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Categorey</InputLabel>

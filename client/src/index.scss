@@ -7,16 +7,14 @@
   .leftmainDivs {
     height: calc(100vh - 50px);
     width: 20%;
+    margin-top: 115px;
+
   }
   .rightmainDivs {
     height: calc(100vh - 50px);
     width: 30%;
-    font-size: 5px;
-  }
-  .leftDivs {
-    margin: 2px;
-    height: 45%;
-    
+    margin-top: 105px;
+    // background-color: red;
   }
 * {
  outline: none;
@@ -69,6 +67,8 @@ html {
  -webkit-font-smoothing: antialiased;
 }
 
+
+
 body {
  background-color: var(--body-bg-color);
  font-family: var(--body-font);
@@ -109,15 +109,6 @@ body {
  }
 }
 
-.job {
- display: flex;
- flex-direction: column;
- max-width: 1400px;
- height: 100vh;
- margin: 0 auto;
- overflow: hidden;
- background-color: var(--theme-bg-color);
-}
 
 .logo {
  display: flex;
@@ -301,9 +292,25 @@ body {
 }
 
 .leftDivs {
-  margin: 2px;
-  height: 45%;
-
+  margin:10px;
+  height: 100%;
+  //background-color: red;
+  vertical-align: middle;
+  margin-right: 20px;
+  padding: 5px;
+  overflow: scroll; /* Добавляем полосы прокрутки */
+  /* width: 300px; Ширина блока */
+  /* height: calc(100vh - 50px); Высота блока */
+  /* padding: 5px; Поля вокруг текста */
+  /* border: solid 1px black; Параметры рамки */
+}
+.rightDivs {
+  margin:10px;
+  height: 100%;
+  //background-color: red;
+  vertical-align: middle;
+  margin-right: 20px;
+  padding: 15px;
   overflow: scroll; /* Добавляем полосы прокрутки */
   /* width: 300px; Ширина блока */
   /* height: calc(100vh - 50px); Высота блока */
@@ -474,7 +481,10 @@ body {
  grid-template-columns: repeat(3, 1fr);
  grid-column-gap: 25px;
  grid-row-gap: 25px;
+ //background-color: red;
+ margin: 30px;
  animation: slideY .6s both;
+ vertical-align: middle;
 
  @media screen and (max-width: 1212px) {
   grid-template-columns: repeat(2, 1fr);
@@ -483,36 +493,21 @@ body {
   grid-template-columns: repeat(1, 1fr);
  }
 }
+
+
 .job-card {
- padding: 20px 16px;
- background-color: var(--header-bg-color);
- border-radius: 8px;
- cursor: pointer;
- transition: .2s;
- &:hover {
-  transform: scale(1.02);
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 100%;
  }
- svg {
-  width: 46px;
-  padding: 10px;
-  border-radius: 8px;
+
+ .left-job-card {
+
+
  }
- &-title {
-  font-weight: 600;
-  margin-top: 16px;
-  font-size: 14px;
- }
- &-subtitle {
-  color: var(--subtitle-color);
-  font-size: 13px;
-  margin-top: 14px;
-  line-height: 1.6em;
- }
- &-header {
-  display: flex;
-  align-items: flex-start;
- }
-}
+
+
+
 
 .overview-card:hover {
  background: #2b2ecf;
@@ -1100,10 +1095,10 @@ body {
 .job {
  display: flex;
  flex-direction: column;
- max-width: 1400px;
- height: 100vh;
+ //max-width: 1400px;
+// height: 100vh;
  margin: 0 auto;
- overflow: hidden;
+  overflow: hidden;
  background-color: var(--theme-bg-color);
 }
 
@@ -1443,11 +1438,11 @@ body {
 
 .job-cards {
  padding-top: 20px;
- /* display: grid; */
+ /* display: grid; 
  /* grid-template-columns: repeat(3, 1fr); */
  grid-column-gap: 25px;
  grid-row-gap: 25px;
- animation: slideY .6s both;
+//  animation: slideY .6s both;
  /* display: none; */
  /* display: flex; */
 
@@ -1459,12 +1454,19 @@ body {
  }
 }
 .job-card {
- padding: 20px 16px;
+ padding: 10px 8px;
  background-color: var(--header-bg-color);
  border-radius: 8px;
  cursor: pointer;
  transition: .2s;
+ width: 95%;
+ vertical-align: middle;
+ text-align: center;
+ margin-bottom: 20px;
+ margin-left: 20px;
  width: 100%;
+
+
 
  &:hover {
   transform: scale(1.02);
@@ -2002,7 +2004,8 @@ body {
 
 * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 
-html { width: 100%; height:100%; overflow:hidden; }
+html { width: 100%; height:100%; 
+  overflow:hidden; }
 
 body { 
 	width: 100%;
@@ -2047,3 +2050,17 @@ input {
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
+
+.company {
+background-color: blue;  
+}
+
+
+.job-overview-card {
+  margin-right: 20px;
+}
+
+
+.centerDiv {
+ // background-color: red;
+}
