@@ -57,7 +57,7 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
               <h3>
                 {title}
               </h3>
-              <div className="rightDivs"  gutterBottom>
+              <div className="rightDivs">
                 {areaOfActivity}
               </div>
               <div className="rightDivs"  color="text.secondary">

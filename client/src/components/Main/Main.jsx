@@ -58,7 +58,7 @@ function Main(){
       {/* <div className="mainDivs"><Center /></div> */}
       <div id="whale">
       <form>
-      <label for="site-search">Search the site:</label>
+      <label htmlFor="site-search">Search the site:</label>
       <input type="search" id="site-search" name="q" aria-label="Search through site content" />
       <button>Search</button>
       </form>

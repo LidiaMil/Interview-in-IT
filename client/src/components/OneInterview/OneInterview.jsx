@@ -86,8 +86,8 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
  <>
     { User && Categorey &&  <div className="job-cardch">
       <div className="job-card-header">
-       <img alt={User.firstName} class="avatar" src={User.photo} />
-       <svg className="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+       <img alt={User.firstName} className="avatar" src={User.photo} />
+       <svg className="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"></path></svg>
        </div>
       <div className="job-card-title">{User.firstName}</div>

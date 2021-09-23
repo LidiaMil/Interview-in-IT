@@ -74,12 +74,12 @@ function Login(){
   return (
 
 
-<div class="login">
+<div className="login">
 	<h1>Login</h1>
     <form onSubmit={handleSubmit}>
     <input type="email" placeholder="email" autofocus name="email" required onChange={handleChange} value={email}></input>
     <input type="password" placeholder="password" name="password" type="password" required onChange={handleChange} value={password}></input>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Войти</button>
+        <button type="submit" className="btn btn-primary btn-block btn-large">Войти</button>
         <div className="error">Тут ошибка: {error}</div>
         <Link to="/">Домой</Link>
     </form>
