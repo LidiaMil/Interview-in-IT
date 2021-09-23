@@ -47,7 +47,7 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
 
           <div className="job-name">
             <div className="job-card-title">{User.firstName}</div>
-            <button className="search-buttons job-star" onClick={() => handleFavorite(id)} type="button"> {favorite ? '⭐' : '☆'}</button>
+            <button className="purchase__button" onClick={() => handleFavorite(id)} type="button"> {favorite ? '⭐' : '☆'}</button>
 
           </div>
           <div className="job-card-subtitle">

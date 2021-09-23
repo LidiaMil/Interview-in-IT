@@ -35,6 +35,61 @@ module.exports = {
         user_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: "IT-рекрутер",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:1,
+        user_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Java – разработчик",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:1,
+        user_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "IT-рекрутер",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:1,
+        user_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "IT-рекрутер",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:1,
+        user_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "IT-рекрутер",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:1,
+        user_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
   },
