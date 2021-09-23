@@ -14,8 +14,8 @@ export default function ComplexGrid(interview ) {
   const postId = useParams()
   const dispatch = useDispatch()
   let history = useHistory();
-  console.log("post ",postId.id)
   const countComment = useSelector((state) => state.countComment)
+  console.log("post ",countComment)
 
   useEffect(() => {
     dispatch(countCommentQuestion(postId.id))
@@ -29,8 +29,8 @@ export default function ComplexGrid(interview ) {
     <>
    <div>
     <div>Вопрос № {interview.index+1}</div>
-    <button onClick={() => handleLink(interview.id)} >{interview.text}</button>
-    <div>Всего комментариев к вопросу: {countComment}</div>
+    <button className="search-buttons card-buttons" onClick={() => handleLink(interview.id)} >{interview.text}</button>
+    <div>Всего комментариев к вопросу: {countComment[interview.index]}</div>
    </div>
    </>
   );

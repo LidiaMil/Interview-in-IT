@@ -56,8 +56,8 @@ function Login(){
       .then((data) => {
         //console.log('fdfdfdfd=====>', data.data.id);
         dispatch(setAuth())
+        localStorage.setItem('user_id', data.data.id);
         history.push('/')
-        
       }
       )
       .catch(() => setError('Повторите вход'))

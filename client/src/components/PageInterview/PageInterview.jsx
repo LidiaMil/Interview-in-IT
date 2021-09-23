@@ -7,17 +7,17 @@ import { useEffect } from 'react'
 import Question from '../Question/Question';
 import { getOneInterview } from '../../redux/actions/oneInterview.action'
 import { useState } from "react"
-import {changesFavorite,newFavorite} from '../../redux/actions/changeFavorite.action'
+import { changesFavorite, newFavorite } from '../../redux/actions/changeFavorite.action'
 
 
 export default function ComplexGrid() {
-  
+
   const postId = useParams()
   // console.log("post ",postId.id)
   const dispatch = useDispatch()
   const oneInterview = useSelector((state) => state.oneInterview)
-  const [favorite,setFavorite]=useState(oneInterview.favorites)
-  const {User, Categorey} = oneInterview
+  const [favorite, setFavorite] = useState(oneInterview.favorites)
+  const { User, Categorey } = oneInterview
   // console.log("0",oneInterview)
 
   useEffect(() => {
@@ -35,56 +35,49 @@ export default function ComplexGrid() {
   }
 
   return (
-    <Paper sx={{ p: 2, margin:'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-     {User && Categorey && <Grid container spacing={3} alignItems='flex-start'>
-        <Grid item>
-          <ButtonBase sx={{ p: 5,width: 100, height: 100}} >
-            <Avatar  
-              alt={User.firstName}
-              src={User.photo}
-            />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={{ margin: '100px' }} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                {oneInterview?.User.firstName}
-              </Typography>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                Организация: {arrOrg.join(' ')}
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                Категория: {oneInterview?.Categorey.categorey}
-              </Typography>
-              <Typography variant="subtitle1" component="div">
-                Позиция: {oneInterview?.level}
-             </Typography>
-              <Typography variant="body2" gutterBottom>
-               Должность: {oneInterview?.name}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                Дата собеедования: {oneInterview?.data}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                Описание: {oneInterview?.description}
-              </Typography>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                Вопросы:
-                  {oneInterview?.Questions && oneInterview?.Questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index}/></div>)}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-  
-             <button onClick={() => handleFavorite(oneInterview.id)} type="button"> {favorite ? 'Удалить из избранного': 'В избранное'}</button> 
-
-            </Typography>
-          </Grid>
-        </Grid> 
-      </Grid>}
-    </Paper>
+    <div className="job-cards">
+      {User && Categorey &&
+        <div>
+            <div className="job-overview-card">
+              <div>
+                <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+                  alt={User.firstName}
+                  src={User.photo}
+                />
+              </div>
+            </div>
+            <div >
+              {oneInterview?.User.firstName}
+              <div  >
+                <span className="job-card-title">Организация:</span> {arrOrg.join(' ')}
+              </div>
+              <div>
+                <span className="job-card-title"> Категория: </span>{oneInterview?.Categorey.categorey}
+              </div>
+              <div>
+                <span className="job-card-title"> Позиция:</span> {oneInterview?.level}
+              </div>
+              <div>
+                <span className="job-card-title">Должность: </span>{oneInterview?.name}
+              </div>
+              <div>
+                <span className="job-card-title"> Дата собеедования: </span> {oneInterview?.data}
+              </div>
+              <div>
+                <span className="job-card-title">Описание:</span> {oneInterview?.description}
+              </div>
+              <div >
+                <span className="job-card-title">Вопросы:</span>
+                {oneInterview?.Questions && oneInterview?.Questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index} /></div>)}
+              </div>
+            </div>
+            <div>
+              <div>
+                <button className="search-buttons detail-button" onClick={() => handleFavorite(oneInterview.id)} type="button"> {favorite ? 'Удалить из избранного' : 'В избранное'}</button>
+              </div>
+            </div>
+        </div>}
+    </div >
   );
 }
 
