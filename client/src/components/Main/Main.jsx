@@ -1,4 +1,3 @@
-import Upleft from '../mainComponent/Upleft'
 import Center from '../mainComponent/Center'
 import Downleft from '../mainComponent/Downleft'
 import Right from '../mainComponent/Right'
@@ -52,11 +51,10 @@ function Main(){
         <div id="myContainer">
 
         </div>
-        <div className="leftDivs"><Upleft /></div>
         <div className="leftDivs"><Downleft /></div>
       </div>
       {/* <div className="mainDivs"><Center /></div> */}
-      <div id="whale">
+      <div class="centerDiv">
       <form>
       <label htmlFor="site-search">Search the site:</label>
       <input type="search" id="site-search" name="q" aria-label="Search through site content" />

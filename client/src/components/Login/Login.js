@@ -8,9 +8,6 @@ import ReactDOM from 'react-dom';
 
 function Login(){
 
-  const responseGoogle = (response) => {
-    console.log(response);
-  }
 
   const dispatch = useDispatch()
   const [error, setError] = useState(false)
@@ -50,12 +47,14 @@ function Login(){
     axios.post('http://localhost:3000/auth/login', {
       email,
       password
-  }, {
+  }
+  , {
       withCredentials: true,
       headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
-  }})
+  }}
+  )
       .then((data) => {
-        console.log(data);
+        //console.log('fdfdfdfd=====>', data.data.id);
         dispatch(setAuth())
         history.push('/')
         

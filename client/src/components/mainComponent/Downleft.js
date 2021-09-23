@@ -15,9 +15,9 @@ function Downleft(){
 
   return (
     <>
-<h4>Вакансии с HH</h4>
-  <ul className="category-list">
-     {vacansies.items && vacansies.items.map((item, index) =>  <Vacancard key={index} vacanprom={item} /> )}
+<h3>Вакансии с HH</h3>
+  <ul class="category-list">
+     {vacansies.items && vacansies.items.map((item) =>  <Vacancard vacanprom={item} /> )}
   </ul>
 
     {/* // <>

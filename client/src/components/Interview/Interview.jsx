@@ -51,57 +51,26 @@ function Question() {
   }
   return (
     <>
-      <form onSubmit={handleSubmit}>
-
-        <Box sx={{ minWidth: 250 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={cat}
-              label="Категория"
-              onChange={(event) => {
-                setCat(event.target.value);
-              }}
-            >
-              {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box sx={{ minWidth: 250 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Company</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={company}
-                  label="Company"
-                  onChange={(event) => {
-                    // console.log(event.target.value)
-                    setCompany(event.target.value);
-                  }}
-                >
-                  {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
-                </Select>
-              </FormControl>
-            </Box>
-        <button type="submit">Применить</button>
-      </form>
-      <button onClick={() => handleNull()}>Сбросить фильтр</button>
-
-      <div className="searched-jobs">
-        {filterPoint ?
-          <div className="job-cards">
-            {filter.length ? filter.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>) : 
-            <div>
-            <div>Упс, 😢😢😢😢😢😢😢😢😢</div>
-            <div>Пока что интервью с такими критериями нет на нашем сайте</div>
-            </div>}
-          </div> :
-          <div className="job-cards">
-            {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
-          </div>}
+      <h2>Собеседования</h2>
+      {/* <Box sx={{ minWidth: 250 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={cat}
+            label="Категория"
+            onChange={(event) => {
+              setCat(event.target.value);
+            }}
+          >
+            {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
+          </Select>
+        </FormControl>
+      </Box> */}
+    
+      <div className="job-cards">
+        {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
       </div>
 
 
