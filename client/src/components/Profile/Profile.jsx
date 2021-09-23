@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
-const id = 1
-
+const id = 2//Number(localStorage.getItem('user_id'))
+// console.log("user_id = ",id);
 function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch()
