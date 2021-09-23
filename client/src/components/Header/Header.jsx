@@ -9,47 +9,6 @@ import { useHistory } from "react-router-dom"
 export default function Header() {
   const isAuthenticated = useSelector(state => state.isAuntificated)
 
-  let history = useHistory();
-  const handleCreate = (numb) => {
-    console.log(numb)
-
-    switch (numb) {
-      case 1: {
-        console.log(1)
-        history.push("/")
-        break;
-
-      }
-      case 2: {
-        console.log(2)
-        if (isAuthenticated) {
-          history.push("/profile")
-        }
-        else {
-          history.push("/login")
-        }
-        break;
-      }
-      case 3: {
-        console.log(3)
-
-        if (isAuthenticated) {
-          history.push("/newcomment")
-        }
-        else {
-          history.push("/login")
-        }
-        break;
-      }
-      default:{
-        console.log(0)
-
-        history.push("/")
-        break;
-      }
-    }
-  }
-
   return (
 
     <div className="header">
@@ -63,12 +22,12 @@ export default function Header() {
         Собеседушки
       </div>
       <div className="header-menu">
-        {/* <a href="/" className="active" onClick={() => handleCreate(1)}>Главная</a>
-        <a href="/profile" className="active" onClick={() => handleCreate(2)}>Профиль</a>
-        <a href="/newcomment" onClick={() => handleCreate(3)}>Создать</a> */}
-        <button onClick={() => handleCreate(1)}>Главная</button>
+        <a href="/" className="active" >Главная</a>
+        <a href="/profile" className="active" >Профиль</a>
+        <a href="/newcomment" className="active" >Создать</a>
+        {/* <button onClick={() => handleCreate(1)}>Главная</button>
         <button onClick={() => handleCreate(2)}>Профиль</button>
-        <button onClick={() => handleCreate(3)}>Создать</button>
+        <button onClick={() => handleCreate(3)}>Создать</button> */}
 
       </div>
       {!isAuthenticated &&

@@ -26,6 +26,7 @@ import Interview from './components/Interview/Interview'
 import More from './components/More/More'
 import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
 import Registry from './components/Registry/Registry'
+import { useSelector } from 'react-redux';
 
 //авторицация
 import Login from './components/Login/Login'
@@ -40,9 +41,7 @@ import { setAuth } from '../../client/src/redux/actions/auth.action'
 function App() {
 
   const dispatch = useDispatch()
-  let history = useHistory()
-
-  console.log(history);
+  const isAuthenticated = useSelector(state => state.isAuntificated)
 
   useEffect(() => {
     if (window.localStorage.getItem('state') === 'true') {
@@ -66,11 +65,12 @@ function App() {
             </Route>
 
             <Route exact path="/interview/:id">
-              <PageInterview />
+            {!isAuthenticated ? <PageInterview /> :<Login />}
             </Route>
 
+
             <Route exact path="/profile">
-              <Profile />
+            {!isAuthenticated ? <Login />:<Profile /> }
             </Route>
 
             <Route exact path="/organization">
@@ -89,12 +89,14 @@ function App() {
               <More />
             </Route>
 
-            <Route exact path="/newcomment/:id">
+            {/* <Route exact path="/newcomment/:id">
               <NewInterview />
-            </Route>
+            </Route> */}
 
             <Route exact path="/newcomment">
-              <NewInterview />
+            {!isAuthenticated ?  <Login />:<NewInterview />}
+
+              
             </Route>
 
             <Route path='/login'>
