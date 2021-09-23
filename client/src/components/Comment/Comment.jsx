@@ -27,6 +27,11 @@ export default function ImgMediaCard(Comment) {
   useEffect(() => {
     dispatch(getUser(Comment.user_id))
   }, [])
+  
+  const handleDelete = (id) => {
+    console.log(id)
+    
+  }
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
       
@@ -47,6 +52,9 @@ export default function ImgMediaCard(Comment) {
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {Comment.text}
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                <button onClick={() => handleDelete(Comment.id)}>Удалить</button>
               </Typography>
             </Grid>
           </Grid>

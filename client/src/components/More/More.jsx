@@ -60,39 +60,45 @@ export default function ImgMediaCard() {
   }
 
   return (
+    <>
     <Card className={classes.root}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {arrLang.join(' ')}
+            Язык программирования: {arrLang.join(' ')}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {oneQuestion.text}
+            Вопрос: {oneQuestion.text}
           </Typography>
         </CardContent>
       </CardActionArea>
+
+      <CardActionArea>
       <Typography variant="body2" color="textSecondary" component="p">
         {postId === newComment ? (
           <>
             <form onSubmit={handleSubmitAdd} >
               <div>
                 <TextField id="outlined-basic" label="text:" variant="outlined"  onChange={textAdd}/>
+                <Button type="submit" variant="contained">Опубликовать</Button>
               </div>
-              <Stack direction="row" spacing={2}>
-                <Button type="submit" variant="contained">Add</Button>
-              </Stack>
             </form>
           </>
         ) : (
           <Stack direction="row" spacing={2}>
-            <Button onClick={() => setNewComment(postId)} variant="contained"> Add new comment</Button>
+            <Button onClick={() => setNewComment(postId)} variant="contained"> Добавить комментарий</Button>
           </Stack>
         )}
       </Typography>
+      </CardActionArea>
+
+    </Card>
+    <Card className={classes.root}>
       <CardActionArea>
         {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
       </CardActionArea>
     </Card>
+    </>
   );
 }
 

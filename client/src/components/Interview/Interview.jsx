@@ -11,47 +11,99 @@ import { useEffect } from 'react'
 import OneInterview from "../OneInterview/OneInterview"
 import { useDispatch, useSelector } from "react-redux";
 import { getInterview } from '../../redux/actions/interview.action'
-import { styled, Grid, Typography,Avatar, Paper, ButtonBase } from '@material-ui/core';
+import { styled, Grid, Typography, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { useState } from "react"
 import { getAllCategorey } from '../../redux/actions/categories.action';
+import { filterInterview } from '../../redux/actions/interview.action'
+import { getAllOrg } from '../../redux/actions/org.action'
+
 
 function Question() {
   const dispatch = useDispatch()
   const [cat, setCat] = useState("")
-  // const categories = useSelector((state) => state.categories)
+  const [company, setCompany] = useState("")
+  const [filterPoint, setFilterPoint] = useState(null)
+  const categories = useSelector((state) => state.categories)
+  const org = useSelector((state) => state.org)
+  const filter = useSelector((state) => state.filter)
   const interview = useSelector((state) => state.interview)
 
   useEffect(() => {
     dispatch(getInterview())
-    // dispatch(getAllCategorey())
-
+    dispatch(getAllCategorey())
+    dispatch(getAllOrg())
   }, [])
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    //const input_data = Object.fromEntries(new FormData(event.target))
+    console.log(cat)
+    dispatch(filterInterview(
+      {
+        categories: cat,
+        company_id: company,
+      }))
+    setFilterPoint(true)
+  }
+  
+  const handleNull = () => {
+    setFilterPoint(null)
+  }
   return (
     <>
-      <h1>All Interview</h1>
-      {/* <Box sx={{ minWidth: 250 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={cat}
-            label="Категория"
-            onChange={(event) => {
-              setCat(event.target.value);
-            }}
-          >
-            {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
-          </Select>
-        </FormControl>
-      </Box> */}
-     <div className="searched-jobs">
-  
-      <div className="job-cards">
-        {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+      <form onSubmit={handleSubmit}>
+
+        <Box sx={{ minWidth: 250 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={cat}
+              label="Категория"
+              onChange={(event) => {
+                setCat(event.target.value);
+              }}
+            >
+              {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box sx={{ minWidth: 250 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Company</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={company}
+                  label="Company"
+                  onChange={(event) => {
+                    // console.log(event.target.value)
+                    setCompany(event.target.value);
+                  }}
+                >
+                  {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
+                </Select>
+              </FormControl>
+            </Box>
+        <button type="submit">Применить</button>
+      </form>
+      <button onClick={() => handleNull()}>Сбросить фильтр</button>
+
+      <div className="searched-jobs">
+        {filterPoint ?
+          <div className="job-cards">
+            {filter.length ? filter.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>) : 
+            <div>
+            <div>Упс, 😢😢😢😢😢😢😢😢😢</div>
+            <div>Пока что интервью с такими критериями нет на нашем сайте</div>
+            </div>}
+          </div> :
+          <div className="job-cards">
+            {interview && interview.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+          </div>}
       </div>
-      </div>
+
 
 
     </>

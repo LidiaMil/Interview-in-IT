@@ -75,9 +75,6 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
                   name="simple-controlled"
                   value={value}
                   onChange={(event, newValue) => {
-                    
-                    // setValue(newValue);
-                    // console.log(value,'neewwvaaalue');
                     getChange(newValue)
                       
                   }}
