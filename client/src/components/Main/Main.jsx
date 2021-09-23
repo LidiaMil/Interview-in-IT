@@ -17,10 +17,7 @@ function Main() {
 
     <div className="mainContainer">
       <div className="leftmainDivs">
-
-
-
-        <div className="leftDivs"><Downleft /></div>
+        <Downleft />
       </div>
       {/* <div className="mainDivs"><Center /></div> */}
       <div class="centerDiv">
