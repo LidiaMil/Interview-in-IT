@@ -63,7 +63,7 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
 
 <a href={`/organization/${id}`} >
 <div className="job-overview-card">
-       <div className="job-card overview-card">
+       <div className="job-card overview-card shadow border-radius">
         <div className="overview-wrapper">
         <img src={photo} />
          <div className="overview-detail">

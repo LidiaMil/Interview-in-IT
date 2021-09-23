@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom"
 import axios from 'axios';
 import { useRadioGroup } from '@material-ui/core';
-
-
 export default function Header() {
   const isAuthenticated = useSelector(state => state.isAuntificated)
   const [one_user, setOneuser] = useState({})
-
   useEffect( async ()=> {
     const id = Number(localStorage.getItem('user_id'))
    await axios.post('http://localhost:3000/auth/one_user', {id})
@@ -21,13 +17,8 @@ export default function Header() {
     //const our_user = await User.findOne({where: {id:Number(id)}})
     })
   }, [])
-
-
   return (
-
     <div className="header shadow">
-
-
       <Link className="logo" to="/">
       <img  src='whale.PNG' alt="" />
         <span>Собеседушки</span>
@@ -39,7 +30,6 @@ export default function Header() {
         {/* <button onClick={() => handleCreate(1)}>Главная</button>
         <button onClick={() => handleCreate(2)}>Профиль</button>
         <button onClick={() => handleCreate(3)}>Создать</button> */}
-
       </div>
       {!isAuthenticated &&
         <div className="forLogin">
@@ -62,9 +52,6 @@ export default function Header() {
           <button color="inherit" className="search-buttons" ><Link to="/logout">Выйти</Link></button>
         </div>
       }
-
     </div>
-
   );
 }
-
