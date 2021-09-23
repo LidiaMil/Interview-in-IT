@@ -189,11 +189,11 @@ router.get('/newOrg', async (req, res) => {
 
 router.post("/new", async (req, res) => {
   const { user,title, description, categories, level, questionsWITHlang, company_id } = req.body;
-  console.log("------------------",req.body)
+  console.log(user,"------------------",typeof Number(company_id))
 
   if (title && categories && questionsWITHlang && level && company_id) {
     const newInterview = await Interview.create({ name: title, level, description: description, categorey_id: categories, user_id: user, favorites: false })
-    if(typeof company_id == 'string'){
+    if(typeof Number(company_id) == 'string'){
       const newCompany= await Organization.create({ title: company_id })
       const ququ = await OrganizationQuestion.create({ organization_id: newCompany.id, interview_id: newInterview.id })
     }
@@ -203,7 +203,6 @@ router.post("/new", async (req, res) => {
     for (let i = 0; i < Object.keys(questionsWITHlang).length / 2; i++) {
       const newQuestion = await Question.create({ interview_id: newInterview.id, text: questionsWITHlang[i] })
       const lang = await LanguageQuestion.create({ question_id: newQuestion.id, language_id: questionsWITHlang[`select-${i}`] })
-
     }
     const news = await Interview.findOne({
       include: [

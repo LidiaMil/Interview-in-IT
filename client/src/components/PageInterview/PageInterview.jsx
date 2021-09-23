@@ -38,44 +38,48 @@ export default function ComplexGrid() {
     <div className="job-cards">
       {User && Categorey &&
         <div>
-            <div className="job-overview-card">
-              <div>
-                <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
-                  alt={User.firstName}
-                  src={User.photo}
-                />
-              </div>
+          <div className="job-overview-card">
+            <div>
+              {User.photo ?
+               <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+               alt={User.firstName}
+               src={User.photo}
+             />
+                :
+                <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar" />
+              }
             </div>
-            <div >
-              {oneInterview?.User.firstName}
-              <div  >
-                <span className="job-card-title">Организация:</span> {arrOrg.join(' ')}
-              </div>
-              <div>
-                <span className="job-card-title"> Категория: </span>{oneInterview?.Categorey.categorey}
-              </div>
-              <div>
-                <span className="job-card-title"> Позиция:</span> {oneInterview?.level}
-              </div>
-              <div>
-                <span className="job-card-title">Должность: </span>{oneInterview?.name}
-              </div>
-              <div>
-                <span className="job-card-title"> Дата собеедования: </span> {oneInterview?.data}
-              </div>
-              <div>
-                <span className="job-card-title">Описание:</span> {oneInterview?.description}
-              </div>
-              <div >
-                <span className="job-card-title">Вопросы:</span>
-                {oneInterview?.Questions && oneInterview?.Questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index} /></div>)}
-              </div>
+          </div>
+          <div >
+            {oneInterview?.User.firstName}
+            <div  >
+              <span className="job-card-title">Организация:</span> {arrOrg.join(' ')}
             </div>
             <div>
-              <div>
-                <button className="search-buttons detail-button" onClick={() => handleFavorite(oneInterview.id)} type="button"> {favorite ? 'Удалить из избранного' : 'В избранное'}</button>
-              </div>
+              <span className="job-card-title"> Категория: </span>{oneInterview?.Categorey.categorey}
             </div>
+            <div>
+              <span className="job-card-title"> Позиция:</span> {oneInterview?.level}
+            </div>
+            <div>
+              <span className="job-card-title">Должность: </span>{oneInterview?.name}
+            </div>
+            <div>
+              <span className="job-card-title"> Дата собеедования: </span> {oneInterview?.data}
+            </div>
+            <div>
+              <span className="job-card-title">Описание:</span> {oneInterview?.description}
+            </div>
+            <div >
+              <span className="job-card-title">Вопросы:</span>
+              {oneInterview?.Questions && oneInterview?.Questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index} /></div>)}
+            </div>
+          </div>
+          <div>
+            <div>
+              <button className="search-buttons detail-button" onClick={() => handleFavorite(oneInterview.id)} type="button"> {favorite ? 'Удалить из избранного' : 'В избранное'}</button>
+            </div>
+          </div>
         </div>}
     </div >
   );

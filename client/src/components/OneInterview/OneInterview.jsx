@@ -22,11 +22,11 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
   }
 
   const handleFavorite = (id) => {
-    if(isAuthenticated){
+    if (isAuthenticated) {
       dispatch(newFavorite(id))
       setFavorite(!favorite)
     }
-    else{
+    else {
       history.push("/login")
     }
   }
@@ -35,9 +35,13 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
     <div className="shadow border-radius">
       {User && Categorey && <div className="job-card">
         <div className="job-card-header">
-          <img alt={User.firstName} class="avatar" src={User.photo} />
+          {User.photo ?
+            <img alt={User.firstName} class="avatar" src={User.photo} />
+            :
+            <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar" />
+          }
           <button className="search-buttons " onClick={() => handleFavorite(id)} type="button"> {favorite ? '⭐' : '☆'}</button>
-       </div>
+        </div>
         <div className="job-card-title">{User.firstName}</div>
         <div className="job-card-subtitle">
           Должность: {name}     </div>
@@ -56,8 +60,8 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
 
         </div>
       </div>}
-      </div>
-  
+    </div>
+
 
 
   );

@@ -97,7 +97,7 @@ function Profile() {
       {img ? 
       <img src={img} alt="Avatar" className="avatar"/>
       :
-      <img src={img} alt="Avatar" className="avatar"/>
+      <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar"/>
       }
       <h2>Leo Bailey</h2>
         </div> 
