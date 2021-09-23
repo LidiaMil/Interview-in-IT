@@ -33,10 +33,6 @@ export default function BasicTextFields() {
   const { id } = useParams()
   const myInterviews = useSelector(state => state.myInterviews)
   const data = myInterviews.filter(e => e.id === Number(id))[0]
-<<<<<<< HEAD
-  // console.log("======", data.Questions)
-=======
->>>>>>> question
 
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
