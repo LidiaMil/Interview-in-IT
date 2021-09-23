@@ -44,6 +44,7 @@ export default function BasicTextFields() {
       setLevel(data.level)
       setDescription(data.description)
       setTitle(data.name)
+      setCompany(data.Organizations[0].title)
     }
   }, [data])
 
