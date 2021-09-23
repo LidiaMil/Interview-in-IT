@@ -35,6 +35,7 @@ export default function BasicTextFields({ index, lang }) {
             console.log(event.target.value)
             setLanguage(event.target.value);
           }}>
+          <option ></option>
           {lang.map((item, index) => <option key={index} id={10} value={item.id}>{item.id}.{item.programmingLanguage}</option>)}
         </select>
       </p>

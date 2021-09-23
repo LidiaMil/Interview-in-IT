@@ -66,14 +66,14 @@ router.get('/getusersposts/:id', async (req, res) => {
 })
 
 
-router.get('/editinterview/:id', async (req, res) => {
-  // const id = Number(req.params.id)
+// router.get('/editinterview/:id', async (req, res) => {
+//   // const id = Number(req.params.id)
 
-})
+// })
 
 router.delete('/interview/:id', async (req, res) => {
   const { id } = req.params
-  console.log("id----", id);
+  // console.log("id----", id);
   await Interview.destroy({ where: { id: Number(id) } })
   return res.status(200)
 })
@@ -93,5 +93,3 @@ router.get('/:id', async (req, res) => {
 
 
 module.exports = router
-
-

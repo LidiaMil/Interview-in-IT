@@ -48,17 +48,47 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+<<<<<<< HEAD
         name: "Java – разработчик",
         description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
         data: new Date(),
         level: "senior",
         favorites:false,
         categorey_id:1,
+=======
+        name: "Junior DevOps",
+        description:'Первичная диагностика инцидентов, настройка мониторинга и правка воркфлоу в jira и тд.',
+        data: new Date(),
+        level: "junior",
+        favorites:false,
+        categorey_id:2,
+>>>>>>> 978750a0312dfcf885c23146ad06b702e9860100
         user_id: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+<<<<<<< HEAD
+        name: "IT-рекрутер",
+        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:1,
+=======
+        name: "Frontend - разработчик",
+        description:'Разрабатывать интерфейсные компоненты: инфраструктура и веб-интерфейсы в зависимости от проекта/продукта и т.д.',
+        data: new Date(),
+        level: "senior",
+        favorites:false,
+        categorey_id:2,
+>>>>>>> 978750a0312dfcf885c23146ad06b702e9860100
+        user_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+<<<<<<< HEAD
         name: "IT-рекрутер",
         description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
         data: new Date(),
@@ -66,10 +96,20 @@ module.exports = {
         favorites:false,
         categorey_id:1,
         user_id: 2,
+=======
+        name: "Python - разработчик",
+        description:'Проектировать и разрабатывать backend-части проектов. Решать прикладные и продуктовые задач на различных фреймворках и т.д.',
+        data: new Date(),
+        level: "junior",
+        favorites:false,
+        categorey_id:2,
+        user_id: 1,
+>>>>>>> 978750a0312dfcf885c23146ad06b702e9860100
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+<<<<<<< HEAD
         name: "IT-рекрутер",
         description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
         data: new Date(),
@@ -77,17 +117,15 @@ module.exports = {
         favorites:false,
         categorey_id:1,
         user_id: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: "IT-рекрутер",
-        description:'Поиск и привлечение кандидатов с помощью порталов вакансий, баз данных, социальных сетей и т.д.',
+=======
+        name: "Ведущий разработчик OpenText",
+        description:'Разрабатывать решения на платформе OpenText и xECM, разрабатывать под программные продукты SAP и интеграционные решения и т.д.',
         data: new Date(),
-        level: "senior",
+        level: "middle",
         favorites:false,
-        categorey_id:1,
-        user_id: 2,
+        categorey_id:5,
+        user_id: 3,
+>>>>>>> 978750a0312dfcf885c23146ad06b702e9860100
         createdAt: new Date(),
         updatedAt: new Date()
       }

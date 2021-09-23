@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,9 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
+const id = Number(localStorage.getItem('user_id'))
 function Profile() {
-  const id = Number(localStorage.getItem('user_id'))
-  // console.log("user_id = ",id);
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)
@@ -46,10 +44,10 @@ function Profile() {
 
   function inputChange(e) {
     const refCurrent = ref.current
-    const retChild = refCurrent.childNodes[0]
+    // const retChild = refCurrent.childNodes[0]
     let reader = new FileReader();
     reader.onloadend = function () {
-      retChild.src = reader.result
+      refCurrent.src = reader.result
     }
     reader.readAsDataURL(e.target.files[0])
   }
@@ -62,12 +60,12 @@ function Profile() {
     formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
     formData.append('nickname', name.value);
     formData.append('id', id)
-    if(nick){
+    if (nick) {
       dispatch(setNicknameProfile(
         formData
       ))
       setNick(nick)
-    }else{
+    } else {
       alert('не введён nickname')
     }
   }
@@ -84,59 +82,96 @@ function Profile() {
       dispatch(getMyInterviews(id))
     }
   }
-  useEffect(()=>{
-    dispatch(getMyInterviews(id))
-  })
 
   return (
-
     <>
-    <h1>{statusUpload}</h1>
-      <form  onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
-      <div  className="center-div" >
-      {img ? 
-      <img src={img} alt="Avatar" className="avatar"/>
-      :
-      <img src="https://semantica.in/wp-content/uploads/2018/08/av-427845-1.png" alt="Avatar" className="avatar"/>
-      }
-      <h2>Leo Bailey</h2>
-        </div> 
-        
-      <div >
-          <input
-            accept="image/*"
-            className={classes.input}
-            id="contained-button-file"
-            name="photo"
-            type="file"
-            onChange={inputChange}
-            value={inputValue}
-          />
-            <label htmlFor="contained-button-file">
-            <button variant="contained" color="primary" component="span" className="search-buttons">
-              Загрузить фото
+      <div className="center-div" >
+        <div className="job-cards">
+          <form
+            className={classes.root}
+            onSubmit={submintForm}
+            noValidate autoComplete="off"
+            encType="multipart/form-data"
+            action="/profile"
+          >
+            <div className="job-overview-card">
+              {img ?
+                <img
+                style={{ width: "100px", height: "100px" }}
+                src={img} ref={ref}
+                alt="Avatar"
+                className="avatar" />
+                :
+                <img 
+                style={{ width: "100px", height: "100px" }}
+                src="https://semantica.in/wp-content/uploads/2018/08/av-427845-1.png" 
+                alt="Avatar"
+                className="avatar" />
+              }
+            </div>
+
+            <div >
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                name="photo"
+                type="file"
+                onChange={inputChange}
+                value={inputValue}
+              />
+              <button style={{margin:'3px'}} className="search-buttons detail-button">
+                <label htmlFor="contained-button-file" >
+                  Загрузить фото
+                </label>
+              </button>
+              <input
+              style={{margin:'3px'}}
+                id="firstName"
+                label="nickname"
+                name="firstName"
+                onChange={(e) => setNick(e.target.value)}
+                value={nick}
+                placeholder="введите ваш nickname"
+              />
+
+              <button style={{margin:'3px'}} variant="contained" color="primary" class="search-buttons">
+                Изменить
+              </button>
+
+            </div>
+          </form >
+          <div>
+          {favorite ?
+            <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={() => handleViewFavorite()}>
+              Избранное
             </button>
-          </label>
+            :
+            <>
+              <button className="search-buttons detail-button" onClick={() => setFavorite(!favorite)}>
+                Скрыть избранное
+              </button>
 
-             <input
-               id="firstName"
-              label="nickname"
-              name="firstName"
-              onChange={(e) => setNick(e.target.value)}
-              value={nick}
-              placeholder="введите ваш nickname"
-            />
+              {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
+            </>
+          }
 
-            < button type="submint" variant="contained" color="primary" class="search-buttons">
-              Изменить
+        </div>
+
+          <div>
+            <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={getMyPosts}>
+              {myInterviews.length ? "Скрыть собеседования" : "Показать мои собеседования"}
             </button>
           </div>
+        </div>
+  
+      </div>
 
-           {myInterviews && myInterviews.map((e, index) => <EditInterview
-       usersId={id}
-         key={e.id}
-         id={e.id}
-         index={index}
+      {myInterviews.map((e, index) => <EditInterview
+        usersId={id}
+        key={e.id}
+        id={e.id}
+        index={index}
         name={e.name}
         description={e.description}
         data={e.data}
@@ -144,90 +179,19 @@ function Profile() {
         categorey={e.Categorey.categorey}
         organization={e.Organizations[0].title}
         questions={e.Questions}
-       />)}
-      </form >
+      />)}
+
     </>
-
-
-    // <>
-    //   <h3>=={id}==</h3>
-    //   <Box component="div" m={1}>
-    //     <h1>{statusUpload}</h1>
-    //     <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
-    //       <Box component="div" style={{ height: "100px" }} m={5}>
-    //         <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} ref={ref} />
-    //       </Box>
-
-    //       <div className={classes.root}>
-    //         <input
-    //           accept="image/*"
-    //           className={classes.input}
-    //           id="contained-button-file"
-    //           name="photo"
-    //           type="file"
-    //           onChange={inputChange}
-    //           value={inputValue}
-    //         />
-    //         <label htmlFor="contained-button-file">
-    //           <Button variant="contained" color="primary" component="span">
-    //             Загрузить фото
-    //           </Button>
-    //         </label>
-
-    //         <Input
-    //           id="firstName"
-    //           label="nickname"
-    //           name="firstName"
-    //           onChange={(e) => setNick(e.target.value)}
-    //           value={nick}
-    //           placeholder="введите ваш nickname"
-    //         />
-
-    //         < Button type="submint" variant="contained" color="primary">
-    //           Изменить
-    //         </Button>
-
-    //       </div>
-    //     </form >
-
-    //     <Box>
-    //       <Button onClick={getMyPosts} variant="contained" color="primary" type="submit" disableElevation>
-    //         {myInterviews.length ? "Скрыть посты" : "Показать мои посты"}
-    //       </Button>
-    //     </Box>
-    //   </Box >
-    //   <div>
-    //     {favorite ?
-    //       <button onClick={() => handleViewFavorite()}>
-    //         Избранное
-    //       </button>
-    //       :
-    //       <>
-    //         <button onClick={() => setFavorite(!favorite)}>
-    //           Скрыть избранное
-    //         </button>
-
-    //         {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
-    //       </>
-    //     }
-
-    //   </div>
-
-    //   {myInterviews.map((e, index) => <EditInterview
-    //     usersId={id}
-    //     key={e.id}
-    //     id={e.id}
-    //     index={index}
-    //     name={e.name}
-    //     description={e.description}
-    //     data={e.data}
-    //     level={e.level}
-    //     categorey={e.Categorey.categorey}
-    //     organization={e.Organizations[0].title}
-    //     questions={e.Questions}
-    //   />)}
-
-    // </> 
   );
 }
 export default Profile
+
+
+
+
+
+
+
+
+
+

@@ -49,29 +49,29 @@ function Question() {
 
         <h3>Собеседования</h3>
         <div className="filterForm">
-          {/* <label for="site-search">Search the site:</label>
-      <input className="formInput" type="text" onkeyup="filter();" placeholder="Поиск по сайту"/>
-      <button>Поиск по сайту</button> */}
+          
           <form onSubmit={handleSubmit}>
 
             <label>Категория</label>
             <select id="fruits" value={cat} label="Категория" onChange={(event) => {
               setCat(event.target.value);
             }}>
+              <option ></option>
               {categories.map((item, index) => <option value={item.id}>{item.categorey}</option>)}
             </select>
             <label>Компания</label>
             <select id="fruits" value={company} label="Company" onChange={(event) => {
-              // console.log(event.target.value)
               setCompany(event.target.value);
             }}>
+              <option ></option>
               {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
             </select>
-
-
+            {filterPoint ?
+            <button onClick={() =>setFilterPoint(null)}>Сбросить фильтр</button>
+            :
             <button type="submit">Применить</button>
+            }
           </form>
-          <button onClick={() => handleNull()}>Сбросить фильтр</button>
         </div>
       </div>
 

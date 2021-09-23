@@ -25,6 +25,7 @@ export default function Basicinputs() {
   let history = useHistory();
   const [cat, setCat] = useState("")
   const [company, setCompany] = useState("")
+  const [error, setError] = useState(null)
   const [newCompany, setNewCompany] = useState(null)
   const [newForm, setNewForm] = useState([{ name: '0' }])
   const [title, setTitle] = useState("")
@@ -34,8 +35,6 @@ export default function Basicinputs() {
   const data = myInterviews.filter(e => e.id === Number(id))[0]
 
   const idUser = Number(localStorage.getItem('user_id'))
-  console.log("user_id = ",idUser);
-
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
   const categories = useSelector((state) => state.categories)
@@ -63,20 +62,29 @@ export default function Basicinputs() {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
     // console.log(input_data)
-    dispatch(addInterview(
-      {
-        user:idUser,
-        title,
-        description,
-        categories: cat,
-        level,
-        questionsWITHlang: input_data,
-        company_id: company,
-      }))
-    setAdd(null)
-    setTimeout(() => {
-      history.push("/")
-    }, 5000);
+    if(idUser && title && cat && level && input_data && company){
+      dispatch(addInterview(
+        {
+          user:idUser,
+          title,
+          description,
+          categories: cat,
+          level,
+          questionsWITHlang: input_data,
+          company_id: company,
+        }))
+      setAdd(null)
+      setError(null)
+      setTimeout(() => {
+        history.push("/")
+      }, 3000);
+    }
+    else{
+      setError(true)
+      setTimeout(() => {
+        history.push("/newcomment")
+      }, 3000);
+    }
 
   }
   const editInterview = (event) => {
@@ -107,9 +115,14 @@ export default function Basicinputs() {
             <div>
             <label class="label" for="name">Компания</label>
               {newCompany ?
-
+              <>
                 <input type="text" name="name" id="name" required="" v-model="name"  onChange={companyAdd} />
+                <button type="button" onClick={() => setNewCompany(null)} class="search-buttons card-buttons">
+                    Вернуть список
+                 </button>
+              </>
                 :
+                <>
                 <p class="select">
                   <select
                     class="budget"
@@ -119,13 +132,15 @@ export default function Basicinputs() {
                     onChange={(event) => {
                       setCompany(event.target.value);
                     }}>
-                    {org.map((item, index) => <option value={item.id}>{item.id}.{item.title}</option>)}
+                      <option ></option>
+                    {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
                   </select>
                 </p>
-              }
               <button type="button" onClick={() => setNewCompany(true)} class="search-buttons card-buttons">
                 Компании нет в списке
               </button>
+              </>
+              }
             </div>
 
             <div>
@@ -167,6 +182,7 @@ export default function Basicinputs() {
                   onChange={(event) => {
                     setCat(event.target.value);
                   }}>
+                      <option ></option>
                     {categories.map((item, index) =>  <option value={item.id}>{item.id}.{item.categorey}</option>)}
                   </select>
                 </p>
@@ -194,6 +210,9 @@ export default function Basicinputs() {
             <a href='/profile'>На главную</a>
           </div>
         </>}
+        <div>
+          {error ? <h1>Что-то пошло не так...</h1> : <h1></h1>}
+        </div>
     </div>
 
     // <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
