@@ -25,6 +25,7 @@ import { Right } from './components/mainComponent/Right'
 import Interview from './components/Interview/Interview'
 import More from './components/More/More'
 import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
+import Registry from './components/Registry/Registry'
 
 //авторицация
 import Login from './components/Login/Login'
@@ -50,14 +51,14 @@ function App() {
     }
   }, [])
 
-
+  
   return (
     <Router>
 
-      {/* <div className="job"> */}
+      <div className="job">
         <Header />
 
-        <div>
+    
           <Switch>
 
             <Route exact path="/">
@@ -104,10 +105,13 @@ function App() {
               <Logout />
             </Route>
 
+            <Route path='/registry'>
+              <Registry />
+            </Route>
+
 
           </Switch>
-        </div>
-      {/* </div> */}
+          </div>
     </Router>
   );
 }

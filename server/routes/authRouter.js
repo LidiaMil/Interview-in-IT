@@ -22,10 +22,11 @@ const db = [{
 
 
 //для авторизации
-router.post("/login", (req, res) => {
- // console.log(req.body);
+router.post("/login", async (req, res) => {
+ console.log(req.body);
   const {email, password} = req.body
-  const user = db.find((user) => user.email === email && user.password === password)
+  const user = await User.findOne({where: {email: email, parol: password}})
+  //const user = db.find((user) => user.email === email && user.password === password)
   console.log('fdfdvdfdfdf', user);
   if (user) {
     console.log('testttt');
@@ -51,6 +52,17 @@ router.get('/logout', (req, res) => {
     res.end()
   }
   
+  })
+
+  router.post('/registry', (req, res) => {
+    console.log(req.body);
+    const registry = User.create({
+      firstName: req.body.firstТame,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      parol: req.body.password,
+      })
+      res.end()
   })
 
 

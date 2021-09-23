@@ -1,21 +1,23 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import UpLeftCard from '../mainComponent/mainComponentsCards/UpLeftCard'
+import Vacancard from '../mainComponent/Vacancard'
 
 function Downleft(){
 
-  const [newquestions, setNewquestion] = useState([])
+  const [vacansies, setNewvacansies] = useState({})
 
   useEffect(() => {
     console.log('Hi from newquestions!');
-    axios.get('http://localhost:3000/main/').then(response => setNewquestion(response.data.questions))
+    axios.get('https://api.hh.ru/vacancies?count=6&locale=RU&text=frontend')
+    .then(response => setNewvacansies(response.data))
   }, [])
 
   return (
     <>
-<h4>Топ 5 новых вопросов</h4>
+<h4>Вакансии с HH</h4>
   <ul class="category-list">
-     {newquestions && newquestions.map((item) =>  <li><a href="">{item.text}</a><span>5</span></li> )}
+     {vacansies.items && vacansies.items.map((item) =>  <Vacancard vacanprom={item} /> )}
   </ul>
 
     {/* // <>

@@ -1,4 +1,4 @@
-import { ADD_COMMENT,SET_COMMENT,DEL_COMMENT,EDIT_COMMENT} from '../types'
+import { ADD_COMMENT,SET_COMMENT,DEL_COMMENT,EDIT_COMMENT, COUNT_COMMENT} from '../types'
 import axios from "axios";
 
 //GET COMMENT
@@ -40,4 +40,14 @@ export const editComment = (postId,id,editCom) => async (dispatch) => {
 export const seteditComment = (changedPost)=> ({
   type:EDIT_COMMENT,
   payload: {changedPost},
+})
+
+//COUNT COMMENT
+export const countCommentQuestion = (postId) => async (dispatch) => {
+  const response = await axios.patch( `http://localhost:3000/interview/comment/${postId}`)
+  dispatch(setcountCommentQuestion(response.data))
+}
+export const setcountCommentQuestion = (countComment)=> ({
+  type:COUNT_COMMENT,
+  payload: {countComment},
 })

@@ -26,13 +26,17 @@ export default function BasicTextFields() {
   let history = useHistory();
   const [cat, setCat] = useState("")
   const [company, setCompany] = useState("")
+  const [newCompany, setNewCompany] = useState(null)
   const [newForm, setNewForm] = useState([{ name: '0' }])
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const { id } = useParams()
   const myInterviews = useSelector(state => state.myInterviews)
   const data = myInterviews.filter(e => e.id === Number(id))[0]
+<<<<<<< HEAD
   // console.log("======", data.Questions)
+=======
+>>>>>>> question
 
   const [level, setLevel] = useState("")
   const [news, setNews] = useState(null)
@@ -91,7 +95,9 @@ export default function BasicTextFields() {
   const levelAdd = (event) => {
     setLevel(event.target.value)
   }
-
+  const companyAdd=(event) => {
+    setCompany(event.target.value)
+  }
 
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
@@ -100,6 +106,9 @@ export default function BasicTextFields() {
         <Grid container spacing={3}>
           <form onSubmit={id ? editInterview : handleSubmitAdd}>
             <Box sx={{ minWidth: 250 }}>
+            {newCompany ?
+                <TextField id="outlined-basic" label="Name company" variant="outlined" onChange={companyAdd} />
+               : 
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Company</InputLabel>
                 <Select
@@ -108,13 +117,17 @@ export default function BasicTextFields() {
                   value={company}
                   label="Company"
                   onChange={(event) => {
-                    // console.log(event.target.value)
                     setCompany(event.target.value);
                   }}
                 >
                   {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
                 </Select>
               </FormControl>
+              }
+              <Button onClick={() => setNewCompany(true)} variant="contained">
+                Компании нет в списке
+              </Button>
+              
             </Box>
 
             <Box sx={{ minWidth: 500 }}>
@@ -122,7 +135,6 @@ export default function BasicTextFields() {
                 <TextField id="outlined-basic" label="Level" variant="outlined" onChange={levelAdd} />
               }
             </Box>
-            {/* data.Organizations[0].title */}
 
             <Box sx={{ minWidth: 250 }}>
               {id ? <TextField id="outlined-basic" label="Title" variant="outlined" onChange={titleAdd} value={title}/> :

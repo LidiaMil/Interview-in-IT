@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+<<<<<<< HEAD
+=======
+
+//id пользователя
+>>>>>>> question
 const id = 1
 
 function Profile() {
