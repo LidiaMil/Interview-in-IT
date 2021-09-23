@@ -47,8 +47,8 @@ function App() {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    if (window.localStorage.getItem('in_user') === 'true') {
-      console.log('привет из сессии', window.localStorage.getItem('in_user'));
+    if (window.localStorage.getItem('user_id')) {
+ //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
       //добавить в локал стораж ид
       dispatch(setAuth())
     }
