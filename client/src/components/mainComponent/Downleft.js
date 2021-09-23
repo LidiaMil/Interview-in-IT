@@ -16,7 +16,7 @@ function Downleft(){
   return (
     <>
 <h3>Вакансии с HH</h3>
-  <ul class="category-list">
+  <ul className="category-list">
      {vacansies.items && vacansies.items.map((item) =>  <Vacancard vacanprom={item} /> )}
   </ul>
 

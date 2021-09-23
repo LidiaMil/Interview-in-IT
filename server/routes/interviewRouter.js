@@ -189,7 +189,8 @@ router.get('/newOrg', async (req, res) => {
 
 router.post("/new", async (req, res) => {
   const { user,title, description, categories, level, questionsWITHlang, company_id } = req.body;
-  console.log("------------------",user)
+  console.log("------------------",req.body)
+
   if (title && categories && questionsWITHlang && level && company_id) {
     const newInterview = await Interview.create({ name: title, level, description: description, categorey_id: categories, user_id: user, favorites: false })
     if(typeof company_id == 'string'){

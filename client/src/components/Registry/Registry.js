@@ -28,14 +28,14 @@ function Registry(){
   return (
 
 
-<div class="login">
+<div className="login">
 	<h1>Регистрация пользователя</h1>
     <form onSubmit={handleSubmit}>
     <input type="text" placeholder="Имя" autofocus name="firstName" ></input>
     <input type="text" placeholder="Фамилия"  name="lastName" ></input>
     <input type="email" placeholder="email"  name="email" ></input>
     <input type="password" placeholder="password" name="password" type="password"></input>
-    <button type="submit" class="btn btn-primary btn-block btn-large">Подтвердить</button> 
+    <button type="submit" className="btn btn-primary btn-block btn-large">Подтвердить</button> 
     </form>
 </div> 
 
