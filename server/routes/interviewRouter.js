@@ -69,25 +69,6 @@ router.post('/filter', async (req, res) => {
       ]
     });
   }
-  else{
-   questions = await Interview.findAll({
-      include: [
-        {
-          model: User,
-          as: 'User'
-        },
-        {
-          model: Question
-        },
-        {
-          model: Categorey
-        },
-        {
-          model: Organization
-        },
-      ]
-    });
-  }
   if(categories && company_id){
     questions = await Interview.findAll({
       where:{categorey_id : categories, id:company_id},
@@ -108,6 +89,26 @@ router.post('/filter', async (req, res) => {
       ]
     });
   }
+  else{
+   questions = await Interview.findAll({
+      include: [
+        {
+          model: User,
+          as: 'User'
+        },
+        {
+          model: Question
+        },
+        {
+          model: Categorey
+        },
+        {
+          model: Organization
+        },
+      ]
+    });
+  }
+  
   // console.log(questions)
   if(questions.length){
     res.json(questions);
@@ -328,6 +329,16 @@ router.patch('/comment/:id', async (req, res) => {
   res.json(mas);
 })
 
+router.delete("/comment/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  // const commentId = req.params.commentid;
+  // const result = list.filter(list => list.id == id);
+  // result[0].comment.map((i,index)=>{
+  //   Number(commentId)=== result[0].comment[index].id ? result[0].comment.splice(index, 1) : false
+  // })
+  // return res.json(result[0].comment);
+});
 
 router.post("/comment/:id", async (req, res) => {
   const id = req.params.id
