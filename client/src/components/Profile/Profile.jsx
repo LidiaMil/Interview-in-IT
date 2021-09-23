@@ -1,34 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Box, Avatar, Input } from '@material-ui/core';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMyInterviews,getMyInterviews, setImgProfile, setNicknameProfile,getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
 import OneInterview from '../OneInterview/OneInterview'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  input: {
-    display: 'none',
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
+
 
 
 //id пользователя
 const id = 1
 
 function Profile() {
-  const classes = useStyles();
   const dispatch = useDispatch()
-  const [favorite,setFavorite]=useState(true)
+  const [favorite, setFavorite] = useState(true)
   const img = useSelector(state => state.img.img)
   const nickname = useSelector(state => state.img.nickname)
   const myInterviews = useSelector(state => state.myInterviews)
@@ -57,7 +42,7 @@ function Profile() {
   }
   console.log(favInterviews)
 
-  const handleViewFavorite=()=>{
+  const handleViewFavorite = () => {
     dispatch(getMyFavoriteInterviews())
     setFavorite(!favorite)
   }
@@ -72,76 +57,144 @@ function Profile() {
 
 
   return (
-    <>
-      <h3>=={id}==</h3>
-      <Box component="div" m={1}>
+    // <h3>=={id}==</h3>
+    // <Box component="div" m={1}>
+    //   <h1>{statusUpload}</h1>
+    //   <form classNameName={classNamees.root} onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
+    //     <Box component="div" style={{ height: "100px" }} m={5}>
+    //       <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} />
+    //     </Box>
+
+    //     <div classNameName={classNamees.root}>
+    //       <input
+    //         accept="image/*"
+    //         classNameName={classNamees.input}
+    //         id="contained-button-file"
+    //         name="photo"
+    //         type="file"
+    //       />
+    //       <label htmlFor="contained-button-file">
+    //         <Button variant="contained" color="primary" component="span">
+    //           Загрузить фото
+    //         </Button>
+    //       </label>
+
+    //       <Input id="firstName" label="nickname" name="firstName" onChange={(e) => setNick(e.target.value)} value={nick} placeholder={nickname} />
+
+    //       < Button type="submint" variant="contained" color="primary">
+    //         Изменить
+    //       </Button>
+
+    //     </div>
+    //   </form >
+
+
+
+    // <div>
+    // {favorite ? 
+    //      <button onClick={() => handleViewFavorite()}>
+    //      Избранное
+    //      </button>
+    //      :
+    //      <>
+    //      <button onClick={() => setFavorite(!favorite)}>
+    //      Скрыть избранное
+    //      </button>
+
+    //      {favInterviews && favInterviews.map((item, index) => <div classNameName="col-4" key={item.id}><OneInterview {...item} /></div>)}
+    //      </>
+    //      }
+
+    // </div>
+
+    // {myInterviews.map((e, index) => <EditInterview
+    //   usersId={id}
+    //   key={e.id}
+    //   id={e.id}
+    //   index={index}
+    //   name={e.name}
+    //   description={e.description}
+    //   data={e.data}
+    //   level={e.level}
+    //   categorey={e.Categorey.categorey}
+    //   organization={e.Organizations[0].title}
+    //   questions={e.Questions}
+    // />)}
+
+    // </> */
+    // <div> Мои посты </div>
+
+
+    <div className="card">
+
+      <div className="card__header">
         <h1>{statusUpload}</h1>
-        <form className={classes.root} onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
-          <Box component="div" style={{ height: "100px" }} m={5}>
-            <Avatar style={{ width: "100px", height: "100px" }} alt="Cindy Baker" src={img} />
-          </Box>
+        <form onSubmit={submintForm} noValidate autoComplete="off" encType="multipart/form-data" action="/profile">
 
-          <div className={classes.root}>
-            <input
-              accept="image/*"
-              className={classes.input}
-              id="contained-button-file"
-              name="photo"
-              type="file"
+          <div className="card__profile">
+            <img
+              src={img}
+
             />
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" color="primary" component="span">
-                Загрузить фото
-              </Button>
-            </label>
-
-            <Input id="firstName" label="nickname" name="firstName" onChange={(e) => setNick(e.target.value)} value={nick} placeholder={nickname} />
-
-            < Button type="submint" variant="contained" color="primary">
-              Изменить
-            </Button>
-
           </div>
-        </form >
+          <div className="card__name">
+            <h2>Leo Bailey</h2>
+            <div className="card__handle">
 
-        <Box>
-          <Button onClick={getMyPosts} variant="contained" color="primary" type="submit" disableElevation>
-            {myInterviews.length ? "Скрыть посты" : "Показать мои посты"}
-          </Button>
-        </Box>
-      </Box >
-      <div>
-      {favorite ? 
-           <button onClick={() => handleViewFavorite()}>
-           Избранное
-           </button>
-           :
-           <>
-           <button onClick={() => setFavorite(!favorite)}>
-           Скрыть избранное
-           </button>
+            </div>
+          </div>
+          <div className="card__button">
+            <div >
+              <input
+                accept="image/*"
 
-           {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
-           </>
-           }
+                id="contained-button-file"
+                name="photo"
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <button variant="contained" color="primary" component="span">
+                  Загрузить фото
+                </button>
+              </label>
+
+              <input id="firstName" label="nickname" name="firstName" onChange={(e) => setNick(e.target.value)} value={nick} placeholder={nickname} />
+
+              < button type="submint" variant="contained" color="primary">
+                Изменить
+              </button>
+            </div>
+      
+         </div>
+      </form>
+
+        <hr className="border" />
+        <nav>
+          <ul className="navlinks">
+            <li className="link__item">Мои посты</li>
+            <li className="link__item">Избранное</li>
+          </ul>
+        </nav>
+         </div>
+<div>
+{myInterviews.map((e, index) => <EditInterview
+   usersId={id}
+   key={e.id}
+   id={e.id}
+   index={index}
+   name={e.name}
+   description={e.description}
+   data={e.data}
+   level={e.level}
+   categorey={e.Categorey.categorey}
+  organization={e.Organizations[0].title}
+     questions={e.Questions}
+     />)}
      
       </div>
+    </div>
 
-      {myInterviews.map((e, index) => <EditInterview
-        usersId={id}
-        key={e.id}
-        id={e.id}
-        index={index}
-        name={e.name}
-        description={e.description}
-        data={e.data}
-        level={e.level}
-        categorey={e.Categorey.categorey}
-        organization={e.Organizations[0].title}
-        questions={e.Questions}
-      />)}
 
-    </>
   );
 
 }
