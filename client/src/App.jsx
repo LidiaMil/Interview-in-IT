@@ -35,9 +35,13 @@ import Container from '@mui/material/Container';
 import { useDispatch } from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
 
-
+// const preloadedState = window.localStorage.getItem('in_user') || '{"isAuthenticated": false}'
+// console.log('amahere', preloadedState);
 
 function App() {
+
+
+
 
   const dispatch = useDispatch()
   let history = useHistory()
@@ -45,8 +49,9 @@ function App() {
   console.log(history);
 
   useEffect(() => {
-    if (window.localStorage.getItem('state') === 'true') {
-      console.log('привет из сессии', window.localStorage.getItem('state'));
+    if (window.localStorage.getItem('in_user') === 'true') {
+      console.log('привет из сессии', window.localStorage.getItem('in_user'));
+      //добавить в локал стораж ид
       dispatch(setAuth())
     }
   }, [])

@@ -43,8 +43,8 @@ function Right(){
 
   console.log(organization)
   return (
-<>
-    <h1>Organization</h1>
+    <>
+    <h3>Организации</h3>
     <div>
       
     {organization && organization.map((item, index) => <div key={item.id}><Cards {...item} /></div>)}
