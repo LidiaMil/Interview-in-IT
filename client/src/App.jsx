@@ -41,15 +41,16 @@ import { setAuth } from '../../client/src/redux/actions/auth.action'
 function App() {
 
   const dispatch = useDispatch()
-  const isAuthenticated = useSelector(state => state.isAuntificated)
-
+  
   useEffect(() => {
     if (window.localStorage.getItem('state') === 'true') {
       console.log('привет из сессии', window.localStorage.getItem('state'));
       dispatch(setAuth())
     }
   }, [])
-
+  
+  const isAuthenticated = useSelector(state => state.isAuntificated)
+  console.log(isAuthenticated)
   
   return (
     <Router>
@@ -65,12 +66,12 @@ function App() {
             </Route>
 
             <Route exact path="/interview/:id">
-            {!isAuthenticated ? <PageInterview /> :<Login />}
+            {isAuthenticated ?  <Login />:<PageInterview />}
             </Route>
 
 
             <Route exact path="/profile">
-            {!isAuthenticated ? <Login />:<Profile /> }
+            {isAuthenticated ? <Profile /> : <Login />}
             </Route>
 
             <Route exact path="/organization">
@@ -89,9 +90,9 @@ function App() {
               <More />
             </Route>
 
-            {/* <Route exact path="/newcomment/:id">
+            <Route exact path="/newcomment/:id">
               <NewInterview />
-            </Route> */}
+            </Route>
 
             <Route exact path="/newcomment">
             {!isAuthenticated ?  <Login />:<NewInterview />}
