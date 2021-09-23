@@ -157,7 +157,6 @@ export default function Basicinputs() {
 
             <div>
              <label class="label" for="name">Категория </label>
-             <FormControl fullWidth>
               <p class="select">
                   <select
                     class="budget"
@@ -170,7 +169,6 @@ export default function Basicinputs() {
                     {categories.map((item, index) =>  <option value={item.id}>{item.id}.{item.categorey}</option>)}
                   </select>
                 </p>
-                </FormControl>
             </div>
 
             <div>

@@ -19,16 +19,14 @@ import { useEffect, useState } from "react"
 export default function BasicTextFields({ index, lang }) {
   let [language, setLanguage] = useState("")
 
-  console.log("name", index)
-  console.log(language)
-
   return (
     <>
-       <label class="label" for="name">Текст вопроса</label>
+      <label class="label" for="name">Текст вопроса</label>
       <input type="text" id="name" required="" v-model="name"  name={index} />
        <label class="label" for="name">Язык программирования </label>
       <p class="select">
         <select
+          name={`select-${index}`}
           class="budget"
           v-model="selection.member"
           value={language}
