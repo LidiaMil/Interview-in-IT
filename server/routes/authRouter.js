@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const {Question,User} = require('../db/models');
 
-//переделал авторизацию через node-localstorage(nodeLocalStorage)
-  let LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
+// //переделал авторизацию через node-localstorage(nodeLocalStorage)
+//   let LocalStorage = require('node-localstorage').LocalStorage;
+//   localStorage = new LocalStorage('./scratch');
 
 
 
@@ -12,10 +12,10 @@ const {Question,User} = require('../db/models');
 
 
 
-const db = [{
-  email: 'a@a.a',
-  password: '123'
-}]
+// const db = [{
+//   email: 'a@a.a',
+//   password: '123'
+// }]
 
 
 
@@ -29,8 +29,8 @@ router.post("/login", async (req, res) => {
   if (user) {
     req.session.user = {id: user.id}
     console.log('сессия тут', req.session);
-    localStorage.setItem('in_user', true)
-    console.log('tttttt====>', localStorage.getItem('in_user'));
+    //localStorage.setItem('in_user', true)
+    //console.log('tttttt====>', localStorage.getItem('in_user'));
     return res.json({id: user.id})
   }
   
