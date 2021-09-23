@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom"
+import axios from 'axios';
 
 
 export default function Header() {
   const isAuthenticated = useSelector(state => state.isAuntificated)
 
+  useEffect(async()=> {
+    const id = localStorage.getItem('user_id')
+    await axios.post('/auth/one_user')
+    .then((response) => {console.log('======_____>', response.data)})
+    //const our_user = await User.findOne({where: {id:Number(id)}})
+
+  }, [])
+
   return (
 
-    <div className="header">
+    <div className="header shadow">
 
       <div className="logo" href="/">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

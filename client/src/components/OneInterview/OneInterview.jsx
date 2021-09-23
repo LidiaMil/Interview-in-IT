@@ -32,7 +32,7 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
   }
 
   return (
-    <div>
+    <div className="shadow border-radius">
       {User && Categorey && <div className="job-card">
         <div className="job-card-header">
           <img alt={User.firstName} class="avatar" src={User.photo} />
