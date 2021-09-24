@@ -61,4 +61,3 @@ export default function EditInterview({ id,  data, name, description, level, que
     </Paper>
   );
 }
-

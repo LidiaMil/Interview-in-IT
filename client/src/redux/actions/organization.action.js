@@ -8,6 +8,9 @@ export const getOrg = () => async (dispatch, getState) => {
     const response = await axios.get('http://localhost:3000/organizations')
     const arr = response.data
     let arrNum = arr.map((i) => {
+      if(!i.Raitings){
+        i.result = 0
+      }
       i.result = i.Raitings.reduce((acc, el) => acc += el.number, 0 ) / i.Raitings.length
       return i
     })

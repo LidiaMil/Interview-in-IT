@@ -29,6 +29,28 @@ router.post('/filter', async (req, res) => {
   const {categories,company_id} = req.body;
   let mas=[];
   let questions;
+  if(!categories && !company_id){
+   questions = await Interview.findAll({
+      include: [
+        {
+          model: User,
+          as: 'User'
+        },
+        {
+          model: Question
+        },
+        {
+          model: Categorey
+        },
+        {
+          model: Organization
+        },
+      ]
+    });
+    if(!questions.length){
+      questions=mas
+    }
+  }
   if(categories){
     questions = await Interview.findAll({
       where:{categorey_id : categories},
@@ -48,68 +70,94 @@ router.post('/filter', async (req, res) => {
         },
       ]
     });
+    if(!questions.length){
+      questions=mas
+    }
   }
   if(company_id){
-    questions = await Interview.findAll({
-      where:{id:company_id},
+    let org = await  Organization.findAll({
       include: [
         {
-          model: User,
-          as: 'User'
+          model: Interview
         },
-        {
-          model: Question
-        },
-        {
-          model: Categorey
-        },
-        {
-          model: Organization
-        },
-      ]
-    });
+      ],
+      where:{id : company_id},
+    })
+    let interview_id=[]
+    for(let i=0;i<org[0].Interviews.length;i++){
+      interview_id.push(org[0].Interviews[i].id)
+    }
+    // console.log(interview_id)
+    questions=[]
+    for(let i=0;i<interview_id.length;i++){
+      oneQuestion = await  Interview.findOne({
+        include: [
+          {
+            model: User,
+            as: 'User'
+          },
+          {
+            model: Question
+          },
+          {
+            model: Categorey
+          },
+          {
+            model: Organization
+          },
+        ],
+        where:{id : interview_id[i]},
+      });
+      questions.push(oneQuestion)
+    }
+    if(!questions.length){
+      questions=mas
+    }
   }
   if(categories && company_id){
-    questions = await Interview.findAll({
-      where:{categorey_id : categories, id:company_id},
+
+    let org = await  Organization.findAll({
       include: [
         {
-          model: User,
-          as: 'User'
+          model: Interview
         },
-        {
-          model: Question
-        },
-        {
-          model: Categorey
-        },
-        {
-          model: Organization
-        },
-      ]
-    });
+      ],
+      where:{id : company_id},
+    })
+    let interview_id=[]
+    for(let i=0;i<org[0].Interviews.length;i++){
+      interview_id.push(org[0].Interviews[i].id)
+    }
+    // console.log(interview_id)
+    questions=[]
+    for(let i=0;i<interview_id.length;i++){
+      oneQuestion = await Interview.findOne({
+        where:{categorey_id :categories ,id : interview_id[i]},
+        include: [
+          {
+            model: User,
+            as: 'User'
+          },
+          {
+            model: Question
+          },
+          {
+            model: Categorey
+          },
+          {
+            model: Organization
+          },
+        ],
+      });
+      if(oneQuestion){
+        questions.push(oneQuestion)
+      }
+    }
+    // console.log(categories ,questions)
+    if(!questions.length){
+      questions=mas
+    }
   }
-  else{
-   questions = await Interview.findAll({
-      include: [
-        {
-          model: User,
-          as: 'User'
-        },
-        {
-          model: Question
-        },
-        {
-          model: Categorey
-        },
-        {
-          model: Organization
-        },
-      ]
-    });
-  }
-  
-  // console.log(questions)
   if(questions.length){
     res.json(questions);
   }
@@ -200,7 +248,8 @@ router.post("/new", async (req, res) => {
     else{
       const ququ = await OrganizationQuestion.create({ organization_id: company_id, interview_id: newInterview.id })
     }
-    for (let i = 0; i < Object.keys(questionsWITHlang).length / 2; i++) {
+    for (let i = 0; i < (Object.keys(questionsWITHlang).length / 2)-1; i++) {
+      console.log(i,questionsWITHlang[i])
       const newQuestion = await Question.create({ interview_id: newInterview.id, text: questionsWITHlang[i] })
       const lang = await LanguageQuestion.create({ question_id: newQuestion.id, language_id: questionsWITHlang[`select-${i}`] })
     }
@@ -344,7 +393,6 @@ router.post("/comment/:id", async (req, res) => {
   const { text } = req.body;
   try {
     const newComment = await Comment.create({ user_id: 1, question_id: id, text: text })
-    // console.log(newComment)
     return res.json(newComment);
   } catch (err) {
     console.log(err);

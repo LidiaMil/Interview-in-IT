@@ -1,13 +1,7 @@
 import * as React from 'react';
-import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
+import { Button, styled, Grid, div, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -23,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ImgMediaCard() {
+export default function ImgMediadiv() {
   const classes = useStyles();
   const [newComment, setNewComment] = useState(null);
   const postId = useParams()
@@ -63,43 +57,44 @@ export default function ImgMediaCard() {
 
   return (
     <>
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+    <div className="job-card shadow border-radius">
+      <div className="job-main">
+        <div className="job-content">
+          <div gutterBottom variant="h5" component="h2">
             Язык программирования: {arrLang.join(' ')}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          </div>
+          <div variant="body2" color="textSecondary" component="p">
             Вопрос: {oneQuestion.text}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+          </div>
+        </div>
+      </div>
 
-      <CardActionArea>
-      <Typography variant="body2" color="textSecondary" component="p">
+      <div>
+      <div variant="body2" color="textSecondary" component="p">
         {postId === newComment ? (
           <>
             <form onSubmit={handleSubmitAdd} >
               <div>
-                <TextField id="outlined-basic" label="text:" variant="outlined"  onChange={textAdd}/>
-                <Button type="submit" variant="contained">Опубликовать</Button>
+              <label class="label" for="name">Твой комментарий:</label>
+                <input type="text" id="name" required="" v-model="name" onChange={textAdd}/>
+                <button type="submit" class="search-buttons card-buttons">Опубликовать</button>
               </div>
             </form>
           </>
         ) : (
-          <Stack direction="row" spacing={2}>
+          <div direction="row" spacing={2}>
             <Button onClick={() => setNewComment(postId)} variant="contained"> Добавить комментарий</Button>
-          </Stack>
+          </div>
         )}
-      </Typography>
-      </CardActionArea>
+      </div>
+      </div>
 
-    </Card>
-    <Card className={classes.root}>
-      <CardActionArea>
+    <div className={classes.root}>
+      <div>
         {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
-      </CardActionArea>
-    </Card>
+      </div>
+    </div>
+    </div>
     </>
   );
 }

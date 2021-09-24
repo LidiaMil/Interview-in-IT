@@ -24,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
 //id пользователя
 const id = Number(localStorage.getItem('user_id'))
 function Profile() {
-  const id = Number(localStorage.getItem('user_id'))
-  // console.log("user_id = ",id);
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)
@@ -97,11 +95,19 @@ function Profile() {
             action="/profile"
           >
             <div className="job-overview-card">
-              <img
+              {img ?
+                <img
                 style={{ width: "100px", height: "100px" }}
                 src={img} ref={ref}
                 alt="Avatar"
                 className="avatar" />
+                :
+                <img 
+                style={{ width: "100px", height: "100px" }}
+                src="https://semantica.in/wp-content/uploads/2018/08/av-427845-1.png" 
+                alt="Avatar"
+                className="avatar" />
+              }
             </div>
 
             <div >
@@ -179,22 +185,6 @@ function Profile() {
   );
 }
 export default Profile
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
