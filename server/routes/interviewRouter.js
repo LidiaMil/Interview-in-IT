@@ -188,23 +188,21 @@ router.get('/newOrg', async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
-  const { title, description, categories, level, questionsWITHlang, company_id } = req.body;
-  console.log(typeof company_id)
+  const { user,title, description, categories, level, questionsWITHlang, company_id } = req.body;
+  console.log(user,"------------------",typeof Number(company_id))
 
   if (title && categories && questionsWITHlang && level && company_id) {
-    const newInterview = await Interview.create({ name: title, level, description: description, categorey_id: categories, user_id: 1, favorites: false })
-    if(typeof company_id == 'string'){
+    const newInterview = await Interview.create({ name: title, level, description: description, categorey_id: categories, user_id: user, favorites: false })
+    if(typeof Number(company_id) == 'string'){
       const newCompany= await Organization.create({ title: company_id })
       const ququ = await OrganizationQuestion.create({ organization_id: newCompany.id, interview_id: newInterview.id })
     }
     else{
-
       const ququ = await OrganizationQuestion.create({ organization_id: company_id, interview_id: newInterview.id })
     }
     for (let i = 0; i < Object.keys(questionsWITHlang).length / 2; i++) {
       const newQuestion = await Question.create({ interview_id: newInterview.id, text: questionsWITHlang[i] })
       const lang = await LanguageQuestion.create({ question_id: newQuestion.id, language_id: questionsWITHlang[`select-${i}`] })
-
     }
     const news = await Interview.findOne({
       include: [
@@ -267,6 +265,7 @@ router.get('/user/:id', async (req, res) => {
 
 router.get('/question/:id', async (req, res) => {
   let thisId = req.params.id
+  console.log(thisId)
   const oneQuestions = await Question.findOne(
     {
       where: {
@@ -284,7 +283,7 @@ router.get('/question/:id', async (req, res) => {
         }
       ]
     });
-  //console.log(oneQuestions);
+  console.log("------",oneQuestions.Language);
   res.json(oneQuestions);
 })
 

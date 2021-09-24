@@ -11,6 +11,7 @@ export const setInterview = (question) => ({
 })
 
 export const addInterview = (newCom) => async (dispatch, getState) => {
+  console.log(newCom)
   const response = await axios.post(`http://localhost:3000/interview/new`,newCom)
   dispatch(setAddInterview(response.data))
 }
