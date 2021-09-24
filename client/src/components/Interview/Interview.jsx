@@ -40,38 +40,45 @@ function Question() {
 
   const handleNull = () => {
     setFilterPoint(null)
+    setCat("");
+    setCompany("");
   }
   return (
-
     <div className="CenterFormCard">
-
       <div className="form-top">
-
         <h3>Собеседования</h3>
         <div className="filterForm">
-          
-          <form onSubmit={handleSubmit}>
-
-            <label>Категория</label>
-            <select id="fruits" value={cat} label="Категория" onChange={(event) => {
-              setCat(event.target.value);
-            }}>
-              <option ></option>
-              {categories.map((item, index) => <option value={item.id}>{item.categorey}</option>)}
-            </select>
-            <label>Компания</label>
-            <select id="fruits" value={company} label="Company" onChange={(event) => {
-              setCompany(event.target.value);
-            }}>
-              <option ></option>
-              {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
-            </select>
-            {filterPoint ?
-            <button onClick={() =>setFilterPoint(null)}>Сбросить фильтр</button>
-            :
-            <button type="submit">Применить</button>
-            }
-          </form>
+          {/* <label for="site-search">Search the site:</label>
+      <input className="formInput" type="text" onkeyup="filter();" placeholder="Поиск по сайту"/>
+      <button>Поиск по сайту</button> */}
+          <div >
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label class="label" for="name">Категория</label>
+                <select id="fruits" value={cat} onChange={(event) => {
+                  setCat(event.target.value);
+                }}>
+                  <option ></option>
+                  {categories.map((item, index) => <option value={item.id}>{item.categorey}</option>)}
+                </select>
+              </div>
+              <div>
+                <label class="label" for="name">Компания</label>
+                <select id="fruits" value={company} label="Company" onChange={(event) => {
+                  setCompany(event.target.value);
+                }}>
+                  <option ></option>
+                  {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
+                </select>
+              </div>
+              <div>
+                <button class="search-buttons card-buttons" type="submit">Применить</button>
+              </div>
+              <div>
+                <button class="search-buttons card-buttons" onClick={() => handleNull()}>Сбросить фильтр</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 

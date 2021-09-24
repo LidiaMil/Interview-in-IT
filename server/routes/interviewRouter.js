@@ -87,7 +87,7 @@ router.post('/filter', async (req, res) => {
     for(let i=0;i<org[0].Interviews.length;i++){
       interview_id.push(org[0].Interviews[i].id)
     }
-    console.log(interview_id)
+    // console.log(interview_id)
     questions=[]
     for(let i=0;i<interview_id.length;i++){
       oneQuestion = await  Interview.findOne({
@@ -115,29 +115,49 @@ router.post('/filter', async (req, res) => {
     }
   }
   if(categories && company_id){
-    questions = await Interview.findAll({
-      where:{categorey_id : categories, id:company_id},
+
+    let org = await  Organization.findAll({
       include: [
         {
-          model: User,
-          as: 'User'
+          model: Interview
         },
-        {
-          model: Question
-        },
-        {
-          model: Categorey
-        },
-        {
-          model: Organization
-        },
-      ]
-    });
+      ],
+      where:{id : company_id},
+    })
+    let interview_id=[]
+    for(let i=0;i<org[0].Interviews.length;i++){
+      interview_id.push(org[0].Interviews[i].id)
+    }
+    // console.log(interview_id)
+    questions=[]
+    for(let i=0;i<interview_id.length;i++){
+      oneQuestion = await Interview.findOne({
+        where:{categorey_id :categories ,id : interview_id[i]},
+        include: [
+          {
+            model: User,
+            as: 'User'
+          },
+          {
+            model: Question
+          },
+          {
+            model: Categorey
+          },
+          {
+            model: Organization
+          },
+        ],
+      });
+      if(oneQuestion){
+        questions.push(oneQuestion)
+      }
+    }
+    // console.log(categories ,questions)
     if(!questions.length){
       questions=mas
     }
   }
-
   if(questions.length){
     res.json(questions);
   }
