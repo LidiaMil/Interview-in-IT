@@ -36,11 +36,11 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
     User && Categorey && <div className="job-card shadow border-radius">
 
       <div className="job-main">
-        <div className="job-card-header">
+        <div className="job-card-header avatar">
           {User.photo ?
-            <img alt={User.firstName} class="avatar" src={User.photo} />
+            <img alt={User.firstName} src={User.photo} />
             :
-            <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar" />
+            <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar"  />
           }
           {/* <button className="search-buttons " onClick={() => handleFavorite(id)} type="button"> {favorite ? '⭐' : '☆'}</button> */}
         </div>

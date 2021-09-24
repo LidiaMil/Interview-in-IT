@@ -17,8 +17,9 @@ router.get('/', async (req, res) => {
       },
       {
         model: Organization
-      },
-    ]
+      }
+    ],
+    order: [['id', 'DESC']]
   });
   // console.log(questions)
   res.json(questions);

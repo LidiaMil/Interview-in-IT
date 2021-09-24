@@ -83,9 +83,7 @@ export default function ImgMediaCard(Comment) {
              {Comment.text}     
               </div>
           </div>
-        <div variant="body2" gutterBottom>
-              <button onClick={() => handleDelete(Comment.id)}>Удалить</button>
-        </div>
+        
         </div>
       </div>
 

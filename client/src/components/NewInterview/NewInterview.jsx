@@ -62,10 +62,10 @@ export default function Basicinputs() {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
     // console.log(input_data)
-    if(idUser && title && cat && level && input_data && company){
+    if (idUser && title && cat && level && input_data && company) {
       dispatch(addInterview(
         {
-          user:idUser,
+          user: idUser,
           title,
           description,
           categories: cat,
@@ -79,7 +79,7 @@ export default function Basicinputs() {
         history.push("/")
       }, 3000);
     }
-    else{
+    else {
       setError(true)
       setTimeout(() => {
         history.push("/newcomment")
@@ -108,38 +108,40 @@ export default function Basicinputs() {
 
   return (
     <div>
-      <h3>{id ? "Редактировать собеседование" : "Создать собеседование"}</h3>
+      <h2>{id ? "Редактировать собеседование" : "Создать собеседование"}</h2>
       {add ?
         <div id="app">
           <form class="vue-form" onSubmit={id ? editInterview : handleSubmitAdd}>
             <div>
-            <label class="label" for="name">Компания</label>
+              <label class="label" for="name">Компания</label>
               {newCompany ?
-              <>
-                <input type="text" name="name" id="name" required="" v-model="name"  onChange={companyAdd} />
-                <button type="button" onClick={() => setNewCompany(null)} class="search-buttons card-buttons">
+                <>
+                  <div>
+                    <input type="text" name="name" id="name" required="" v-model="name" onChange={companyAdd} />
+                  </div>
+                  <button type="button" onClick={() => setNewCompany(null)} class="search-buttons card-buttons">
                     Вернуть список
-                 </button>
-              </>
+                  </button>
+                </>
                 :
                 <>
-                <p class="select">
-                  <select
-                    class="budget"
-                    label="Company"
-                    v-model="selection.member"
-                    value={company}
-                    onChange={(event) => {
-                      setCompany(event.target.value);
-                    }}>
+                  <p class="select">
+                    <select
+                      class="budget"
+                      label="Company"
+                      v-model="selection.member"
+                      value={company}
+                      onChange={(event) => {
+                        setCompany(event.target.value);
+                      }}>
                       <option ></option>
-                    {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
-                  </select>
-                </p>
-              <button type="button" onClick={() => setNewCompany(true)} class="search-buttons card-buttons">
-                Компании нет в списке
-              </button>
-              </>
+                      {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
+                    </select>
+                  </p>
+                  <button type="button" onClick={() => setNewCompany(true)} class="search-buttons card-buttons">
+                    Компании нет в списке
+                  </button>
+                </>
               }
             </div>
 
@@ -163,29 +165,29 @@ export default function Basicinputs() {
 
             <div>
               {id ? <input label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
-               <>
-                <label class="label" for="name">Описание вакансии</label>
-                <input type="text" name="name" id="name" required="" v-model="name" onChange={descriptionAdd} />
+                <>
+                  <label class="label" for="name">Описание вакансии</label>
+                  <input type="text" name="name" id="name" required="" v-model="name" onChange={descriptionAdd} />
                 </>
               }
             </div>
 
 
             <div>
-             <label class="label" for="name">Категория </label>
+              <label class="label" for="name">Категория </label>
               <p class="select">
-                  <select
-                    class="budget"
-                    v-model="selection.member"
-                    value={cat}
+                <select
+                  class="budget"
+                  v-model="selection.member"
+                  value={cat}
                   label="Organization"
                   onChange={(event) => {
                     setCat(event.target.value);
                   }}>
-                      <option ></option>
-                    {categories.map((item, index) =>  <option value={item.id}>{item.id}.{item.categorey}</option>)}
-                  </select>
-                </p>
+                  <option ></option>
+                  {categories.map((item, index) => <option value={item.id}>{item.id}.{item.categorey}</option>)}
+                </select>
+              </p>
             </div>
 
             <div>
@@ -210,9 +212,9 @@ export default function Basicinputs() {
             <a href='/profile'>На главную</a>
           </div>
         </>}
-        <div>
-          {error ? <h1>Что-то пошло не так...</h1> : <h1></h1>}
-        </div>
+      <div>
+        {error ? <h1>Что-то пошло не так...</h1> : <h1></h1>}
+      </div>
     </div>
 
     // <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>

@@ -95,10 +95,11 @@ html {
 
 
 body {
- background-color: var(--body-bg-color);
+//  background-color: var(--body-bg-color);
  font-family: var(--body-font);
  font-size: 15px;
  color: var(--body-color);
+ background-color: #fafafb;
 }
 
 .dark-light svg {
@@ -208,12 +209,20 @@ body {
  }
 }
 .user-profile {
- width: 32px;
- height: 32px;
+ width: 32px !important;
+ height: 32px !important;
  border-radius: 50%;
- object-fit: cover;
  margin-right: 10px;
+ overflow: hidden;
+ border: 1px solid var(--active-light-color);
+ 
+ img {
+   object-fit: cover;
+  width: 100%;
+  height: 100%;
+ }
 }
+
 
 .wrapper {
  width: 100%;
@@ -921,12 +930,12 @@ html {
  -webkit-font-smoothing: antialiased;
 }
 
-body {
- background-color: var(--body-bg-color);
- font-family: var(--body-font);
- font-size: 15px;
- color: var(--body-color);
-}
+// body {
+//  background-color: var(--body-bg-color);
+//  font-family: var(--body-font);
+//  font-size: 15px;
+//  color: var(--body-color);
+// }
 
 .dark-light svg {
  margin-right: 8px;
@@ -968,7 +977,7 @@ body {
 // height: 100vh;
  margin: 0 auto;
   // overflow: hidden;
- background-color: var(--theme-bg-color);
+
 }
 
 .header {
@@ -1686,6 +1695,14 @@ body {
   height: 100px;
   border-radius: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  svg {
+    width: 60%;
+  }
 
   img {
     width: 100%;
@@ -1788,6 +1805,22 @@ background-color: blue;
 .filterForm form{
   position:relative;
   display: flex;
+  align-items: flex-end;
+
+  select {
+    height: 34px;
+  }
+
+  h4 {
+    margin-bottom: 10px;
+  }
+  div {
+    margin-right: 10px;
+  }
+
+  .card-buttons:last-child {
+    margin: 0;
+  }
   }
 
   .formInput{
@@ -1802,16 +1835,27 @@ background-color: blue;
   #fruits{
     border: 1px solid #ccc;
     display:block;
-    height:30px;
+    height:34px;
     border-radius:3px;
     width:100px;
     padding:3px;
     width: 175px;
   }
 
+
   .category-list {
     list-style: none;
   }
+
+  .rating-block {
+    color: inherit;
+    display: flex;
+
+
+    span:last-child {
+      margin-top: 3px;
+    }
+    }
 
   .shadow {
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05) !important;
@@ -2154,3 +2198,19 @@ background-color: blue;
 .questionCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+  .purchase__button { border: none; outline: none !important; background-color: #f0f0f0; }
+
+  .companyImg {
+    width: 50%;
+    height: 50%;
+    margin-left: 20%;
+  }
+
+  img.default {
+    object-fit: unset;
+    width: 60%;
+    height: auto;
+    margin: auto;
+    display: block;
+    margin-top: 20%;
+  }
