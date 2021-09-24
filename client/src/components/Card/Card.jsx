@@ -61,11 +61,11 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
   //             </div>
   // </div>
 
-
+<a href={`/organization/${id}`} >
 <div className="job-overview-card">
        <div className="job-card overview-card shadow border-radius">
         <div className="overview-wrapper">
-        <img src={photo} />
+        <img className = "companyImg" src={photo} />
          <div className="overview-detail">
           <div className="job-card-title">{title}</div>
           <div className="job-card-subtitle">
@@ -80,12 +80,9 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
 
 
          </div>
-         {/* <svg className="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-heart">
-          <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" /></svg> */}
+       
         </div>
-        {/* <div className="job-overview-buttons">
-         <div className="search-buttons time-button">Звездочки</div>
-        </div> */}
+     
         <Box
                 sx={{
                   '& > legend': { mt: 2 },
@@ -104,7 +101,7 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
        </div>
 
       </div>
-
+      </a>
 
 
 

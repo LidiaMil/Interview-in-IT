@@ -83,7 +83,7 @@ export default function OrganizationInterview() {
               >
                 <Rating
                   name="simple-controlled"
-                  value={value}
+                  value={Math.floor(organization[0]?.result.toFixed(2))}
                   onChange={(event, newValue) => {
                       getChange(newValue)
                   }}
