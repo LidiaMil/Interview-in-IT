@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import EditInterview from '../EditInterview/EditInterview';
 import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import { clearMyInterviews, getMyInterviews, setProfileData, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import {getUser } from '../../redux/actions/user.action'
 import OneInterview from '../OneInterview/OneInterview'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,11 +26,12 @@ const useStyles = makeStyles((theme) => ({
 //id пользователя
 const id = Number(localStorage.getItem('user_id'))
 function Profile() {
+  const history=useHistory()
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)
-  const img = useSelector(state => state.img.img)
-  const nickname = useSelector(state => state.img.nickname)
+  const img = useSelector(state => state.oneUser.photo)
+  const nickname = useSelector(state => state.oneUser.firstName)
   const myInterviews = useSelector(state => state.myInterviews)
   const favInterviews = useSelector(state => state.favInterviews)
   const [inputValue, setInputValue] = useState(null)
@@ -37,10 +40,11 @@ function Profile() {
   // const [posts, setPosts] = useState([])
   const [nick, setNick] = useState(nickname)
   const [statusUpload, setStatusUpload] = useState("")
+
+  useEffect(() => dispatch(getMyFavoriteInterviews()), [])
   useEffect(() => {
-    dispatch(setImgProfile(id))
     setNick(nickname)
-  }, [nickname, img])
+  }, [nickname])
 
   function inputChange(e) {
     const refCurrent = ref.current
@@ -52,6 +56,11 @@ function Profile() {
     reader.readAsDataURL(e.target.files[0])
   }
 
+  // const getRender=()=>{
+  // history.go(0)
+  // console.log('cdsd')
+
+  // }
   function submintForm(e) {
     e.preventDefault()
     const formData = new FormData();
@@ -60,14 +69,16 @@ function Profile() {
     formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
     formData.append('nickname', name.value);
     formData.append('id', id)
-    if (nick) {
-      dispatch(setNicknameProfile(
+    // if (nick) {
+      dispatch(setProfileData(
         formData
       ))
-      setNick(nick)
-    } else {
-      alert('не введён nickname')
-    }
+      // setNick(nick)
+      getUser(id)
+      
+    // } else {
+    //   alert('не введён nickname')
+    // }
   }
 
   const handleViewFavorite = () => {
@@ -88,14 +99,14 @@ function Profile() {
       <div className="center-div" >
         <div className="job-cards">
           <form
-            className={classes.root}
+            className={`${classes.root} vue-form profile-form shadow border-radius`}
             onSubmit={submintForm}
             noValidate autoComplete="off"
             encType="multipart/form-data"
             action="/profile"
           >
             <div className="job-overview-card">
-              {img ?
+            {img ?
                 <img
                 style={{ width: "100px", height: "100px" }}
                 src={img} ref={ref}
@@ -104,9 +115,9 @@ function Profile() {
                 :
                 <img 
                 style={{ width: "100px", height: "100px" }}
-                src="https://semantica.in/wp-content/uploads/2018/08/av-427845-1.png" 
+                src="../../1.png" ref={ref}
                 alt="Avatar"
-                className="avatar" />
+                 />
               }
             </div>
 
@@ -125,24 +136,33 @@ function Profile() {
                   Загрузить фото
                 </label>
               </button>
+              <div>Nick: {nick}</div>
               <input
               style={{margin:'3px'}}
                 id="firstName"
                 label="nickname"
                 name="firstName"
+                type="text"
                 onChange={(e) => setNick(e.target.value)}
                 value={nick}
                 placeholder="введите ваш nickname"
               />
 
               <button style={{margin:'3px'}} variant="contained" color="primary" class="search-buttons">
-                Изменить
+                  Изменить
               </button>
 
             </div>
           </form >
+
           <div>
-          {favorite ?
+            {/* <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={getMyPosts}>
+              {myInterviews.length ? "Скрыть собеседования" : "Показать мои собеседования"}
+            </button> */}
+          </div>
+        </div>
+        <div>
+          {/* {favorite ?
             <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={() => handleViewFavorite()}>
               Избранное
             </button>
@@ -154,17 +174,11 @@ function Profile() {
 
               {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
             </>
-          }
+          } */}
+
+{favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
 
         </div>
-
-          <div>
-            <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={getMyPosts}>
-              {myInterviews.length ? "Скрыть собеседования" : "Показать мои собеседования"}
-            </button>
-          </div>
-        </div>
-  
       </div>
 
       {myInterviews.map((e, index) => <EditInterview
@@ -185,9 +199,6 @@ function Profile() {
   );
 }
 export default Profile
-
-
-
 
 
 

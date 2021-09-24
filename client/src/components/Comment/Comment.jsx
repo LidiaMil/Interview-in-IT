@@ -65,14 +65,14 @@ export default function ImgMediaCard(Comment) {
      <div className="job-card shadow border-radius">
 
         <div className="job-main">
-          <div className="job-card-header">
+          <div className="job-card-header avatar">
             {oneUser.photo ?
                <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
                        alt={oneUser.firstName}
                        src={oneUser.photo}
                />
               :
-              <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar" />
+              <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar"/>
             }
           </div>
           <div className="job-content">
