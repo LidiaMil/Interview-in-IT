@@ -16,7 +16,7 @@ function Upleft(){
 
 <h4>Топ 5 популярных вопросов</h4>
 {newquestions && newquestions.map((item) =>
-<div className="job-overview-card">
+(<div key={item.text} className="job-overview-card">
        <div className="job-card overview-card">
         <div className="overview-wrapper">
          {/* <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="background-color: #fe5b5f"> */}
@@ -29,7 +29,7 @@ function Upleft(){
          <div className="search-buttons time-button">Full Time</div>
         </div>
        </div>
-      </div>
+      </div>)
 )}
 
 

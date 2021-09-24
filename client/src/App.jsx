@@ -6,11 +6,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
 import { useHistory } from "react-router-dom";
-
 import { useState, useEffect } from 'react';
-
 import Main from './components/Main/Main';
 import PageInterview from './components/PageInterview/PageInterview';
 import Header from './components/Header/Header';
@@ -26,26 +23,17 @@ import Interview from './components/Interview/Interview'
 import More from './components/More/More'
 import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
 import Registry from './components/Registry/Registry'
-import { useSelector } from 'react-redux';
-
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
 import Container from '@mui/material/Container';
-
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
-
 // const preloadedState = window.localStorage.getItem('in_user') || '{"isAuthenticated": false}'
 // console.log('amahere', preloadedState);
-
 function App() {
-
-
-
-
   const dispatch = useDispatch()
-
+  const isAuthenticated = useSelector(state => state.isAuntificated)
   useEffect(() => {
     if (window.localStorage.getItem('user_id')) {
       //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
@@ -54,75 +42,58 @@ function App() {
     }
   }, [])
 
-  const isAuthenticated = useSelector(state => state.isAuntificated)
-  console.log(isAuthenticated)
+  // const isAuthenticated = true
+  // console.log(isAuthenticated)
 
   return (
     <Router>
-
       <div className="job">
         <Header />
 
         <div className="main-container">
           <Switch>
-
             <Route exact path="/">
               <Main />
             </Route>
-
             <Route exact path="/interview/:id">
               <PageInterview />
             </Route>
-
-
             <Route exact path="/profile">
               {isAuthenticated ? <Profile /> : <Login />}
             </Route>
-
             <Route exact path="/organization">
               <Organization />
             </Route>
-
             <Route exact path="/organization/:id">
               <OrganizationInterview />
             </Route>
-
             <Route exact path="/question">
               <Interview />
             </Route>
-
             <Route exact path="/question/:id">
               <More />
             </Route>
-
             <Route exact path="/newcomment/:id">
               <NewInterview />
             </Route>
-
             <Route exact path="/newcomment">
               {!isAuthenticated ? <Login /> : <NewInterview />}
 
 
             </Route>
-
             <Route path='/login'>
               <Login />
             </Route>
-
             <Route path='/logout'>
               <Logout />
             </Route>
-
             <Route path='/registry'>
               <Registry />
             </Route>
-
-
           </Switch>
         </div>
       </div>
     </Router>
   );
 }
-
 export default App;

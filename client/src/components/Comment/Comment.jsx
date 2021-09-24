@@ -44,7 +44,7 @@ export default function ImgMediaCard(Comment) {
             />
           </ButtonBase>
         </Grid>
-        <Grid item xs={10} sm container>
+        <Grid item xs={{margin: '10px'}} sm container>
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
