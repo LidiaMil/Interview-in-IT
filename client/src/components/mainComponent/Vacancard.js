@@ -18,11 +18,7 @@ export default function ActionAreaCard(vacanprom) {
 
         </div>
         <div className="job-overview-buttons">
-          <a href={vacanprom.vacanprom.url}></a>
-          <div className="search-buttons time-button">Full Time</div>
-          {/* <div className="search-buttons level-button">Senior Level</div>
-         <div className="job-stat">New</div>
-         <div className="job-day">4d</div> */}
+          <a href={vacanprom.vacanprom.url}>Перейти</a>
         </div>
       </div>
     </div>
