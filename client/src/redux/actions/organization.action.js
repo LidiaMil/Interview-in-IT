@@ -9,8 +9,8 @@ export const getOrg = () => async (dispatch, getState) => {
     const arr = response.data
     console.log('qwwqwqwq',arr)
     let arrNum = arr.map((i) => {
-      if(i==0){
-        return 1
+      if(!i.Raitings){
+        i.result = 0
       }
       i.result = i.Raitings.reduce((acc, el) => acc += el.number, 0 ) / i.Raitings.length
       return i

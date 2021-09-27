@@ -80,8 +80,9 @@ function Login(){
     <input type="email" placeholder="email" autofocus name="email" required onChange={handleChange} value={email}></input>
     <input type="password" placeholder="password" name="password" type="password" required onChange={handleChange} value={password}></input>
         <button type="submit" className="btn btn-primary btn-block btn-large">Войти</button>
-        <div className="error">Тут ошибка: {error}</div>
-        <Link to="/">Домой</Link>
+        {error ? <div className="error">Тут ошибка: {error}</div> : <div></div>}
+        
+         <Link to="/registry">Регистрация</Link> 
     </form>
 </div>
 

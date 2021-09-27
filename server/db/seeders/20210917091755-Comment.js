@@ -13,28 +13,42 @@ module.exports = {
       {
         user_id: 1,
         question_id: 2,
-        text: "P3W1D4 - Redux",
+        text: "Не знаю",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         user_id: 3,
         question_id: 2,
-        text: "lalala",
+        text: "+undefined // NaN",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         user_id: 2,
         question_id: 2,
-        text: "qweqweqwe",
+        text: "Только у массивов, у объектов нет.",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        user_id: 1,
-        question_id: 3,
-        text: "P3W2D1 - Thunk, Saga",
+        user_id: 3,
+        question_id: 5,
+        text: "Ничем не отличается, тоже самое!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 2,
+        question_id: 5,
+        text: " == значения и тип данных, а === сравнивает только значения",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 3,
+        question_id: 4,
+        text: "Это функция со всеми внешними переменными, доступными ей.",
         createdAt: new Date(),
         updatedAt: new Date()
       },

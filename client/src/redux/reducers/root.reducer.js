@@ -7,8 +7,6 @@ import { commentReducer } from './comment.reducer'
 import { categoriesReducer } from './categories.reducer'
 import { langReducer } from './lang.reducer'
 import { orgReducer } from './org.reducer'
-import { editImg } from "./editImg.reducer"
-import { editNickname } from "./editNickname.reducer"
 import { myInterviewsReducer } from "./myInterviews.reducer"
 import {organizationInterviewReducer} from './organizationInterview.reducer'
 import {oneInterviewReducer} from './oneInterview.reducer'
@@ -18,6 +16,7 @@ import {myFavoriteInterviewsReducer} from './favoriteInterview.reducer'
 import { dataInterviewFormReducer } from "./dataInterviewForm.reducer"
 import {commentCountReducer} from './countComment.reducer'
 import {filterReducer} from './filter.reducer'
+import {commentUserReducer} from './userComment.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -29,8 +28,8 @@ export const reducer = combineReducers({
   lang: langReducer,
   org: orgReducer,
   oneQuestion: oneQuestionReducer,
-  img: editImg,
-  nickname: editNickname,
+  // img: editImg,
+  // nickname: editNickname,
   myInterviews: myInterviewsReducer,
   organizationInterview: organizationInterviewReducer,
   oneUser:oneUserReducer,
@@ -38,5 +37,6 @@ export const reducer = combineReducers({
   favInterviews:myFavoriteInterviewsReducer,
   dataInterviewForm: dataInterviewFormReducer,
   countComment:commentCountReducer,
-  filter:filterReducer
+  filter:filterReducer,
+  commentUser:commentUserReducer 
 })

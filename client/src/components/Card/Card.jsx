@@ -65,7 +65,7 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
 <div className="job-overview-card">
        <div className="job-card overview-card shadow border-radius">
         <div className="overview-wrapper">
-        <img src={photo} />
+        <img className = "companyImg" src={photo} />
          <div className="overview-detail">
           <div className="job-card-title">{title}</div>
           <div className="job-card-subtitle">
@@ -83,11 +83,7 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
        
         </div>
      
-        <Box
-                sx={{
-                  '& > legend': { mt: 2 },
-                }}
-              >
+        <div className="rating-block">
                 <Rating
                   name="simple-controlled"
                   value={value}
@@ -96,8 +92,8 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
                       
                   }}
                 />
-                  {result.toFixed(2)}
-              </Box>
+                  <span >{result.toFixed(2)}</span>
+              </div>
        </div>
 
       </div>

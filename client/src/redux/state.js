@@ -7,6 +7,7 @@ export const initialState = {
   favInterviews:[],
   comments:[],
   categories:[],
+  commentUser:[],
   user:{},
   lang:[],
   oneUser:[],

@@ -17,8 +17,9 @@ router.get('/', async (req, res) => {
       },
       {
         model: Organization
-      },
-    ]
+      }
+    ],
+    order: [['id', 'DESC']]
   });
   // console.log(questions)
   res.json(questions);
@@ -355,7 +356,7 @@ router.get('/comment/:id', async (req, res) => {
         }
       ]
     });
-  //console.log(oneQuestions);
+  console.log('+');
   res.json(oneQuestions);
 })
 

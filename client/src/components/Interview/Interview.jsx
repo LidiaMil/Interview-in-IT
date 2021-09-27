@@ -49,9 +49,9 @@ function Question() {
         <h3>Собеседования</h3>
         <div className="filterForm">
           <div >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='filter-form'>
               <div>
-                <label class="label" for="name">Категория</label>
+                <label class="label" for="name"><h4>Категория</h4></label>
                 <select id="fruits" value={cat} onChange={(event) => {
                   setCat(event.target.value);
                 }}>
@@ -60,7 +60,7 @@ function Question() {
                 </select>
               </div>
               <div>
-                <label class="label" for="name">Компания</label>
+                <label class="label" for="name"><h4>Компания</h4></label>
                 <select id="fruits" value={company} label="Company" onChange={(event) => {
                   setCompany(event.target.value);
                 }}>
@@ -68,12 +68,11 @@ function Question() {
                   {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
                 </select>
               </div>
-              <div>
-                <button class="search-buttons card-buttons" type="submit">Применить</button>
-              </div>
-              <div>
-                <button class="search-buttons card-buttons" onClick={() => handleNull()}>Сбросить фильтр</button>
-              </div>
+
+              <button class="search-buttons card-buttons" type="submit">Применить</button>
+
+              <button class="search-buttons card-buttons" onClick={() => handleNull()}>Сбросить</button>
+
             </form>
           </div>
         </div>

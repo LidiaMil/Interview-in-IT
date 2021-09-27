@@ -1,6 +1,6 @@
-import { SET_USER, SET_USER_DATA, SET_IMG } from '../types'
+import { SET_COMMENTUSER, SET_USER_DATA, SET_IMG } from '../types'
 
-export const oneUserReducer = (state = [], action) => {
+export const commentUserReducer = (state = [], action) => {
   const { type, payload } = action
 
   switch (type) {
@@ -12,9 +12,9 @@ export const oneUserReducer = (state = [], action) => {
       const { img } = payload
       return {...state, photo: img} 
     }
-    case  SET_USER: {
-      const { oneUser } = payload
-      return oneUser
+    case  SET_COMMENTUSER: {
+      const { commentUser } = payload
+      return commentUser
     }
 
     default: {

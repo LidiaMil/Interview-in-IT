@@ -42,6 +42,7 @@ function Right(){
 
 
   console.log(organization)
+
   return (
     <>
     <h3>Организации</h3>

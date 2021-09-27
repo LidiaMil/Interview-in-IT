@@ -20,9 +20,13 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
   }
+
+  .user-name {
+    margin-right: 10px;
+  }
   
   .leftTop {
-    padding: 10px;
+    padding: 0 10px;
     flex-shrink: 0;
   }
   .leftDivs {
@@ -91,10 +95,11 @@ html {
 
 
 body {
- background-color: var(--body-bg-color);
+//  background-color: var(--body-bg-color);
  font-family: var(--body-font);
  font-size: 15px;
  color: var(--body-color);
+ background-color: #fafafb;
 }
 
 .dark-light svg {
@@ -204,12 +209,20 @@ body {
  }
 }
 .user-profile {
- width: 32px;
- height: 32px;
+ width: 32px !important;
+ height: 32px !important;
  border-radius: 50%;
- object-fit: cover;
  margin-right: 10px;
+ overflow: hidden;
+ border: 1px solid var(--active-light-color);
+ 
+ img {
+   object-fit: cover;
+  width: 100%;
+  height: 100%;
+ }
 }
+
 
 .wrapper {
  width: 100%;
@@ -318,9 +331,10 @@ body {
 }
 
 .main-container {
- display: flex;
+//  display: flex;
  flex-grow: 1;
  padding: 30px 40px;
+ width: 100%;
 }
 
 .search-type {
@@ -916,12 +930,12 @@ html {
  -webkit-font-smoothing: antialiased;
 }
 
-body {
- background-color: var(--body-bg-color);
- font-family: var(--body-font);
- font-size: 15px;
- color: var(--body-color);
-}
+// body {
+//  background-color: var(--body-bg-color);
+//  font-family: var(--body-font);
+//  font-size: 15px;
+//  color: var(--body-color);
+// }
 
 .dark-light svg {
  margin-right: 8px;
@@ -963,7 +977,7 @@ body {
 // height: 100vh;
  margin: 0 auto;
   // overflow: hidden;
- background-color: var(--theme-bg-color);
+
 }
 
 .header {
@@ -1120,12 +1134,6 @@ body {
  &:last-child {
   left: 185px;
  }
-}
-
-.main-container {
- display: flex;
- flex-grow: 1;
- padding-top: 30px;
 }
 
 .search-type {
@@ -1298,6 +1306,7 @@ body {
 
  .job-card-header {
    margin-right: 20px;
+   flex-shrink: 0;
  }
 
  .job-name {
@@ -1675,6 +1684,9 @@ body {
   display: none;
  }
 }
+.job-content {
+  flex-grow: 1;
+}
 
 .avatar {
   border: 1px solid var(--active-light-color);
@@ -1683,6 +1695,14 @@ body {
   height: 100px;
   border-radius: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  svg {
+    width: 60%;
+  }
 
   img {
     width: 100%;
@@ -1745,28 +1765,34 @@ body {
 	margin: -150px 0 0 -150px;
 	width:300px;
 	height:300px;
-}
-.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
-input { 
-	width: 100%; 
-	margin-bottom: 10px; 
-	background: rgba(0,0,0,0.3);
-	border: none;
-	outline: none;
-	padding: 10px;
-	font-size: 13px;
-	color: #fff;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-	border: 1px solid rgba(0,0,0,0.3);
-	border-radius: 4px;
-	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-	-webkit-transition: box-shadow .5s ease;
-	-moz-transition: box-shadow .5s ease;
-	-o-transition: box-shadow .5s ease;
-	-ms-transition: box-shadow .5s ease;
-	transition: box-shadow .5s ease;
+  input {
+    width: 100%;
+    height: 34px;
+    margin-bottom: 10px;
+  }
 }
+.login h1 { color: #000; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+
+// input { 
+// 	width: 100%; 
+// 	margin-bottom: 10px; 
+// 	background: rgba(0,0,0,0.3);
+// 	border: none;
+// 	outline: none;
+// 	padding: 10px;
+// 	font-size: 13px;
+// 	color: #fff;
+// 	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+// 	border: 1px solid rgba(0,0,0,0.3);
+// 	border-radius: 4px;
+// 	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+// 	-webkit-transition: box-shadow .5s ease;
+// 	-moz-transition: box-shadow .5s ease;
+// 	-o-transition: box-shadow .5s ease;
+// 	-ms-transition: box-shadow .5s ease;
+// 	transition: box-shadow .5s ease;
+// }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
 
@@ -1785,6 +1811,22 @@ background-color: blue;
 .filterForm form{
   position:relative;
   display: flex;
+  align-items: flex-end;
+
+  select {
+    height: 34px;
+  }
+
+  h4 {
+    margin-bottom: 10px;
+  }
+  div {
+    margin-right: 10px;
+  }
+
+  .card-buttons:last-child {
+    margin: 0;
+  }
   }
 
   .formInput{
@@ -1799,23 +1841,34 @@ background-color: blue;
   #fruits{
     border: 1px solid #ccc;
     display:block;
-    height:30px;
+    height:34px;
     border-radius:3px;
     width:100px;
     padding:3px;
     width: 175px;
   }
 
+
   .category-list {
     list-style: none;
   }
 
+  .rating-block {
+    color: inherit;
+    display: flex;
+
+
+    span:last-child {
+      margin-top: 3px;
+    }
+    }
+
   .shadow {
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05) !important;
   }
 
   .border-radius {
-    border-radius: 5px;
+    border-radius: 5px !important;
   }
   .purchase__button { border: none; outline: none !important; background-color: #f0f0f0; }
 
@@ -1863,6 +1916,11 @@ background-color: blue;
     width: 500px;
     background-color: #fff;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .profile-form.vue-form {
+    margin: 0;
+    margin-bottom: 40px;
   }
   .vue-form fieldset {
     margin: 24px 0 0 0;
@@ -2126,3 +2184,39 @@ background-color: blue;
     }
   }
   
+  .classStar {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+ 
+}
+  .purchase__button { border: none; outline: none !important; background-color: #F0F0F0; }
+
+  .questionCard {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    text-align: left;
+    border-radius: 5px; /* 5px rounded corners */
+    vertical-align: middle;
+}
+
+.questionCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+  .purchase__button { border: none; outline: none !important; background-color: #f0f0f0; }
+
+  .companyImg {
+    width: 50%;
+    height: 50%;
+    margin-left: 20%;
+  }
+
+  img.default {
+    object-fit: unset;
+    width: 60%;
+    height: auto;
+    margin: auto;
+    display: block;
+    margin-top: 20%;
+  }

@@ -13,7 +13,7 @@ import { getOneQuestion } from '../../redux/actions/oneQuest.action'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { useCallback } from 'react'
-import { getUser } from '../../redux/actions/user.action'
+import { getCommentUser } from '../../redux/actions/user.action'
 import {deleteComment} from '../../redux/actions/comment.action'
 
 const useStyles = makeStyles({
@@ -28,16 +28,16 @@ export default function ImgMediaCard(Comment) {
   console.log("gsktg",idUser)
   const dispatch = useDispatch()
   let post=useParams()
-  const oneUser = useSelector((state) => state.oneUser)
-  console.log(oneUser)
+  const oneUser = useSelector((state) => state.commentUser)
 
   useEffect(() => {
-    dispatch(getUser(Comment.user_id))
+    dispatch(getCommentUser(Comment.user_id))
   }, [])
 
-  if(idUser==Comment.user_id){
-    setThisUser(true)
-  }
+  // if(idUser==Comment.user_id){
+  //   setThisUser(true)
+  // }
+
   const handleDelete = (id) => {
     console.log(post.id,id)
     dispatch(deleteComment(post.id,id))
@@ -47,14 +47,14 @@ export default function ImgMediaCard(Comment) {
      <div className="job-card shadow border-radius">
 
         <div className="job-main">
-          <div className="job-card-header">
+          <div className="job-card-header avatar">
             {oneUser.photo ?
                <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
                        alt={oneUser.firstName}
                        src={oneUser.photo}
                />
               :
-              <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar" />
+              <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar"/>
             }
           </div>
           <div className="job-content">
