@@ -361,6 +361,7 @@ router.get('/comment/:id', async (req, res) => {
 
 router.patch('/comment/:id', async (req, res) => {
   let thisId = req.params.id
+
   // console.log("id",thisId )
   const oneQuestions = await Question.findAll({ where: { interview_id: thisId }})
   // console.log(oneQuestions.length)
@@ -377,22 +378,28 @@ router.patch('/comment/:id', async (req, res) => {
   res.json(mas);
 })
 
-router.delete("/comment/:id", (req, res) => {
+router.delete("/comment/:id/:post", async (req, res) => {
   const id = req.params.id;
-  console.log(id)
-  // const commentId = req.params.commentid;
-  // const result = list.filter(list => list.id == id);
-  // result[0].comment.map((i,index)=>{
-  //   Number(commentId)=== result[0].comment[index].id ? result[0].comment.splice(index, 1) : false
-  // })
-  // return res.json(result[0].comment);
+  let post=req.params.post
+  console.log("------",id)
+  await Comment.destroy({ where: { id: Number(id) } })
+  const oneQuestions = await Comment.findAll(
+    {
+      where:{
+        question_id: post
+      }
+    });
+  console.log("----",oneQuestions);
+  return res.json(oneQuestions);
 });
 
-router.post("/comment/:id", async (req, res) => {
+router.post("/comment/:id/:idUser", async (req, res) => {
   const id = req.params.id
+  const user = req.params.idUser
+  console.log(user)
   const { text } = req.body;
   try {
-    const newComment = await Comment.create({ user_id: 1, question_id: id, text: text })
+    const newComment = await Comment.create({ user_id: user, question_id: id, text: text })
     return res.json(newComment);
   } catch (err) {
     console.log(err);

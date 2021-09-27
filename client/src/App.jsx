@@ -71,7 +71,8 @@ function App() {
               <Interview />
             </Route>
             <Route exact path="/question/:id">
-              <More />
+            {isAuthenticated ?  <More /> : <Login />}
+             
             </Route>
             <Route exact path="/newcomment/:id">
               <NewInterview />

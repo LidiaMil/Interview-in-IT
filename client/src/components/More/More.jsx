@@ -23,6 +23,7 @@ export default function ImgMediadiv() {
   const postId = useParams()
   // console.log("post ",postId)
   const dispatch = useDispatch()
+  const idUser = Number(localStorage.getItem('user_id'))
 
 
   const comments = useSelector((state) => state.comments)
@@ -46,6 +47,7 @@ export default function ImgMediadiv() {
     event.preventDefault()
     dispatch(addComment(
       postId.id,
+      idUser,
       {
         text: comments.text
       }))

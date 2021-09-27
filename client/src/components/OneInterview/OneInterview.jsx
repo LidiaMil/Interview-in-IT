@@ -42,7 +42,6 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
             :
             <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar" className="avatar" />
           }
-          {/* <button className="search-buttons " onClick={() => handleFavorite(id)} type="button"> {favorite ? '⭐' : '☆'}</button> */}
         </div>
 
 

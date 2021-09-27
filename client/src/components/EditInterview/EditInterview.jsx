@@ -11,14 +11,13 @@ import {
 
 export default function EditInterview({ id,  data, name, description, level, questions, categorey, organization}) {
   const dispatch = useDispatch()
-// console.log("===__",id);
 
   function deleteInterview() {
     dispatch(deleteMyInterview(id))
   }
 
   function getUsersInterview(){
-    // dispatch(editMyInterview(id))    
+    dispatch(editMyInterview(id))    
   }
 
   return (

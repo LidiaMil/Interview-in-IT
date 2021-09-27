@@ -19,11 +19,6 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        categorey: "Data Analyst",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
         categorey: "DevOps Engineer",
         createdAt: new Date(),
         updatedAt: new Date()

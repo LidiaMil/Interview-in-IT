@@ -12,8 +12,8 @@ export const setComment = (comments)=>({
 })
 
 //ADD COMMENT
-export const addComment = (postId,newCom) => async (dispatch) => {
-  const response = await axios.post(`http://localhost:3000/interview/comment/${postId}`,newCom)
+export const addComment = (postId,idUser,newCom) => async (dispatch) => {
+  const response = await axios.post(`http://localhost:3000/interview/comment/${postId}/${idUser}`,newCom)
   console.log(response.data)
   dispatch(setAddComment(response.data))
 }
@@ -23,13 +23,14 @@ export const setAddComment = (newComment)=> ({
 })
 
 //DELETE COMMENT
-export const deleteComment = (id) => async (dispatch) => {
-  const response = await axios.delete(`http://localhost:3000/interview/comment/${id}`)
+export const deleteComment = (post,id) => async (dispatch) => {
+  const response = await axios.delete(`http://localhost:3000/interview/comment/${id}/${post}`)
+  console.log(response.data,"+-+-")
   dispatch(setdeleteComment(response.data))
 }
-export const setdeleteComment = (updatedArr)=> ({
+export const setdeleteComment = (id)=> ({
   type:DEL_COMMENT,
-  payload: updatedArr,
+  payload: id,
 })
 
 //EDIT COMMENT

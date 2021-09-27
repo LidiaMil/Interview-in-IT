@@ -12,7 +12,7 @@ module.exports = {
       },
       {
         organization_id: 1,
-        interview_id: 1,
+        interview_id: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       },

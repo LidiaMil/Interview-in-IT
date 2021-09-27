@@ -82,15 +82,15 @@ export const delInterview = (id) => ({
 
 
 
-// export const editMyInterview = (id) => (dispatch) => {
-//   fetch(`http://localhost:3000/edit/datainterview/${id}`)
-//     .then(result => console.log(result))
-//     .then(data=>dispatch(editInterview(data)))
+export const editMyInterview = (id) => (dispatch) => {
+  fetch(`http://localhost:3000/edit/datainterview/${id}`)
+    .then(result => console.log(result))
+    .then(data=>dispatch(editInterview(data)))
 
-// }
-// export const editInterview = (data) => ({
-//   type: GET_MY_INTERVIEW_FOR_FORM,
-//   payload: data
-// })
+}
+export const editInterview = (data) => ({
+  type: GET_MY_INTERVIEW_FOR_FORM,
+  payload: data
+})
 
 

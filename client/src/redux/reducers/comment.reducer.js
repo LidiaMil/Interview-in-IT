@@ -16,7 +16,7 @@ export const commentReducer = (state = [], action) => {
     }
 
     case DEL_COMMENT: {
-      return payload
+       return payload
     }
 
     case EDIT_COMMENT: {

@@ -75,6 +75,8 @@ function Profile() {
     setFavorite(!favorite)
   }
 
+  console.log(myInterviews)
+   
   function getMyPosts() {
     if (myInterviews.length) {
       dispatch(clearMyInterviews())

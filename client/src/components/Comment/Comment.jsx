@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { useCallback } from 'react'
 import { getUser } from '../../redux/actions/user.action'
+import {deleteComment} from '../../redux/actions/comment.action'
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 400,
@@ -21,47 +23,27 @@ const useStyles = makeStyles({
 });
 
 export default function ImgMediaCard(Comment) {
+  const idUser = Number(localStorage.getItem('user_id'))
+  const [thisUser,setThisUser]=useState(false)
+  console.log("gsktg",idUser)
   const dispatch = useDispatch()
+  let post=useParams()
   const oneUser = useSelector((state) => state.oneUser)
   console.log(oneUser)
+
   useEffect(() => {
     dispatch(getUser(Comment.user_id))
   }, [])
 
-  const handleDelete = (id) => {
-    console.log(id)
-
+  if(idUser==Comment.user_id){
+    setThisUser(true)
   }
+  const handleDelete = (id) => {
+    console.log(post.id,id)
+    dispatch(deleteComment(post.id,id))
+  }
+
   return (
-    // <div >
-
-
-    //   <div item>
-    //     <div>
-    //       <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
-    //         alt={oneUser.firstName}
-    //         src={oneUser.photo}
-    //       />
-    //     </div>
-    //   </div>
-
-    //   <div item xs={{ margin: '10px' }} sm container>
-    //     <div item xs container direction="column" spacing={2}>
-    //       <div item xs>
-    //         <div gutterBottom variant="subtitle1" component="div">
-    //           {oneUser.firstName}
-    //         </div>
-    //         <div variant="body2" gutterBottom>
-    //           {Comment.text}
-    //         </div>
-    //         <div variant="body2" gutterBottom>
-    //           <button onClick={() => handleDelete(Comment.id)}>Удалить</button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    // </div>
      <div className="job-card shadow border-radius">
 
         <div className="job-main">
@@ -83,9 +65,13 @@ export default function ImgMediaCard(Comment) {
              {Comment.text}     
               </div>
           </div>
+          {thisUser ? 
         <div variant="body2" gutterBottom>
               <button onClick={() => handleDelete(Comment.id)}>Удалить</button>
         </div>
+        :
+        <div></div>
+          }
         </div>
       </div>
 

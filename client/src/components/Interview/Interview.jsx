@@ -48,9 +48,6 @@ function Question() {
       <div className="form-top">
         <h3>Собеседования</h3>
         <div className="filterForm">
-          {/* <label for="site-search">Search the site:</label>
-      <input className="formInput" type="text" onkeyup="filter();" placeholder="Поиск по сайту"/>
-      <button>Поиск по сайту</button> */}
           <div >
             <form onSubmit={handleSubmit}>
               <div>
