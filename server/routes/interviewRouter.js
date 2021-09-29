@@ -313,6 +313,7 @@ router.get('/user/:id', async (req, res) => {
   res.json(oneQuestions);
 })
 
+
 router.get('/question/:id', async (req, res) => {
   let thisId = req.params.id
   console.log(thisId)
@@ -334,6 +335,24 @@ router.get('/question/:id', async (req, res) => {
       ]
     });
   console.log("------",oneQuestions.Language);
+  res.json(oneQuestions);
+})
+
+router.get('/comment/info/:id', async (req, res) => {
+  let thisId = req.params.id
+  
+  const oneQuestions = await Comment.findAll(
+    {
+      where: {
+        question_id: thisId
+      },
+      include:[
+        {
+          model:User,
+        }
+      ]
+    });
+    console.log('++');
   res.json(oneQuestions);
 })
 
@@ -382,7 +401,6 @@ router.patch('/comment/:id', async (req, res) => {
 router.delete("/comment/:id/:post", async (req, res) => {
   const id = req.params.id;
   let post=req.params.post
-  console.log("------",id)
   await Comment.destroy({ where: { id: Number(id) } })
   const oneQuestions = await Comment.findAll(
     {
@@ -390,7 +408,6 @@ router.delete("/comment/:id/:post", async (req, res) => {
         question_id: post
       }
     });
-  console.log("----",oneQuestions);
   return res.json(oneQuestions);
 });
 
@@ -398,10 +415,22 @@ router.post("/comment/:id/:idUser", async (req, res) => {
   const id = req.params.id
   const user = req.params.idUser
   console.log(user)
-  const { text } = req.body;
+  const { text,Users } = req.body;
   try {
-    const newComment = await Comment.create({ user_id: user, question_id: id, text: text })
-    return res.json(newComment);
+    const newComment = await Comment.create({ user_id: Users.id, question_id: id, text: text})
+    const oneQuestions = await Comment.findOne(
+      {
+        where: {
+          id: newComment.id
+        },
+        include:[
+          {
+            model:User,
+          }
+        ]
+      });
+
+    return res.json( oneQuestions);
   } catch (err) {
     console.log(err);
   }

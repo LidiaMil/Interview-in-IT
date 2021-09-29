@@ -17,6 +17,7 @@ import { dataInterviewFormReducer } from "./dataInterviewForm.reducer"
 import {commentCountReducer} from './countComment.reducer'
 import {filterReducer} from './filter.reducer'
 import {commentUserReducer} from './userComment.reducer'
+import {commentInfoReducer} from './commentInfo.reducer'
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -38,5 +39,6 @@ export const reducer = combineReducers({
   dataInterviewForm: dataInterviewFormReducer,
   countComment:commentCountReducer,
   filter:filterReducer,
-  commentUser:commentUserReducer 
+  commentUser:commentUserReducer ,
+  commentInfo:commentInfoReducer
 })

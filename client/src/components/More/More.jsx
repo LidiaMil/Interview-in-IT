@@ -28,7 +28,8 @@ export default function ImgMediadiv() {
 
   const comments = useSelector((state) => state.comments)
   const oneQuestion = useSelector((state) => state.oneQuestion)
-
+  const oneUser = useSelector((state) => state.oneUser)
+  console.log(oneUser)
 
   useEffect(() => {
     dispatch(getOneQuestion(postId.id))
@@ -49,11 +50,14 @@ export default function ImgMediadiv() {
       postId.id,
       idUser,
       {
-        text: comments.text
+        text: comments.text,
+        Users: oneUser
       }))
     setNewComment(null);
   }
+
   const textAdd = (event) => {
+    
     comments.text = event.target.value
   }
 
@@ -93,7 +97,7 @@ export default function ImgMediadiv() {
 
     <div className={classes.root}>
       <div>
-        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
+        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} index={index}/></div>)}
       </div>
     </div>
     </div>

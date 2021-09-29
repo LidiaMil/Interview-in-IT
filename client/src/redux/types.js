@@ -4,7 +4,7 @@ export const SET_RAT = 'SET_RAT'
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ORGINT = 'SET_ORGINT'
 export const SET_COMMENTUSER='SET_COMMENTUSER'
-
+export const SET_COMMENTINFO='SET_COMMENTINFO'
 
 export const SET_QUESTION = 'SET_QUESTION'
 export const SET_ONEQUEST='SET_ONEQUEST'

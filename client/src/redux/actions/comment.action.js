@@ -1,10 +1,12 @@
-import { ADD_COMMENT,SET_COMMENT,DEL_COMMENT,EDIT_COMMENT, COUNT_COMMENT} from '../types'
+import { ADD_COMMENT,SET_COMMENT,DEL_COMMENT,EDIT_COMMENT, COUNT_COMMENT, SET_COMMENTINFO} from '../types'
 import axios from "axios";
 
 //GET COMMENT
 export const getComment = (postId) => async (dispatch) => {
-  const response = await axios.get(`http://localhost:3000/interview/comment/${postId}`)
-  dispatch(setComment(response.data.Comments))
+  // const response = await axios.get(`http://localhost:3000/interview/comment/${postId}`)
+  const response = await axios.get(`http://localhost:3000/interview/comment/info/${postId}`)
+
+  dispatch(setComment(response.data))
 }
 export const setComment = (comments)=>({
   type:SET_COMMENT,
@@ -51,4 +53,15 @@ export const countCommentQuestion = (postId) => async (dispatch) => {
 export const setcountCommentQuestion = (countComment)=> ({
   type:COUNT_COMMENT,
   payload: {countComment},
+})
+
+//INFO COMMENT
+export const commentInfoAction = (id) => async (dispatch) => {
+  const response = await axios.get( `http://localhost:3000/interview/comment/info/${id}`)
+  console.log("response.data",response.data)
+  dispatch(setcommentInfo(response.data))
+}
+export const setcommentInfo = (commentInfo)=> ({
+  type:SET_COMMENTINFO,
+  payload: {commentInfo},
 })

@@ -19,5 +19,6 @@ export const initialState = {
   myInterviews:[], //список собеседований пользователя
   dataInterviewForm:{},
   filter:[],
-  countComment:[]
+  countComment:[],
+  commentInfo:[]
 }

@@ -15,31 +15,26 @@ import { useParams } from "react-router-dom"
 import { useCallback } from 'react'
 import { getCommentUser } from '../../redux/actions/user.action'
 import {deleteComment} from '../../redux/actions/comment.action'
-
+import {commentInfoAction} from '../../redux/actions/comment.action'
 const useStyles = makeStyles({
   root: {
     maxWidth: 400,
   },
 });
 
-export default function ImgMediaCard(Comment) {
+export default function ImgMediaCard(Comment,index) {
+
   const idUser = Number(localStorage.getItem('user_id'))
   const [thisUser,setThisUser]=useState(false)
-  console.log("gsktg",idUser)
+  const oneUser = useSelector((state) => state.oneUser)
   const dispatch = useDispatch()
   let post=useParams()
-  const oneUser = useSelector((state) => state.commentUser)
-
-  useEffect(() => {
-    dispatch(getCommentUser(Comment.user_id))
-  }, [])
-
-  // if(idUser==Comment.user_id){
+  
+  // if(oneUser.id===Comment.user_id){
   //   setThisUser(true)
   // }
 
   const handleDelete = (id) => {
-    console.log(post.id,id)
     dispatch(deleteComment(post.id,id))
   }
 
@@ -48,10 +43,10 @@ export default function ImgMediaCard(Comment) {
 
         <div className="job-main">
           <div className="job-card-header avatar">
-            {oneUser.photo ?
+            {Comment.User.photo ?
                <img style={{ width: "100px", height: "100px", borderRadius: "50%" }}
-                       alt={oneUser.firstName}
-                       src={oneUser.photo}
+                       alt={Comment.User.firstName}
+                       src={Comment.User.photo}
                />
               :
               <img src="https://avatarko.ru/img/kartinka/1/panda_Pooh.jpg" alt="Avatar"/>
@@ -59,7 +54,7 @@ export default function ImgMediaCard(Comment) {
           </div>
           <div className="job-content">
             <div className="job-name">
-              <div className="job-card-title">{oneUser.firstName}</div>  
+              <div className="job-card-title">{Comment.User.firstName}</div>  
             </div>
             <div className="job-card-subtitle">
              {Comment.text}     
