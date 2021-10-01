@@ -6,111 +6,96 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
 import { useHistory } from "react-router-dom";
-
 import { useState, useEffect } from 'react';
-
 import Main from './components/Main/Main';
+import PageInterview from './components/PageInterview/PageInterview';
 import Header from './components/Header/Header';
 import NewInterview from './components/NewInterview/NewInterview';
 import Organization from './components/Organization/Organization'
 import Profile from './components/Profile/Profile'
 import Question from './components/Question/Question'
-import {Upleft} from './components/mainComponent/Upleft'
-import {Center} from './components/mainComponent/Center'
-import {Downleft} from './components/mainComponent/Downleft'
-import {Right} from './components/mainComponent/Right'
+import { Upleft } from './components/mainComponent/Upleft'
+import { Center } from './components/mainComponent/Center'
+import { Downleft } from './components/mainComponent/Downleft'
+import { Right } from './components/mainComponent/Right'
 import Interview from './components/Interview/Interview'
 import More from './components/More/More'
 import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
-
+import Registry from './components/Registry/Registry'
 //авторицация
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
 import Container from '@mui/material/Container';
-
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
-
-
-
+// const preloadedState = window.localStorage.getItem('in_user') || '{"isAuthenticated": false}'
+// console.log('amahere', preloadedState);
 function App() {
-  
-const dispatch = useDispatch()
-let history = useHistory()
-
-console.log(history);
-
-useEffect(()=>{
-    if(window.localStorage.getItem('state') === 'true'){
-      console.log('привет из сессии', window.localStorage.getItem('state'));
+  const dispatch = useDispatch()
+  const isAuthenticated = useSelector(state => state.isAuntificated)
+  useEffect(() => {
+    if (window.localStorage.getItem('user_id')) {
+      //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
+      //добавить в локал стораж ид
       dispatch(setAuth())
-  }
-}, [])
+    }
+  }, [])
 
-
-
-
-
-
-
-
-
+  // const isAuthenticated = true
+  // console.log(isAuthenticated)
 
   return (
-
-    
     <Router>
-      <Header />
+      <div className="job">
+        <Header />
 
-      <div>
-        <Switch>
-          
-          <Route exact path="/">
-            <Main />
-          </Route>
+        <div className="main-container">
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <Route exact path="/interview/:id">
+              <PageInterview />
+            </Route>
+            <Route exact path="/profile">
+              {isAuthenticated ? <Profile /> : <Login />}
+            </Route>
+            <Route exact path="/organization">
+              <Organization />
+            </Route>
+            <Route exact path="/organization/:id">
+              <OrganizationInterview />
+            </Route>
+            <Route exact path="/question">
+              <Interview />
+            </Route>
+            <Route exact path="/question/:id">
+            {!isAuthenticated ? <Login /> : <More />}
 
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
+              
+            </Route>
+            <Route exact path="/newcomment/:id">
+              <NewInterview />
+            </Route>
+            <Route exact path="/newcomment">
+              {!isAuthenticated ? <Login /> : <NewInterview />}
 
-          <Route exact path="/organization">
-            <Organization />
-          </Route>
 
-          <Route exact path="/organization/:id">
-            <OrganizationInterview />
-          </Route>
-
-          <Route exact path="/question">
-            <Interview />
-          </Route>
-          <Route exact path="/question/:id">
-            <More />
-          </Route>
-
-          <Route exact path="/newcomment">
-            <NewInterview />
-          </Route>
-    
-          <Route path='/login'>
+            </Route>
+            <Route path='/login'>
               <Login />
-           </Route>
-           <Route path='/logout'>
+            </Route>
+            <Route path='/logout'>
               <Logout />
-           </Route>
-
-
-          <Route exact path="/main">
-            <Main />
-          </Route>
-
-
-        </Switch>
+            </Route>
+            <Route path='/registry'>
+              <Registry />
+            </Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   );
 }
-
 export default App;

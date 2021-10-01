@@ -14,7 +14,7 @@
 //   return (
 //     <>
 // <h4>Список компаний</h4>
-//   <ul class="category-list">
+//   <ul className="category-list">
 //      {neworganiz && neworganiz.map((item) =>  <li><a href="">{item.title}</a><span>5</span></li> )}
 //   </ul>
 
@@ -42,13 +42,18 @@ function Right(){
 
 
   console.log(organization)
+
   return (
     <>
-    <h1>Organization</h1>
+    <h3>Организации</h3>
     <div>
+      
     {organization && organization.map((item, index) => <div key={item.id}><Cards {...item} /></div>)}
     </div>
     </>
+
+
+ 
   )
 }
 export default Right

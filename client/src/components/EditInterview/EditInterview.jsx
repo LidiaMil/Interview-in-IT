@@ -2,17 +2,23 @@
 import * as React from 'react';
 import { Button, Grid, Typography, Paper } from '@material-ui/core';
 import Question from '../Question/Question';
+import { deleteMyInterview, editMyInterview } from '../../redux/actions/editProfile.action';
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  Link
+} from "react-router-dom";
 
-export default function EditInterview({ id, text, data, name, description, level, questions, categorey, organization }) {
 
-  function editInterview() {
-    fetch(`http://localhost:3000/edit/editinterview/${id}`)
-  }
+export default function EditInterview({ id,  data, name, description, level, questions, categorey, organization}) {
+  const dispatch = useDispatch()
 
   function deleteInterview() {
-    fetch(`http://localhost:3000/edit/delinterview/${id}`)
+    dispatch(deleteMyInterview(id))
   }
 
+  function getUsersInterview(){
+    dispatch(editMyInterview(id))    
+  }
 
   return (
     <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
@@ -33,12 +39,13 @@ export default function EditInterview({ id, text, data, name, description, level
                 {description}
               </Typography>
               <Typography gutterBottom variant="subtitle1" component="div">
-                {questions && questions.map((item, index) => <div className="col-4" key={item.id}>{index + 1}: <Question {...item} /></div>)}
+                {questions && questions.map((item, index) => <div className="col-4" key={item.id}><Question {...item} index={index}/></div>)}
               </Typography>
             </Grid>
             <Grid item>
               <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                <Button onClick={editInterview} variant="outlined"> Редактировать</Button>
+                <Button variant="outlined" onClick={getUsersInterview}> <Link className="nav-link" to={`/newcomment/${id}`}>Редактировать</Link></Button>
+                
                 <Button onClick={deleteInterview} variant="outlined"> Удалить</Button>
               </Typography>
             </Grid>
@@ -53,4 +60,3 @@ export default function EditInterview({ id, text, data, name, description, level
     </Paper>
   );
 }
-

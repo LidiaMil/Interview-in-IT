@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const {Question,User} = require('../db/models');
 
-//переделал авторизацию через node-localstorage(nodeLocalStorage)
-let LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
+// //переделал авторизацию через node-localstorage(nodeLocalStorage)
+//   let LocalStorage = require('node-localstorage').LocalStorage;
+//   localStorage = new LocalStorage('./scratch');
 
 
 
@@ -12,28 +12,26 @@ localStorage = new LocalStorage('./scratch');
 
 
 
-
-const db = [{
-  email: 'a@a.a',
-  password: '123'
-}]
+// const db = [{
+//   email: 'a@a.a',
+//   password: '123'
+// }]
 
 
 
 
 //для авторизации
-router.post("/login", (req, res) => {
- // console.log(req.body);
+router.post("/login", async (req, res) => {
+ console.log(req.body);
   const {email, password} = req.body
-  const user = db.find((user) => user.email === email && user.password === password)
-  console.log('fdfdvdfdfdf', user);
+  const user = await User.findOne({where: {email: email, parol: password}})
+  //const user = db.find((user) => user.email === email && user.password === password)
   if (user) {
-    console.log('testttt');
-    req.session.user = {email: user.email}
+    req.session.user = {id: user.id}
     console.log('сессия тут', req.session);
-    localStorage.setItem('in_user', user.email)
-    console.log('fgdfgdfgdf', localStorage.getItem('in_user'));
-    return res.status(200).end()
+    //localStorage.setItem('in_user', true)
+    //console.log('tttttt====>', localStorage.getItem('in_user'));
+    return res.json({id: user.id})
   }
   
   res.status(401).end()
@@ -53,7 +51,24 @@ router.get('/logout', (req, res) => {
   
   })
 
+  router.post('/registry', (req, res) => {
+    console.log(req.body);
+    const registry = User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      parol: req.body.password,
+      })
+      res.end()
+  })
 
+
+  router.post('/one_user', async (req, res) => {
+    //console.log('0000000', req.body.id);
+    const one_user = await User.findOne({where: {id: Number(req.body.id)}})
+    console.log(one_user);
+    res.send(one_user)
+    })
 
 
 

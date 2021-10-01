@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Interview, Categorey, Organization, Question } = require('../db/models');
+const { User, Interview, Categorey, Organization, Question, Language } = require('../db/models');
 
 const multer = require("multer");
 const storageConfig = multer.diskStorage({
@@ -24,7 +24,7 @@ router.post("/upload", function (req, res, next) {
         res.json({ message: err, });
       } else {
         await User.update({ firstName, photo }, { where: { id } })
-        const usersData = await User.findOne( { where: { id } })
+        const usersData = await User.findOne({ where: { id } })
         res.json(usersData)
         // res.status(200).end()
 
@@ -58,26 +58,31 @@ router.get('/getusersposts/:id', async (req, res) => {
         },
         {
           model: Question
-        }
-
+        },
+    
       ]
     })
   res.json(posts)
 })
 
 
-router.get('/editinterview/:id', async (req, res) => {
-  const id = Number(req.params.id)
+// router.get('/editinterview/:id', async (req, res) => {
+//   // const id = Number(req.params.id)
 
+// })
+
+router.delete('/interview/:id', async (req, res) => {
+  const { id } = req.params
+  // console.log("id----", id);
+  await Interview.destroy({ where: { id: Number(id) } })
+  return res.status(200)
 })
 
-router.get('/delinterview/:id', async (req, res) => {
-  const id = Number(req.params.id)
 
-})
-
-
-
+// router.get('/datainterview/:id', async (req, res) => {
+//   const { id } = req.params
+//   console.log("====>", +id);
+// })
 
 
 router.get('/:id', async (req, res) => {
@@ -88,5 +93,3 @@ router.get('/:id', async (req, res) => {
 
 
 module.exports = router
-
-

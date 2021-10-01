@@ -210,7 +210,7 @@
 
 25. Стилизация input для загрузки файлов
     <input id="file" type="file">
-    <label for="file"> press to add</label>
+    <label htmlFor="file"> press to add</label>
 
     input {
         display: none;

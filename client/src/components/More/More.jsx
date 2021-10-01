@@ -1,13 +1,7 @@
 import * as React from 'react';
-import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
+import { Button, styled, Grid, div, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -23,20 +17,24 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ImgMediaCard() {
+export default function ImgMediadiv() {
   const classes = useStyles();
   const [newComment, setNewComment] = useState(null);
   const postId = useParams()
   // console.log("post ",postId)
   const dispatch = useDispatch()
+  const idUser = Number(localStorage.getItem('user_id'))
+
 
   const comments = useSelector((state) => state.comments)
   const oneQuestion = useSelector((state) => state.oneQuestion)
-  // console.log(oneQuestion)
+  const oneUser = useSelector((state) => state.oneUser)
+  console.log(oneUser)
 
   useEffect(() => {
     dispatch(getOneQuestion(postId.id))
     dispatch(getComment(postId.id))
+    
   }, [])
 
   let arrLang = [];
@@ -50,49 +48,60 @@ export default function ImgMediaCard() {
     event.preventDefault()
     dispatch(addComment(
       postId.id,
+      idUser,
       {
-        text: comments.text
+        text: comments.text,
+        Users: oneUser
       }))
     setNewComment(null);
   }
+
   const textAdd = (event) => {
+    
     comments.text = event.target.value
   }
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {arrLang.join(' ')}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {oneQuestion.text}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <Typography variant="body2" color="textSecondary" component="p">
+    <>
+    <div className="job-card shadow border-radius">
+      <div className="job-main">
+        <div className="job-content">
+          <div gutterBottom variant="h5" component="h2">
+            Язык программирования: {arrLang.join(' ')}
+          </div>
+          <div variant="body2" color="textSecondary" component="p">
+            Вопрос: {oneQuestion.text}
+          </div>
+        </div>
+      </div>
+
+      <div>
+      <div variant="body2" color="textSecondary" component="p">
         {postId === newComment ? (
           <>
             <form onSubmit={handleSubmitAdd} >
               <div>
-                <TextField id="outlined-basic" label="text:" variant="outlined"  onChange={textAdd}/>
+              <label class="label" for="name">Твой комментарий:</label>
+                <input type="text" id="name" required="" v-model="name" onChange={textAdd}/>
+                <button type="submit" class="search-buttons card-buttons">Опубликовать</button>
               </div>
-              <Stack direction="row" spacing={2}>
-                <Button type="submit" variant="contained">Add</Button>
-              </Stack>
             </form>
           </>
         ) : (
-          <Stack direction="row" spacing={2}>
-            <Button onClick={() => setNewComment(postId)} variant="contained"> Add new comment</Button>
-          </Stack>
+          <div direction="row" spacing={2}>
+            <Button onClick={() => setNewComment(postId)} variant="contained"> Добавить комментарий</Button>
+          </div>
         )}
-      </Typography>
-      <CardActionArea>
-        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
-      </CardActionArea>
-    </Card>
+      </div>
+      </div>
+
+    <div className={classes.root}>
+      <div>
+        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} index={index}/></div>)}
+      </div>
+    </div>
+    </div>
+    </>
   );
 }
 

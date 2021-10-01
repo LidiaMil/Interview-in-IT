@@ -13,12 +13,11 @@ function Organization(){
   }, [])
 
 
-
   return (
     <>
     <h1>Organization</h1>
     <div>
-    {organization && organization.map((item, index) => <div key={item.id}><Cards {...item} /></div>)}
+   {organization && organization.map((item, index) =>  <div className="company" key={item.id}><Cards {...item} /></div> )}
     </div>
     </>
   )

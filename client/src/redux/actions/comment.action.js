@@ -1,10 +1,12 @@
-import { ADD_COMMENT,SET_COMMENT,DEL_COMMENT,EDIT_COMMENT} from '../types'
+import { ADD_COMMENT,SET_COMMENT,DEL_COMMENT,EDIT_COMMENT, COUNT_COMMENT, SET_COMMENTINFO} from '../types'
 import axios from "axios";
 
 //GET COMMENT
 export const getComment = (postId) => async (dispatch) => {
-  const response = await axios.get(`http://localhost:3000/interview/comment/${postId}`)
-  dispatch(setComment(response.data.Comments))
+  // const response = await axios.get(`http://localhost:3000/interview/comment/${postId}`)
+  const response = await axios.get(`http://localhost:3000/interview/comment/info/${postId}`)
+
+  dispatch(setComment(response.data))
 }
 export const setComment = (comments)=>({
   type:SET_COMMENT,
@@ -12,8 +14,8 @@ export const setComment = (comments)=>({
 })
 
 //ADD COMMENT
-export const addComment = (postId,newCom) => async (dispatch) => {
-  const response = await axios.post(`http://localhost:3000/interview/comment/${postId}`,newCom)
+export const addComment = (postId,idUser,newCom) => async (dispatch) => {
+  const response = await axios.post(`http://localhost:3000/interview/comment/${postId}/${idUser}`,newCom)
   console.log(response.data)
   dispatch(setAddComment(response.data))
 }
@@ -23,13 +25,14 @@ export const setAddComment = (newComment)=> ({
 })
 
 //DELETE COMMENT
-export const deleteComment = (postId,id) => async (dispatch) => {
-  const response = await axios.delete(`http://localhost:3000/interview/comment/${postId}/${id}`)
+export const deleteComment = (post,id) => async (dispatch) => {
+  const response = await axios.delete(`http://localhost:3000/interview/comment/${id}/${post}`)
+  console.log(response.data,"+-+-")
   dispatch(setdeleteComment(response.data))
 }
-export const setdeleteComment = (updatedArr)=> ({
+export const setdeleteComment = (id)=> ({
   type:DEL_COMMENT,
-  payload: updatedArr,
+  payload: id,
 })
 
 //EDIT COMMENT
@@ -40,4 +43,25 @@ export const editComment = (postId,id,editCom) => async (dispatch) => {
 export const seteditComment = (changedPost)=> ({
   type:EDIT_COMMENT,
   payload: {changedPost},
+})
+
+//COUNT COMMENT
+export const countCommentQuestion = (postId) => async (dispatch) => {
+  const response = await axios.patch( `http://localhost:3000/interview/comment/${postId}`)
+  dispatch(setcountCommentQuestion(response.data))
+}
+export const setcountCommentQuestion = (countComment)=> ({
+  type:COUNT_COMMENT,
+  payload: {countComment},
+})
+
+//INFO COMMENT
+export const commentInfoAction = (id) => async (dispatch) => {
+  const response = await axios.get( `http://localhost:3000/interview/comment/info/${id}`)
+  console.log("response.data",response.data)
+  dispatch(setcommentInfo(response.data))
+}
+export const setcommentInfo = (commentInfo)=> ({
+  type:SET_COMMENTINFO,
+  payload: {commentInfo},
 })
