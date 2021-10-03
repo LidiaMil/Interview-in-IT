@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Organization, Raiting, OrganizationQuestion, Question, Interview, User, Categorey } = require('../db/models')
-
+const {checkUser} = require('../middleware/isUser');
 
 router.get('/', async (req, res) => {
   const rating = await Organization.findAll({include: Raiting})
