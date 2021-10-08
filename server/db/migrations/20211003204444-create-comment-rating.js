@@ -1,12 +1,21 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('CommentRatings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      comment_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: { 
+            tableName: "Comments" 
+          },
+          key: "id"
+        },
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -17,21 +26,8 @@ module.exports = {
           key: "id"
         },
       },
-      question_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "Questions"
-          },
-          key: "id"
-        },
-        onDelete:'CASCADE'
-      },
-      text: {
-        type: Sequelize.TEXT
-      },
-      data: {
-        type: Sequelize.DATEONLY
+      count: {
+        type: Sequelize.DOUBLE
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable('CommentRatings');
   }
 };

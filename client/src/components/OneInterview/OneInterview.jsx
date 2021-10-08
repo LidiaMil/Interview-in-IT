@@ -72,10 +72,6 @@ export default function ComplexGrid({ id, data, name, description, level, Questi
 
       </div>
     </div>
-
-
-
-
   );
 }
 

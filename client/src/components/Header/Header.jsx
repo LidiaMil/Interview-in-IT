@@ -19,15 +19,10 @@ export default function Header() {
       </Link>
       <div className="header-menu">
 
-        {/* <Link className="active" to="/"  >Главная</Link>
-        <Link  className="active" to="/profile" >Профиль</Link>
-        <Link  className="active" to="/newcomment" >Создать</Link> */}
-        <a href="/" className="active" >Главная</a>
-        <a href="/profile" className="active" >Профиль</a>
-        <a href="/newcomment" className="active" >Создать</a>
-        {/* <button onClick={() => handleCreate(1)}>Главная</button>
-        <button onClick={() => handleCreate(2)}>Профиль</button>
-        <button onClick={() => handleCreate(3)}>Создать</button> */}
+        <Link to="/" className="active" >Главная</Link>
+        <Link to="/profile" className="active" >Профиль</Link>
+        <Link to="/newcomment" className="active" >Создать</Link>
+
       </div>
       {!isAuntificated &&
         <div className="forLogin">
@@ -37,14 +32,6 @@ export default function Header() {
       }
       {isAuntificated &&
         <div className="user-settings">
-          {/* <div className="dark-light">
-            <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
-          </div>
-          <div className="user-menu">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-square">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /></svg>
-          </div> */}
           <div className={`user-profile avatar`}>
 
             {oneUser?.photo ? <img src={oneUser?.photo} alt="" /> :

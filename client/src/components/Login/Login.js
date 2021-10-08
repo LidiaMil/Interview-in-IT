@@ -28,35 +28,16 @@ function Login(){
 
   async function handleSubmit(event){
     event.preventDefault()
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:3000/auth/login',
-    //   data: {
-    //     email,
-    //     password 
-    //   },
-    //       withCredentials: true
-    // })
-    // axios.post('http://localhost:3000/auth/login', {
-    //   email,
-    //     password 
-    // },{
-    //   withCredentials: true
-    // }
-    // )
     axios.post('http://localhost:3000/auth/login', {
       email,
       password
-  }
-  , {
+  }, {
       withCredentials: true,
       headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
   }}
   )
       .then((data) => {
-        //console.log('fdfdfdfd=====>', data);
         dispatch(setAuth())
-
         localStorage.setItem('user_id', data.data.id);
         history.push('/')
       }

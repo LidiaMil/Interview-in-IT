@@ -409,6 +409,7 @@ router.delete("/comment/:id/:post", async (req, res) => {
       }
     });
   return res.json(oneQuestions);
+  // return res.status(200)
 });
 
 router.post("/comment/:id/:idUser", async (req, res) => {

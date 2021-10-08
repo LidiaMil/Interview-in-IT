@@ -20,8 +20,8 @@ const useStyles = makeStyles({
 export default function ImgMediadiv() {
   const classes = useStyles();
   const [newComment, setNewComment] = useState(null);
+  const [delComment, setDelComment] = useState(false)
   const postId = useParams()
-  // console.log("post ",postId)
   const dispatch = useDispatch()
   const idUser = Number(localStorage.getItem('user_id'))
 
@@ -29,12 +29,13 @@ export default function ImgMediadiv() {
   const comments = useSelector((state) => state.comments)
   const oneQuestion = useSelector((state) => state.oneQuestion)
   const oneUser = useSelector((state) => state.oneUser)
-  console.log(oneUser)
 
   useEffect(() => {
     dispatch(getOneQuestion(postId.id))
+  }, [])
+
+  useEffect(() => {
     dispatch(getComment(postId.id))
-    
   }, [])
 
   let arrLang = [];
@@ -57,9 +58,10 @@ export default function ImgMediadiv() {
   }
 
   const textAdd = (event) => {
-    
     comments.text = event.target.value
   }
+
+  console.log(delComment)
 
   return (
     <>
@@ -79,12 +81,12 @@ export default function ImgMediadiv() {
       <div variant="body2" color="textSecondary" component="p">
         {postId === newComment ? (
           <>
-            <form onSubmit={handleSubmitAdd} >
+            <form  class="vue-form" onSubmit={handleSubmitAdd} >
               <div>
-              <label class="label" for="name">Твой комментарий:</label>
+                <label class="label" for="name">Твой комментарий:</label>
                 <input type="text" id="name" required="" v-model="name" onChange={textAdd}/>
-                <button type="submit" class="search-buttons card-buttons">Опубликовать</button>
               </div>
+                <button type="submit" class="search-buttons card-buttons">Опубликовать</button>
             </form>
           </>
         ) : (
@@ -97,7 +99,7 @@ export default function ImgMediadiv() {
 
     <div className={classes.root}>
       <div>
-        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} index={index}/></div>)}
+        {comments && comments.map((item, index) => <div className="col-4" key={item.id}><Comment {...item} /></div>)}
       </div>
     </div>
     </div>

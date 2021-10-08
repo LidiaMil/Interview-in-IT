@@ -12,8 +12,7 @@ export const myInterviewsReducer = (state = [], action) => {
     case CLEAR_MY_INTERVIEWS: {
       return payload
     }
-    case DELETE_MY_INTERVIEW: {
-      
+    case DELETE_MY_INTERVIEW: {      
       return state.filter(e => e.id !== payload)
     }
     default: {

@@ -30,9 +30,9 @@ export const deleteComment = (post,id) => async (dispatch) => {
   console.log(response.data,"+-+-")
   dispatch(setdeleteComment(response.data))
 }
-export const setdeleteComment = (id)=> ({
+export const setdeleteComment = (newMasComment)=> ({
   type:DEL_COMMENT,
-  payload: id,
+  payload: newMasComment,
 })
 
 //EDIT COMMENT
