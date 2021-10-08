@@ -21,8 +21,31 @@ router.get('/', async (req, res) => {
     ],
     order: [['id', 'DESC']]
   });
-  // console.log(questions)
+  console.log("questions-----------------------------------------")
   res.json(questions);
+});
+
+router.get('/this/:id', async (req, res) => {
+  let thisId = req.params.id
+  const question = await Interview.findOne({
+    include: [
+      {
+        model: User
+      },
+      {
+        model: Question
+      },
+      {
+        model: Categorey
+      },
+      {
+        model: Organization
+      },
+    ],
+    where: { id: thisId }
+  });
+  console.log("loooooooooool==============")
+  res.json(question);
 });
 
 router.post('/filter', async (req, res) => {
@@ -278,29 +301,6 @@ router.post("/new", async (req, res) => {
   }
 });
 
-
-router.get('/:id', async (req, res) => {
-  let thisId = req.params.id
-  const question = await Interview.findOne({
-    include: [
-      {
-        model: User
-      },
-      {
-        model: Question
-      },
-      {
-        model: Categorey
-      },
-      {
-        model: Organization
-      },
-    ],
-    where: { id: thisId }
-  });
-  // console.log(question)
-  res.json(question);
-});
 
 router.get('/user/:id', async (req, res) => {
   let thisId = req.params.id

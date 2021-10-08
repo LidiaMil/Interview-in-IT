@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { Button, styled, Grid, div, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@mui/material/TextField';
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { getOneQuestion } from '../../redux/actions/oneQuest.action'
 import { useDispatch, useSelector } from "react-redux";

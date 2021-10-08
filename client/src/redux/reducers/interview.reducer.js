@@ -8,11 +8,6 @@ export const interviewReducer = (state = [], action) => {
       const { question } = payload
       return  question 
     }
-    case SET_ONE: {
-      const {oneInterview}=payload
-      return oneInterview
-
-    }
     case ADD_INTERVIEW: {
       const { newInterview } = payload
       return [...state, newInterview]

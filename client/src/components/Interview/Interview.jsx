@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import OneInterview from "../OneInterview/OneInterview"
 import { useDispatch, useSelector } from "react-redux";
 import { getInterview } from '../../redux/actions/interview.action'
-import { styled, Grid, Typography, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { useState } from "react"
 import { getAllCategorey } from '../../redux/actions/categories.action';
 import { filterInterview } from '../../redux/actions/interview.action'
@@ -28,8 +27,6 @@ function Question() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //const input_data = Object.fromEntries(new FormData(event.target))
-    console.log(cat)
     dispatch(filterInterview(
       {
         categories: cat,
@@ -88,8 +85,8 @@ function Question() {
                 <div>Пока что интервью с такими критериями нет на нашем сайте</div>
               </div>}
           </div> :
-          <div className="job-cards">
-            {interview && interview.map((item, index) => <OneInterview key={item.id} {...item} />)}
+          interview && <div className="job-cards">
+            { interview.map((item, index) => <OneInterview key={item.id} {...item} />)}
           </div>}
       </div>
 
