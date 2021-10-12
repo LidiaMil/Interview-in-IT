@@ -7,21 +7,21 @@
  1.1  Заход через терминал под супер пользователем postgres <br />
  sudo su postgres psql или psql -d postgres  <br />
  1.2 Создаем пользователя  <br />
-  CREATE USER *имя пользователя* WITH password ' *пароль* '; <br />
+  CREATE USER admin WITH password 'qwerty'; <br />
  1.3 Создаем  базу данных <br />
-  CREATE DATABASE *имя базы данных* OWNER *имя владельца*; <br />
+  CREATE DATABASE final OWNER admin; <br />
  1.4 Даем привилегии пользователю данной БД  <br />
-  GRANT ALL privileges ON DATABASE *название базы данных* TO *имя пользователя*; <br />
+  GRANT ALL privileges ON DATABASE final TO admin; <br />
 
 3. делаем git clone + скопированный путь в терминале, где открыта нужная папка.
  
 4. В терминале открываем папку server и вводим команду npm i  - для того, чтобы все зависимости установились.
 
-5. Заполняем базу данных npx sequelize-cli db:migrate и sequelize-cli db:seed:all 
+5. Заполняем базу данных **npx sequelize-cli db:migrate** и **npx sequelize-cli db:seed:all**
 
-6. Запускаем сервер npm start
+6. Запускаем сервер **npm start**
 
-7. В терминале открываем папку client и вводим команду npm i - для того, чтобы все зависимости установились, а далее npm start В этот момент в браузере откроется наше приложение 
+7. В терминале открываем папку client и вводим команду **npm i** - для того, чтобы все зависимости установились, а далее **npm start** В этот момент в браузере откроется наше приложение 
 <img width="1417" alt="Снимок экрана 2021-10-12 в 22 27 32" src="https://user-images.githubusercontent.com/81895405/137017402-a1885ac7-1e6b-4fe9-adbf-28f8d0088ace.png">
 
 Данные о собеседованиях и организациях приходят из базы данных и записываются в redux
