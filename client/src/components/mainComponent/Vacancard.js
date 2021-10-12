@@ -18,7 +18,7 @@ export default function ActionAreaCard(vacanprom) {
 
         </div>
         <div className="job-overview-buttons">
-          <a href={vacanprom.vacanprom.url}>Перейти</a>
+          <a href={vacanprom.vacanprom.alternate_url} target="_blank">Перейти</a>
         </div>
       </div>
     </div>
