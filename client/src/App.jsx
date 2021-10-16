@@ -29,17 +29,17 @@ import Logout from './components/Logout/Logout'
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
+import {Auth} from '../../client/src/redux/actions/auth.action'
 // const preloadedState = window.localStorage.getItem('in_user') || '{"isAuthenticated": false}'
 // console.log('amahere', preloadedState);
 function App() {
   const dispatch = useDispatch()
-  const isAuthenticated = useSelector(state => state.isAuntificated)
+  const isAuthenticated = useSelector(state => state.user.isAuth)
   useEffect(() => {
-    if (window.localStorage.getItem('user_id')) {
+    // if (window.localStorage.getItem('user_id')) {
       //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
       //добавить в локал стораж ид
-      dispatch(setAuth())
-    }
+      dispatch(Auth())
   }, [])
 
   // const isAuthenticated = true
@@ -87,7 +87,7 @@ function App() {
             <Route path='/logout'>
               <Logout />
             </Route>
-            <Route path='/registry'>
+            <Route path='/registration'>
               <Registry />
             </Route>
           </Switch>

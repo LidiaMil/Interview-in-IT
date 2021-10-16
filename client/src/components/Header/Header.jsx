@@ -5,18 +5,25 @@ import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom"
 import axios from 'axios';
 import { useRadioGroup } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/reducers/userauth.reducer'
+
+
 export default function Header() {
-  const isAuthenticated = useSelector(state => state.isAuntificated)
-  const [one_user, setOneuser] = useState({})
-  useEffect( async ()=> {
-    const id = Number(localStorage.getItem('user_id'))
-   await axios.post('http://localhost:3000/auth/one_user', {id})
-    .then((response) => {setOneuser(response.data)
-    console.log(response.data);
+  const history = useHistory()
+  const isAuthenticated = useSelector(state => state.user.isAuth)
+  const currentUser = useSelector(state => state.user.currentUser)
+  const dispatch = useDispatch()
+  //const [one_user, setOneuser] = useState({})
+  // useEffect( async ()=> {
+  //   const id = Number(localStorage.getItem('user_id'))
+  //  await axios.post('http://localhost:3000/auth/one_user', {id})
+  //   .then((response) => {setOneuser(response.data)
+  //   console.log(response.data);
     
-    //const our_user = await User.findOne({where: {id:Number(id)}})
-    })
-  }, [])
+  //   //const our_user = await User.findOne({where: {id:Number(id)}})
+  //   })
+  // }, [])
   return (
     <div className="header shadow">
       <Link className="logo" to="/">
@@ -38,7 +45,7 @@ export default function Header() {
       {!isAuthenticated &&
         <div className="forLogin">
           <button color="inherit"><Link className="nav-link" to="/login">Логин</Link></button>
-          <button color="inherit"><Link className="nav-link" to="/registry">Регистрация</Link></button>
+          <button color="inherit"><Link className="nav-link" to="/registration">Регистрация</Link></button>
         </div>
       }
       {isAuthenticated &&
@@ -51,9 +58,13 @@ export default function Header() {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-square">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /></svg>
           </div>
-          <img className="user-profile" src={one_user.photo} alt="" />
-          <div className="user-name">{one_user.firstName} {one_user.lastName}</div>
-          <button color="inherit" className="search-buttons" ><Link to="/logout">Выйти</Link></button>
+          <img className="user-profile" src={currentUser.photo} alt="" />
+          <div className="user-name">{currentUser.firstName} {currentUser.lastName}</div>
+          <button color="inherit" className="search-buttons" onClick = {() => {
+            dispatch(logout())
+            history.push('/')          
+          }
+            } ><Link to="/logout">Выйти</Link></button>
         </div>
       }
     </div>

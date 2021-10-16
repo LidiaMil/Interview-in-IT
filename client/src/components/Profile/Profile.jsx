@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import EditInterview from '../EditInterview/EditInterview';
-import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMyInterviews, getMyInterviews, setImgProfile, setNicknameProfile, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
+import { clearMyInterviews, getMyInterviews, setNicknameProfile, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
 import OneInterview from '../OneInterview/OneInterview'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -22,8 +20,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
-const id = Number(localStorage.getItem('user_id'))
+
+
+// const id = Number(localStorage.getItem('user_id'))
 function Profile() {
+  const id = Number(useSelector(state => state.user.currentUser.id))
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)
@@ -38,7 +39,7 @@ function Profile() {
   const [nick, setNick] = useState(nickname)
   const [statusUpload, setStatusUpload] = useState("")
   useEffect(() => {
-    dispatch(setImgProfile(id))
+    // dispatch(setImgProfile(id))
     setNick(nickname)
   }, [nickname, img])
 
@@ -61,6 +62,7 @@ function Profile() {
     formData.append('nickname', name.value);
     formData.append('id', id)
     if (nick) {
+
       dispatch(setNicknameProfile(
         formData
       ))

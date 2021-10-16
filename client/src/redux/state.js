@@ -7,7 +7,7 @@ export const initialState = {
   favInterviews:[],
   comments:[],
   categories:[],
-  user:{},
+  //user:{},
   lang:[],
   oneUser:[],
   changeFavorite:[],
@@ -18,5 +18,7 @@ export const initialState = {
   myInterviews:[], //список собеседований пользователя
   dataInterviewForm:{},
   filter:[],
-  countComment:[]
+  countComment:[],
+  files: {}
+
 }

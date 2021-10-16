@@ -1,17 +1,22 @@
-import {SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS, CLEAR_MY_INTERVIEWS, DELETE_MY_INTERVIEW, GET_MY_INTERVIEW_FOR_FORM,GET_MY_FAV_INTERVIEWS } from "../types"
+import {SET_IMG, SET_NICKNAME, GET_MY_INTERVIEWS, CLEAR_MY_INTERVIEWS,
+   DELETE_MY_INTERVIEW, GET_MY_INTERVIEW_FOR_FORM,GET_MY_FAV_INTERVIEWS } from "../types"
 import axios from "axios";
+import { setImg } from "../reducers/userauth.reducer";
 
 
-//////  IMG  //////
-export const setImgProfile = (id) => async (dispatch) => {
-  fetch(`http://localhost:3000/edit/${id}`)
-    .then(res => res.json())
-    .then(data => dispatch(setImg(data.photo, data.firstName)))
-}
-export const setImg = (img, nickname) => ({
-  type: SET_IMG,
-  payload: { img, nickname }
-})
+// //////  IMG  //////
+// export const setImgProfile = (id) => async (dispatch) => {
+//   fetch(`http://localhost:3000/edit/${id}`)
+//     .then(res => res.json())
+//     .then(data => 
+//       {console.log('data tuta', data)
+      
+//       dispatch(setImg(data.photo))})
+// }
+// // export const setImg = (img, nickname) => ({
+// //   type: SET_IMG,
+// //   payload: { img, nickname }
+// // })
 
 
 /////////  NICKNAME  ////////
@@ -21,7 +26,7 @@ export const setNicknameProfile = (formData) => (dispatch) => {
     method: 'POST',
     body: formData,
   }).then(result => result.json())
-    .then(data => dispatch(setNickname(data.firstName, data.photo)))
+    .then(data => dispatch(setImg(data.firstName, data.photo)))
   // .then(data=>console.log(data.firstName, data.photo))
   //   .then(result => {
   //     const { img, nickname, status } = result

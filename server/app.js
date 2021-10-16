@@ -6,7 +6,7 @@ const path = require('path');
 const redis = require('redis');
 const session = require('express-session');
 
-const authRouter=require('./routes/authRouter')
+const authRouter=require('./routes/auth.routes')
 const mainRouter=require('./routes/mainRouter')
 
 const cors = require("cors");
@@ -29,14 +29,13 @@ const organizations = require('./routes/organizationsRouter');
 
 const PORT = 3000;
 
-// тут подключаем файлики
+// тут подключаем файлы
 const questionRouter=require('./routes/questionRouter')
 
 
 
 
 
-//app.use(cors());
 app.use(cors({credentials: true, origin: 'http://localhost:3001'}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
