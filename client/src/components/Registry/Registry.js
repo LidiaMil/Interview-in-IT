@@ -47,7 +47,7 @@ function Registry(){
 <div className="login">
 	<h1>Регистрация пользователя</h1>
     <form onSubmit={handleSubmit}>
-    <input type="text" placeholder="Имя" autofocus name="firstName" ></input>
+    <input type="text" placeholder="Имя" autoFocus name="firstName" ></input>
     <input type="text" placeholder="Фамилия"  name="lastName" ></input>
     <input type="email" placeholder="email"  name="email" ></input>
     <input type="password" placeholder="password" name="password" type="password"></input>

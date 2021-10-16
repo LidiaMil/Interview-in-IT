@@ -21,40 +21,15 @@ router.get('/', async (req, res) => {
     ],
     order: [['id', 'DESC']]
   });
-  // console.log(questions)
   res.json(questions);
 });
 
 router.post('/filter', async (req, res) => {
-  console.log(req.body)
-  const {categories,company_id} = req.body;
-  let mas=[];
+  const { categories, company_id } = req.body;
+  let mas = [];
   let questions;
-  if(!categories && !company_id){
-   questions = await Interview.findAll({
-      include: [
-        {
-          model: User,
-          as: 'User'
-        },
-        {
-          model: Question
-        },
-        {
-          model: Categorey
-        },
-        {
-          model: Organization
-        },
-      ]
-    });
-    if(!questions.length){
-      questions=mas
-    }
-  }
-  if(categories){
+  if (!categories && !company_id) {
     questions = await Interview.findAll({
-      where:{categorey_id : categories},
       include: [
         {
           model: User,
@@ -71,27 +46,49 @@ router.post('/filter', async (req, res) => {
         },
       ]
     });
-    if(!questions.length){
-      questions=mas
+    if (!questions.length) {
+      questions = mas
     }
   }
-  if(company_id){
-    let org = await  Organization.findAll({
+  if (categories) {
+    questions = await Interview.findAll({
+      where: { categorey_id: categories },
+      include: [
+        {
+          model: User,
+          as: 'User'
+        },
+        {
+          model: Question
+        },
+        {
+          model: Categorey
+        },
+        {
+          model: Organization
+        },
+      ]
+    });
+    if (!questions.length) {
+      questions = mas
+    }
+  }
+  if (company_id) {
+    let org = await Organization.findAll({
       include: [
         {
           model: Interview
         },
       ],
-      where:{id : company_id},
+      where: { id: company_id },
     })
-    let interview_id=[]
-    for(let i=0;i<org[0].Interviews.length;i++){
+    let interview_id = []
+    for (let i = 0; i < org[0].Interviews.length; i++) {
       interview_id.push(org[0].Interviews[i].id)
     }
-    // console.log(interview_id)
-    questions=[]
-    for(let i=0;i<interview_id.length;i++){
-      oneQuestion = await  Interview.findOne({
+    questions = []
+    for (let i = 0; i < interview_id.length; i++) {
+      oneQuestion = await Interview.findOne({
         include: [
           {
             model: User,
@@ -107,33 +104,32 @@ router.post('/filter', async (req, res) => {
             model: Organization
           },
         ],
-        where:{id : interview_id[i]},
+        where: { id: interview_id[i] },
       });
       questions.push(oneQuestion)
     }
-    if(!questions.length){
-      questions=mas
+    if (!questions.length) {
+      questions = mas
     }
   }
-  if(categories && company_id){
+  if (categories && company_id) {
 
-    let org = await  Organization.findAll({
+    let org = await Organization.findAll({
       include: [
         {
           model: Interview
         },
       ],
-      where:{id : company_id},
+      where: { id: company_id },
     })
-    let interview_id=[]
-    for(let i=0;i<org[0].Interviews.length;i++){
+    let interview_id = []
+    for (let i = 0; i < org[0].Interviews.length; i++) {
       interview_id.push(org[0].Interviews[i].id)
     }
-    // console.log(interview_id)
-    questions=[]
-    for(let i=0;i<interview_id.length;i++){
+    questions = []
+    for (let i = 0; i < interview_id.length; i++) {
       oneQuestion = await Interview.findOne({
-        where:{categorey_id :categories ,id : interview_id[i]},
+        where: { categorey_id: categories, id: interview_id[i] },
         include: [
           {
             model: User,
@@ -150,19 +146,18 @@ router.post('/filter', async (req, res) => {
           },
         ],
       });
-      if(oneQuestion){
+      if (oneQuestion) {
         questions.push(oneQuestion)
       }
     }
-    // console.log(categories ,questions)
-    if(!questions.length){
-      questions=mas
+    if (!questions.length) {
+      questions = mas
     }
   }
-  if(questions.length){
+  if (questions.length) {
     res.json(questions);
   }
-  else{
+  else {
     res.json(mas);
   }
 });
@@ -188,7 +183,6 @@ router.get('/favorite', async (req, res) => {
         }
       ]
     })
-  // console.log(favoritePosts)
   res.json(favoritePosts)
 })
 
@@ -197,7 +191,6 @@ router.get('/favorite/:id', async (req, res) => {
   const favorite = await Interview.findOne({
     where: { id }
   });
-  // console.log(favorite.favorites)
   res.json(favorite.favorites);
 });
 
@@ -206,7 +199,6 @@ router.patch('/favorite/:id', async (req, res) => {
   let favorite = await Interview.findOne({
     where: { id }
   });
-  console.log(favorite.favorites)
   const newFav = await Interview.update({
     favorites: !favorite.favorites
   },
@@ -216,14 +208,11 @@ router.patch('/favorite/:id', async (req, res) => {
   favorite = await Interview.findOne({
     where: { id }
   });
-  // console.log(newFav)
-  console.log(favorite.favorites)
   res.json(favorite.favorites);
 });
 
 router.get('/new', async (req, res) => {
   const categories = await Categorey.findAll();
-  // console.log(categories)
   res.json(categories);
 });
 router.get('/newLang', async (req, res) => {
@@ -232,25 +221,22 @@ router.get('/newLang', async (req, res) => {
 });
 router.get('/newOrg', async (req, res) => {
   const organization = await Organization.findAll();
-  // console.log(organization)
   res.json(organization);
 });
 
 router.post("/new", async (req, res) => {
-  const { user,title, description, categories, level, questionsWITHlang, company_id } = req.body;
-  console.log(user,"------------------",typeof Number(company_id))
+  const { user, title, description, categories, level, questionsWITHlang, company_id } = req.body;
 
   if (title && categories && questionsWITHlang && level && company_id) {
     const newInterview = await Interview.create({ name: title, level, description: description, categorey_id: categories, user_id: user, favorites: false })
-    if(typeof Number(company_id) == 'string'){
-      const newCompany= await Organization.create({ title: company_id })
+    if (typeof Number(company_id) == 'string') {
+      const newCompany = await Organization.create({ title: company_id })
       const ququ = await OrganizationQuestion.create({ organization_id: newCompany.id, interview_id: newInterview.id })
     }
-    else{
+    else {
       const ququ = await OrganizationQuestion.create({ organization_id: company_id, interview_id: newInterview.id })
     }
-    for (let i = 0; i < (Object.keys(questionsWITHlang).length / 2)-1; i++) {
-      console.log(i,questionsWITHlang[i])
+    for (let i = 0; i < (Object.keys(questionsWITHlang).length / 2) - 1; i++) {
       const newQuestion = await Question.create({ interview_id: newInterview.id, text: questionsWITHlang[i] })
       const lang = await LanguageQuestion.create({ question_id: newQuestion.id, language_id: questionsWITHlang[`select-${i}`] })
     }
@@ -298,7 +284,6 @@ router.get('/:id', async (req, res) => {
     ],
     where: { id: thisId }
   });
-  // console.log(question)
   res.json(question);
 });
 
@@ -316,7 +301,6 @@ router.get('/user/:id', async (req, res) => {
 
 router.get('/question/:id', async (req, res) => {
   let thisId = req.params.id
-  console.log(thisId)
   const oneQuestions = await Question.findOne(
     {
       where: {
@@ -334,25 +318,23 @@ router.get('/question/:id', async (req, res) => {
         }
       ]
     });
-  console.log("------",oneQuestions.Language);
   res.json(oneQuestions);
 })
 
 router.get('/comment/info/:id', async (req, res) => {
   let thisId = req.params.id
-  
+
   const oneQuestions = await Comment.findAll(
     {
       where: {
         question_id: thisId
       },
-      include:[
+      include: [
         {
-          model:User,
+          model: User,
         }
       ]
     });
-    console.log('++');
   res.json(oneQuestions);
 })
 
@@ -375,36 +357,30 @@ router.get('/comment/:id', async (req, res) => {
         }
       ]
     });
-  console.log('+');
   res.json(oneQuestions);
 })
 
 router.patch('/comment/:id', async (req, res) => {
   let thisId = req.params.id
-
-  // console.log("id",thisId )
-  const oneQuestions = await Question.findAll({ where: { interview_id: thisId }})
-  // console.log(oneQuestions.length)
-  let arr=[]
+  const oneQuestions = await Question.findAll({ where: { interview_id: thisId } })
+  let arr = []
   for (let i = 0; i < oneQuestions.length; i++) {
     arr.push(oneQuestions[i].id)
   }
-  // console.log(arr)
-  let mas=[]
+  let mas = []
   for (let i = 0; i < oneQuestions.length; i++) {
-    mas.push(await Comment.count({ where: { question_id: arr[i]}}))
+    mas.push(await Comment.count({ where: { question_id: arr[i] } }))
   }
-  // console.log(mas)
   res.json(mas);
 })
 
 router.delete("/comment/:id/:post", async (req, res) => {
   const id = req.params.id;
-  let post=req.params.post
+  let post = req.params.post
   await Comment.destroy({ where: { id: Number(id) } })
   const oneQuestions = await Comment.findAll(
     {
-      where:{
+      where: {
         question_id: post
       }
     });
@@ -414,25 +390,23 @@ router.delete("/comment/:id/:post", async (req, res) => {
 router.post("/comment/:id/:idUser", async (req, res) => {
   const id = req.params.id
   const user = req.params.idUser
-  console.log(user)
-  const { text,Users } = req.body;
+  const { text, Users } = req.body;
   try {
-    const newComment = await Comment.create({ user_id: Users.id, question_id: id, text: text})
+    const newComment = await Comment.create({ user_id: Users.id, question_id: id, text: text })
     const oneQuestions = await Comment.findOne(
       {
         where: {
           id: newComment.id
         },
-        include:[
+        include: [
           {
-            model:User,
+            model: User,
           }
         ]
       });
 
-    return res.json( oneQuestions);
+    return res.json(oneQuestions);
   } catch (err) {
-    console.log(err);
   }
 });
 

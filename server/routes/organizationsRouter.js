@@ -4,44 +4,43 @@ const { Organization, Raiting, OrganizationQuestion, Question, Interview, User, 
 
 
 router.get('/', async (req, res) => {
-  const rating = await Organization.findAll({include: Raiting})
-    res.json(rating)
-  })
+  const rating = await Organization.findAll({ include: Raiting })
+  res.json(rating)
+})
 
 
 router.patch('/rating', async (req, res) => {
-     
-
-    const rating = await Raiting.create({userId:1,organization_id:req.body.id, number: req.body.newValue })
-
-    
-    res.json(rating)
-    })
 
 
+  const rating = await Raiting.create({ userId: 1, organization_id: req.body.id, number: req.body.newValue })
 
-  router.get('/:id', async (req, res) => {
-       const id = req.params.id
-       console.log('it id',id)
-       const oneQuestions = await Interview.findAll(
-        { include: [
-          {
-            model: User
-          },
-          {
-            model: Question
-          },
-          {
-            model: Categorey
-          },
-          {
-            model: Organization
-          },
-        ],
-          where: {id }
-        });
-    console.log(oneQuestions)
-        res.json(oneQuestions)
-      })
+
+  res.json(rating)
+})
+
+
+
+router.get('/:id', async (req, res) => {
+  const id = req.params.id
+  const oneQuestions = await Interview.findAll(
+    {
+      include: [
+        {
+          model: User
+        },
+        {
+          model: Question
+        },
+        {
+          model: Categorey
+        },
+        {
+          model: Organization
+        },
+      ],
+      where: { id }
+    });
+  res.json(oneQuestions)
+})
 
 module.exports = router

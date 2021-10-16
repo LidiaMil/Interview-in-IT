@@ -18,7 +18,6 @@ const news = await Interview.findOne({
   ],
   where:{id:5}
 });
-console.log(news)
 
 }
 

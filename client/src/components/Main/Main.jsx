@@ -19,13 +19,7 @@ function Main() {
       <div className="leftmainDivs">
         <Downleft />
       </div>
-      {/* <div className="mainDivs"><Center /></div> */}
-      <div class="centerDiv">
-        {/* <form>
-      <label for="site-search">Search the site:</label>
-      <input type="search" id="site-search" name="q" aria-label="Search through site content" />
-      <button>Search</button>
-      </form> */}
+      <div className="centerDiv">
         <Interview />
 
       </div>

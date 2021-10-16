@@ -3,7 +3,6 @@ import axios from "axios";
 
 //GET COMMENT
 export const getComment = (postId) => async (dispatch) => {
-  // const response = await axios.get(`http://localhost:3000/interview/comment/${postId}`)
   const response = await axios.get(`http://localhost:3000/interview/comment/info/${postId}`)
 
   dispatch(setComment(response.data))
@@ -16,7 +15,6 @@ export const setComment = (comments)=>({
 //ADD COMMENT
 export const addComment = (postId,idUser,newCom) => async (dispatch) => {
   const response = await axios.post(`http://localhost:3000/interview/comment/${postId}/${idUser}`,newCom)
-  console.log(response.data)
   dispatch(setAddComment(response.data))
 }
 export const setAddComment = (newComment)=> ({
@@ -27,7 +25,6 @@ export const setAddComment = (newComment)=> ({
 //DELETE COMMENT
 export const deleteComment = (post,id) => async (dispatch) => {
   const response = await axios.delete(`http://localhost:3000/interview/comment/${id}/${post}`)
-  console.log(response.data,"+-+-")
   dispatch(setdeleteComment(response.data))
 }
 export const setdeleteComment = (id)=> ({
@@ -58,7 +55,6 @@ export const setcountCommentQuestion = (countComment)=> ({
 //INFO COMMENT
 export const commentInfoAction = (id) => async (dispatch) => {
   const response = await axios.get( `http://localhost:3000/interview/comment/info/${id}`)
-  console.log("response.data",response.data)
   dispatch(setcommentInfo(response.data))
 }
 export const setcommentInfo = (commentInfo)=> ({

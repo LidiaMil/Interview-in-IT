@@ -7,7 +7,6 @@ export const getOrg = () => async (dispatch, getState) => {
   try {
     const response = await axios.get('http://localhost:3000/organizations')
     const arr = response.data
-    console.log('qwwqwqwq',arr)
     let arrNum = arr.map((i) => {
       if(!i.Raitings){
         i.result = 0

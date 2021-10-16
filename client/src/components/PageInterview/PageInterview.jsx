@@ -11,12 +11,10 @@ import { changesFavorite, newFavorite } from '../../redux/actions/changeFavorite
 export default function ComplexGrid() {
 
   const postId = useParams()
-  // console.log("post ",postId.id)
   const dispatch = useDispatch()
   const oneInterview = useSelector((state) => state.oneInterview)
   const [favorite, setFavorite] = useState(oneInterview.favorites)
   const { User, Categorey } = oneInterview
-  // console.log("0",oneInterview)
 
   useEffect(() => {
     dispatch(getOneInterview(postId.id))

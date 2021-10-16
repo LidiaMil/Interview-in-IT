@@ -8,7 +8,6 @@ function Downleft() {
   const [vacansies, setNewvacansies] = useState({})
 
   useEffect(() => {
-    console.log('Hi from newquestions!');
     axios.get('https://api.hh.ru/vacancies?count=6&locale=RU&text=frontend')
       .then(response => setNewvacansies(response.data))
   }, [])

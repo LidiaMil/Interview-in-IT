@@ -49,19 +49,16 @@ export default function Basicinputs() {
     }
   }, [data])
 
-  // console.log(categories,"++++++++", org, '123', lang)
   useEffect(() => {
     dispatch(getAllCategorey())
     dispatch(getAllOrg())
     dispatch(getAllLang())
   }, [])
-  // console.log(newForm)
 
 
   const handleSubmitAdd = (event) => {
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
-    // console.log(input_data)
     if (idUser && title && cat && level && input_data && company) {
       dispatch(addInterview(
         {
@@ -111,23 +108,23 @@ export default function Basicinputs() {
       <h2>{id ? "Редактировать собеседование" : "Создать собеседование"}</h2>
       {add ?
         <div id="app">
-          <form class="vue-form" onSubmit={id ? editInterview : handleSubmitAdd}>
+          <form className="vue-form" onSubmit={id ? editInterview : handleSubmitAdd}>
             <div>
-              <label class="label" for="name">Компания</label>
+              <label className="label" for="name">Компания</label>
               {newCompany ?
                 <>
                   <div>
                     <input type="text" name="name" id="name" required="" v-model="name" onChange={companyAdd} />
                   </div>
-                  <button type="button" onClick={() => setNewCompany(null)} class="search-buttons card-buttons">
+                  <button type="button" onClick={() => setNewCompany(null)} className="search-buttons card-buttons">
                     Вернуть список
                   </button>
                 </>
                 :
                 <>
-                  <p class="select">
+                  <p className="select">
                     <select
-                      class="budget"
+                      className="budget"
                       label="Company"
                       v-model="selection.member"
                       value={company}
@@ -138,7 +135,7 @@ export default function Basicinputs() {
                       {org.map((item, index) => <option value={item.id}>{item.title}</option>)}
                     </select>
                   </p>
-                  <button type="button" onClick={() => setNewCompany(true)} class="search-buttons card-buttons">
+                  <button type="button" onClick={() => setNewCompany(true)} className="search-buttons card-buttons">
                     Компании нет в списке
                   </button>
                 </>
@@ -148,7 +145,7 @@ export default function Basicinputs() {
             <div>
               {id ? <input label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
                 <>
-                  <label class="label" for="name">Уровень</label>
+                  <label className="label" for="name">Уровень</label>
                   <input type="text" name="name" id="name" required="" v-model="name" onChange={levelAdd} />
                 </>
               }
@@ -157,7 +154,7 @@ export default function Basicinputs() {
             <div>
               {id ? <input label="Title" variant="outlined" onChange={titleAdd} value={title} /> :
                 <>
-                  <label class="label" for="name">Должность</label>
+                  <label className="label" for="name">Должность</label>
                   <input type="text" name="name" id="name" required="" v-model="name" onChange={titleAdd} />
                 </>
               }
@@ -166,7 +163,7 @@ export default function Basicinputs() {
             <div>
               {id ? <input label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
                 <>
-                  <label class="label" for="name">Описание вакансии</label>
+                  <label className="label" for="name">Описание вакансии</label>
                   <input type="text" name="name" id="name" required="" v-model="name" onChange={descriptionAdd} />
                 </>
               }
@@ -174,10 +171,10 @@ export default function Basicinputs() {
 
 
             <div>
-              <label class="label" for="name">Категория </label>
-              <p class="select">
+              <label className="label" for="name">Категория </label>
+              <p className="select">
                 <select
-                  class="budget"
+                  className="budget"
                   v-model="selection.member"
                   value={cat}
                   label="Organization"
@@ -192,13 +189,13 @@ export default function Basicinputs() {
 
             <div>
               {newForm.map((el, i) => <Input key={el.name} index={el.name} lang={lang} />)}
-              <button type="button" onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} class="search-buttons card-buttons">
+              <button type="button" onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} className="search-buttons card-buttons">
                 Добавить вопрос
               </button>
             </div>
 
             <Stack spacing={2} direction="row">
-              <button type="submit" class="search-buttons card-buttons">{id ? "Сохранить изменения" : "Создать"}</button>
+              <button type="submit" className="search-buttons card-buttons">{id ? "Сохранить изменения" : "Создать"}</button>
             </Stack>
           </form>
         </div>
@@ -217,92 +214,5 @@ export default function Basicinputs() {
       </div>
     </div>
 
-    // <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1, alignItems: 'center' }}>
-    //   <h3>{id ? "Редактировать собеседование" : "Создать собеседование"}</h3>
-    //   {add ?
-    //     <Grid container spacing={3}>
-    //       <form onSubmit={id ? editInterview : handleSubmitAdd}>
-    //         <Box sx={{ minWidth: 250 }}>
-    //         {newCompany ?
-    //             <input  label="Name company" variant="outlined" onChange={companyAdd} />
-    //            : 
-    //           <FormControl fullWidth>
-    //             <InputLabel id="demo-simple-select-label">Company</InputLabel>
-    //             <Select
-    //               labelId="demo-simple-select-label"
-    //               id="demo-simple-select"
-    //               value={company}
-    //               label="Company"
-    //               onChange={(event) => {
-    //                 setCompany(event.target.value);
-    //               }}
-    //             >
-    //               {org.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.title}</MenuItem>)}
-    //             </Select>
-    //           </FormControl>
-    //           }
-    //           <Button onClick={() => setNewCompany(true)} variant="contained">
-    //             Компании нет в списке
-    //           </Button>
-
-    //         </Box>
-
-    //         <Box sx={{ minWidth: 500 }}>
-    //           {id ? <input  label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
-    //             <input  label="Level" variant="outlined" onChange={levelAdd} />
-    //           }
-    //         </Box>
-
-    //         <Box sx={{ minWidth: 250 }}>
-    //           {id ? <input  label="Title" variant="outlined" onChange={titleAdd} value={title}/> :
-    //             <input  label="Title" variant="outlined" onChange={titleAdd} />}
-    //         </Box>
-
-    //         <Box sx={{ minWidth: 500 }}>
-    //           {id ? <input  label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
-    //             <input  label="Description" variant="outlined" onChange={descriptionAdd} />
-    //           }
-    //         </Box>
-
-
-    //         <Box sx={{ minWidth: 250 }}>
-    //           <FormControl fullWidth>
-    //             <InputLabel id="demo-simple-select-label">Categorey</InputLabel>
-    //             <Select
-    //               labelId="demo-simple-select-label"
-    //               id="demo-simple-select"
-    //               value={cat}
-    //               label="Organization"
-    //               onChange={(event) => {
-    //                 setCat(event.target.value);
-    //               }}
-    //             >
-    //               {categories.map((item, index) => <MenuItem value={item.id}>{item.id}.{item.categorey}</MenuItem>)}
-    //             </Select>
-    //           </FormControl>
-    //         </Box>
-
-    //         <Box sx={{ minWidth: 500 }}>
-    //           {newForm.map((el, i) => <Input key={el.name} index={el.name} lang={lang} />)}
-    //           <Button onClick={() => setNewForm([...newForm, { name: `${newForm.length}` }])} variant="contained">
-    //             Добавить вопрос
-    //           </Button>
-    //         </Box>
-
-    //         <Stack spacing={2} direction="row">
-    //           <Button type="submit" variant="contained">{id ? "Сохранить изменения" : "Создать"}</Button>
-    //         </Stack>
-    //       </form>
-    //     </Grid>
-    //     : <>
-    //       <h1>Запись успешно добавленна</h1>
-    //       <div>
-    //         <a href='/'>перейти в личный кабинет</a>
-    //       </div>
-    //       <div>
-    //         <a href='/profile'>На главную</a>
-    //       </div>
-    //     </>}
-    // </Paper>
   );
 }

@@ -28,8 +28,6 @@ function Question() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //const input_data = Object.fromEntries(new FormData(event.target))
-    console.log(cat)
     dispatch(filterInterview(
       {
         categories: cat,
@@ -51,7 +49,7 @@ function Question() {
           <div >
             <form onSubmit={handleSubmit} className='filter-form'>
               <div>
-                <label class="label" for="name"><h4>Категория</h4></label>
+                <label className="label" for="name"><h4>Категория</h4></label>
                 <select id="fruits" value={cat} onChange={(event) => {
                   setCat(event.target.value);
                 }}>
@@ -60,7 +58,7 @@ function Question() {
                 </select>
               </div>
               <div>
-                <label class="label" for="name"><h4>Компания</h4></label>
+                <label className="label" for="name"><h4>Компания</h4></label>
                 <select id="fruits" value={company} label="Company" onChange={(event) => {
                   setCompany(event.target.value);
                 }}>
@@ -69,9 +67,9 @@ function Question() {
                 </select>
               </div>
 
-              <button class="search-buttons card-buttons" type="submit">Применить</button>
+              <button className="search-buttons card-buttons" type="submit">Применить</button>
 
-              <button class="search-buttons card-buttons" onClick={() => handleNull()}>Сбросить</button>
+              <button className="search-buttons card-buttons" onClick={() => handleNull()}>Сбросить</button>
 
             </form>
           </div>

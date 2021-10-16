@@ -23,27 +23,17 @@ import Interview from './components/Interview/Interview'
 import More from './components/More/More'
 import OrganizationInterview from './components/OrganizationInterview/OrganizationInterview'
 import Registry from './components/Registry/Registry'
-//авторицация
 import Login from './components/Login/Login'
-import Logout from './components/Logout/Logout'
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuth } from '../../client/src/redux/actions/auth.action'
-import {Auth} from '../../client/src/redux/actions/auth.action'
-// const preloadedState = window.localStorage.getItem('in_user') || '{"isAuthenticated": false}'
-// console.log('amahere', preloadedState);
+import { Auth } from '../../client/src/redux/actions/auth.action'
 function App() {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(state => state.user.isAuth)
   useEffect(() => {
-    // if (window.localStorage.getItem('user_id')) {
-      //     console.log('привет из сессии', window.localStorage.getItem('in_user'));
-      //добавить в локал стораж ид
-      dispatch(Auth())
+    dispatch(Auth())
   }, [])
-
-  // const isAuthenticated = true
-  // console.log(isAuthenticated)
 
   return (
     <Router>
@@ -71,9 +61,9 @@ function App() {
               <Interview />
             </Route>
             <Route exact path="/question/:id">
-            {!isAuthenticated ? <Login /> : <More />}
+              {!isAuthenticated ? <Login /> : <More />}
 
-              
+
             </Route>
             <Route exact path="/newcomment/:id">
               <NewInterview />
@@ -85,9 +75,6 @@ function App() {
             </Route>
             <Route path='/login'>
               <Login />
-            </Route>
-            <Route path='/logout'>
-              <Logout />
             </Route>
             <Route path='/registration'>
               <Registry />

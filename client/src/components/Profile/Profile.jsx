@@ -18,37 +18,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-//id пользователя
-
-
-// const id = Number(localStorage.getItem('user_id'))
 function Profile() {
-  //const history = useHistory()
   const id = Number(useSelector(state => state.user.currentUser.id))
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)
-  const img = useSelector(state => state.oneUser.photo)
-  const nickname = useSelector(state => state.oneUser.firstName)
+  const img = useSelector(state => state.user.currentUser.photo)
+  const nickname = useSelector(state => state.user.currentUser.firstName)
   const myInterviews = useSelector(state => state.myInterviews)
   const favInterviews = useSelector(state => state.favInterviews)
   const [inputValue, setInputValue] = useState(null)
   const ref = useRef(null)
-
-  // const [posts, setPosts] = useState([])
   const [nick, setNick] = useState(nickname)
   const [tmpImg, setTmpImg] = useState(nickname)
-  const [statusUpload, setStatusUpload] = useState("")
 
   useEffect(() => dispatch(getMyFavoriteInterviews()), [])
   useEffect(() => {
-    // dispatch(setImgProfile(id))
     setNick(nickname)
   }, [nickname])
 
   function inputChange(e) {
-    // const retChild = refCurrent.childNodes[0]
     let reader = new FileReader();
     reader.onloadend = function () {
       setTmpImg(reader.result)
@@ -80,7 +69,6 @@ function Profile() {
     setFavorite(!favorite)
   }
 
-  console.log(myInterviews)
    
   function getMyPosts() {
     if (myInterviews.length) {
@@ -118,7 +106,7 @@ function Profile() {
             <div >
               <input
                 accept="image/*"
-                className={classes.input}
+                class={classes.input}
                 id="contained-button-file"
                 name="photo"
                 type="file"
@@ -142,33 +130,14 @@ function Profile() {
                 placeholder="введите ваш nickname"
               />
 
-              <button style={{ margin: '3px' }} variant="contained" color="primary" class="search-buttons">
+              <button style={{ margin: '3px' }} variant="contained" color="primary" className="search-buttons">
                 Изменить
               </button>
 
             </div>
           </form >
-
-          <div>
-            {/* <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={getMyPosts}>
-              {myInterviews.length ? "Скрыть собеседования" : "Показать мои собеседования"}
-            </button> */}
-          </div>
         </div>
         <div>
-          {/* {favorite ?
-            <button style={{margin:'7px'}} className="search-buttons detail-button" onClick={() => handleViewFavorite()}>
-              Избранное
-            </button>
-            :
-            <>
-              <button className="search-buttons detail-button" onClick={() => setFavorite(!favorite)}>
-                Скрыть избранное
-              </button>
-
-              {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
-            </>
-          } */}
 
           {favInterviews && favInterviews.map((item, index) => <div className="col-4" key={item.id}><OneInterview {...item} /></div>)}
 

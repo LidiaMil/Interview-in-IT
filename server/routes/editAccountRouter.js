@@ -59,30 +59,19 @@ router.get('/getusersposts/:id', async (req, res) => {
         {
           model: Question
         },
-    
+
       ]
     })
   res.json(posts)
 })
 
 
-// router.get('/editinterview/:id', async (req, res) => {
-//   // const id = Number(req.params.id)
-
-// })
-
 router.delete('/interview/:id', async (req, res) => {
   const { id } = req.params
-  // console.log("id----", id);
   await Interview.destroy({ where: { id: Number(id) } })
   return res.status(200)
 })
 
-
-// router.get('/datainterview/:id', async (req, res) => {
-//   const { id } = req.params
-//   console.log("====>", +id);
-// })
 
 
 router.get('/:id', async (req, res) => {

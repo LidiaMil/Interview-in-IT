@@ -30,7 +30,6 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
 
   const getChange =  useCallback(async (newValue) => {
     setValue(newValue);
-    console.log('inCallback',newValue)
     await axios.patch('http://localhost:3000/organizations/rating', {newValue, id})
     dispatch(getOrg())
    
