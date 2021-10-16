@@ -8,7 +8,7 @@ export const initialState = {
   comments:[],
   categories:[],
   commentUser:[],
-  user:{},
+  //user:{},
   lang:[],
   oneUser:[],
   changeFavorite:[],
@@ -21,4 +21,5 @@ export const initialState = {
   filter:[],
   countComment:[],
   commentInfo:[]
+
 }

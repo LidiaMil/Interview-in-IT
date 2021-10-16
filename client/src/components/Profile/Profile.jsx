@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import EditInterview from '../EditInterview/EditInterview';
-import { } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearMyInterviews, getMyInterviews, setProfileData, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
-import { getUser } from '../../redux/actions/user.action'
+import { clearMyInterviews, getMyInterviews, setNicknameProfile, getMyFavoriteInterviews } from '../../redux/actions/editProfile.action';
 import OneInterview from '../OneInterview/OneInterview'
-import { useHistory } from 'react-router-dom'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -24,9 +20,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 //id пользователя
-const id = Number(localStorage.getItem('user_id'))
+
+
+// const id = Number(localStorage.getItem('user_id'))
 function Profile() {
-  const history = useHistory()
+  //const history = useHistory()
+  const id = Number(useSelector(state => state.user.currentUser.id))
   const classes = useStyles();
   const dispatch = useDispatch()
   const [favorite, setFavorite] = useState(true)
@@ -44,6 +43,7 @@ function Profile() {
 
   useEffect(() => dispatch(getMyFavoriteInterviews()), [])
   useEffect(() => {
+    // dispatch(setImgProfile(id))
     setNick(nickname)
   }, [nickname])
 
@@ -64,16 +64,15 @@ function Profile() {
     formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
     formData.append('nickname', name.value);
     formData.append('id', id)
-    // if (nick) {
-    dispatch(setProfileData(
-      formData
-    ))
-    // setNick(nick)
-    getUser(id)
+    if (nick) {
 
-    // } else {
-    //   alert('не введён nickname')
-    // }
+      dispatch(setNicknameProfile(
+        formData
+      ))
+      setNick(nick)
+    } else {
+      alert('не введён nickname')
+    }
   }
 
   const handleViewFavorite = () => {

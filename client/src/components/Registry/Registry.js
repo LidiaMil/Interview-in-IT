@@ -3,24 +3,40 @@ import {useHistory, Link} from 'react-router-dom'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { setAuth } from '../../redux/actions/auth.action'
-import ReactDOM from 'react-dom';
 
 
 function Registry(){
 
   const history = useHistory()
+  const dispatch = useDispatch()
 
   function handleSubmit(event){
   
     event.preventDefault()
     const input_data = Object.fromEntries(new FormData(event.target))
 
-    axios.post('http://localhost:3000/auth/registry', {
-      firstName: input_data.firstName ,
-      lastName: input_data.lastName,
-      email: input_data.email,
-      password: input_data.password
-  }).then(()=> history.push('/'))
+    try{
+        axios.post('http://localhost:3000/auth/registration', {
+        firstName: input_data.firstName ,
+        lastName: input_data.lastName,
+        email: input_data.email,
+        password: input_data.password
+    }).then((response)=> 
+    {
+
+      //удалить эту логику кроме push
+      dispatch(setAuth())
+      localStorage.setItem('user_id', response.data.id);
+      history.push('/')
+  
+    })
+
+    } catch(e){
+      alert(e.response.data.message)
+    }
+   
+  
+  
 
   }
                                

@@ -8,16 +8,18 @@ import { categoriesReducer } from './categories.reducer'
 import { langReducer } from './lang.reducer'
 import { orgReducer } from './org.reducer'
 import { myInterviewsReducer } from "./myInterviews.reducer"
-import {organizationInterviewReducer} from './organizationInterview.reducer'
-import {oneInterviewReducer} from './oneInterview.reducer'
-import {oneUserReducer} from './user.reducer'
-import {changeFavoriteReducer} from './changeFavorite.reducer'
-import {myFavoriteInterviewsReducer} from './favoriteInterview.reducer'
+import { organizationInterviewReducer } from './organizationInterview.reducer'
+import { oneInterviewReducer } from './oneInterview.reducer'
+import { oneUserReducer } from './user.reducer'
+import { changeFavoriteReducer } from './changeFavorite.reducer'
+import { myFavoriteInterviewsReducer } from './favoriteInterview.reducer'
 import { dataInterviewFormReducer } from "./dataInterviewForm.reducer"
 import {commentCountReducer} from './countComment.reducer'
 import {filterReducer} from './filter.reducer'
 import {commentUserReducer} from './userComment.reducer'
 import {commentInfoReducer} from './commentInfo.reducer'
+import { fileReducer } from "./file.reducer"
+import { userAuthReducer } from "./userauth.reducer"
 
 export const reducer = combineReducers({
   organization: organizationReducer,
@@ -33,12 +35,14 @@ export const reducer = combineReducers({
   // nickname: editNickname,
   myInterviews: myInterviewsReducer,
   organizationInterview: organizationInterviewReducer,
-  oneUser:oneUserReducer,
-  changeFavorite:changeFavoriteReducer,
-  favInterviews:myFavoriteInterviewsReducer,
+  oneUser: oneUserReducer,
+  changeFavorite: changeFavoriteReducer,
+  favInterviews: myFavoriteInterviewsReducer,
   dataInterviewForm: dataInterviewFormReducer,
   countComment:commentCountReducer,
   filter:filterReducer,
-  commentUser:commentUserReducer ,
-  commentInfo:commentInfoReducer
+  commentUser:commentUserReducer,
+  commentInfo:commentInfoReducer,
+  user: userAuthReducer,
+  files: fileReducer
 })
