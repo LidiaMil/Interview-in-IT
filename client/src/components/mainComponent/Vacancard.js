@@ -1,8 +1,6 @@
 import * as React from 'react';
 export default function ActionAreaCard(vacanprom) {
   return (
-
-
     <div className="job-overview-card shadow border-radius">
       <div className="job-card overview-card">
         <div className="overview-wrapper">
@@ -19,6 +17,5 @@ export default function ActionAreaCard(vacanprom) {
         </div>
       </div>
     </div>
-
   );
 }

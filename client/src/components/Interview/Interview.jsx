@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import OneInterview from "../OneInterview/OneInterview"
 import { useDispatch, useSelector } from "react-redux";
 import { getInterview } from '../../redux/actions/interview.action'
-import { styled, Grid, Typography, Avatar, Paper, ButtonBase } from '@material-ui/core';
 import { useState } from "react"
 import { getAllCategorey } from '../../redux/actions/categories.action';
 import { filterInterview } from '../../redux/actions/interview.action'

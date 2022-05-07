@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button, Grid, Typography, Paper } from '@material-ui/core';
 import Question from '../Question/Question';
 import { deleteMyInterview, editMyInterview } from '../../redux/actions/editProfile.action';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   Link
 } from "react-router-dom";

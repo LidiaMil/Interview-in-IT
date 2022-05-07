@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, styled, Grid, div, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
+import { Button, } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from "react"
 import { getOneQuestion } from '../../redux/actions/oneQuest.action'

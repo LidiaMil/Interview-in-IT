@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react"
 import { useEffect } from 'react'
 import { countCommentQuestion } from '../../redux/actions/comment.action'
 

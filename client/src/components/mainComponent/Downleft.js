@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import UpLeftCard from '../mainComponent/mainComponentsCards/UpLeftCard'
 import Vacancard from '../mainComponent/Vacancard'
 
 function Downleft() {

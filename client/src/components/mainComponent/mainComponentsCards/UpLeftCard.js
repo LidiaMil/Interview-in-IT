@@ -1,5 +1,3 @@
-
-
 function UpLeftCard(questions) {
 
   return (

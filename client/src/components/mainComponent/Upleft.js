@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import UpLeftCard from '../mainComponent/mainComponentsCards/UpLeftCard'
 
 function Upleft() {
 
@@ -12,7 +11,6 @@ function Upleft() {
 
   return (
     <>
-
       <h4>Топ 5 популярных вопросов</h4>
       {newquestions && newquestions.map((item) =>
       (<div key={item.text} className="job-overview-card">
@@ -29,11 +27,7 @@ function Upleft() {
         </div>
       </div>)
       )}
-
-
-
-
-
+      
       {/* 
   <ul className="category-list">
      {newquestions && newquestions.map((item) =>  <li><a href="">{item.text}</a><span>5</span></li> )}

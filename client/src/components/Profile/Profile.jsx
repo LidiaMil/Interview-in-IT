@@ -50,11 +50,12 @@ function Profile() {
     const formData = new FormData();
     const imagefile = document.querySelector('#contained-button-file');
     const name = document.querySelector('#firstName');
+    console.log('image', imagefile.files,name.value, 'nickname', formData)
     formData.append('image', imagefile.files[0] ? imagefile.files[0] : null);
     formData.append('nickname', name.value);
     formData.append('id', id)
     if (nick) {
-
+      console.log(formData,'formData.formData')
       dispatch(setNicknameProfile(
         formData
       ))
@@ -106,12 +107,12 @@ function Profile() {
             <div >
               <input
                 accept="image/*"
-                class={classes.input}
+                className={classes.input}
                 id="contained-button-file"
                 name="photo"
                 type="file"
                 onChange={inputChange}
-                value={inputValue}
+                value= {inputValue ? inputValue : ''} 
               />
               <button style={{ margin: '3px' }} className="search-buttons detail-button">
                 <label htmlFor="contained-button-file" >

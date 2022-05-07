@@ -1,13 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import { Grid, Paper } from '@material-ui/core';
-
-import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategorey } from '../../redux/actions/categories.action';
 import { addInterview } from '../../redux/actions/interview.action'
@@ -15,7 +7,6 @@ import { getAllLang } from '../../redux/actions/lang.action'
 import { getAllOrg } from '../../redux/actions/org.action'
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
-import { useInput } from '../../hooks/inputHook'
 import { useParams } from 'react-router';
 import Input from '../Input/Input'
 

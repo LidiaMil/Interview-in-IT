@@ -1,8 +1,8 @@
 
 import * as React from 'react';
-import { Button, styled, Grid, Typography, Box, Avatar, Paper, ButtonBase } from '@material-ui/core';
-import { Link, useParams } from "react-router-dom";
-import { useMemo, useEffect, useCallback, useState } from 'react'
+import { styled, Grid, Typography, Box, ButtonBase } from '@material-ui/core';
+import { useParams } from "react-router-dom";
+import { useEffect, useCallback, useState } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 

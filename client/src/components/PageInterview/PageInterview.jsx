@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import Question from '../Question/Question';
 import { getOneInterview } from '../../redux/actions/oneInterview.action'
 import { useState } from "react"
-import { changesFavorite, newFavorite } from '../../redux/actions/changeFavorite.action'
+import { newFavorite } from '../../redux/actions/changeFavorite.action'
 
 
 export default function ComplexGrid() {

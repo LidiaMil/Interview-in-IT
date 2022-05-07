@@ -1,20 +1,11 @@
 import * as React from 'react';
-import { styled, Grid, Typography, Avatar, Paper, ButtonBase, CardMedia, Link } from '@material-ui/core';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
+import { styled, } from '@material-ui/core';
 import Rating from '@mui/material/Rating';
-import { useMemo, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { getValue } from '../../redux/actions/raiting.action'
+import { useCallback } from 'react'
+import { useDispatch, } from "react-redux";
 import { useState } from 'react';
 import axios from 'axios';
 import { getOrg } from '../../redux/actions/organization.action';
-// import {Link} from "react-router-dom";
-
-
-
-
-
 
 const Img = styled('img')({
   margin: '10px',
@@ -32,16 +23,12 @@ export default function Cards({ id, photo, Raitings, address, link, areaOfActivi
     setValue(newValue);
     await axios.patch('http://localhost:3000/organizations/rating', {newValue, id})
     dispatch(getOrg())
-   
 
   }, [])
   
 
 
   return (
-
-    
-
   //           <div className='companyCard'>
   //           <a href={`/organization/${id}`}>silka</a>
   //           <img src={photo} />

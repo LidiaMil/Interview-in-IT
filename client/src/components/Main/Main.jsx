@@ -1,15 +1,8 @@
-import Center from '../mainComponent/Center'
 import Downleft from '../mainComponent/Downleft'
 import Right from '../mainComponent/Right'
-import whale from '../../whale'
 import Interview from '../Interview/Interview'
-import { useEffect } from "react";
 
 import React from "react";
-import axios from 'axios'
-
-
-
 
 function Main() {
 
