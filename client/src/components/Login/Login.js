@@ -39,7 +39,7 @@ function Login(){
         <button type="submit" className="btn btn-primary btn-block btn-large">Войти</button>
         {error ? <div className="error">Тут ошибка: {error}</div> : <div></div>}
         
-         <Link to="/registry">Регистрация</Link> 
+         <Link to="/registration">Регистрация</Link> 
     </form>
 </div>
 
