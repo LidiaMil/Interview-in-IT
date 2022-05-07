@@ -72,7 +72,7 @@ export default function ImgMediadiv() {
               <>
                 <form onSubmit={handleSubmitAdd} >
                   <div>
-                    <label className="label" for="name">Твой комментарий:</label>
+                    <label className="label" htmlFor="name">Твой комментарий:</label>
                     <input type="text" id="name" required="" v-model="name" onChange={textAdd} />
                     <button type="submit" className="search-buttons card-buttons">Опубликовать</button>
                   </div>

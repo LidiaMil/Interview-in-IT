@@ -101,7 +101,7 @@ export default function Basicinputs() {
         <div id="app">
           <form className="vue-form" onSubmit={id ? editInterview : handleSubmitAdd}>
             <div>
-              <label className="label" for="name">Компания</label>
+              <label className="label" htmlFor="name">Компания</label>
               {newCompany ?
                 <>
                   <div>
@@ -136,7 +136,7 @@ export default function Basicinputs() {
             <div>
               {id ? <input label="Level" variant="outlined" onChange={levelAdd} value={level} /> :
                 <>
-                  <label className="label" for="name">Уровень</label>
+                  <label className="label" htmlFor="name">Уровень</label>
                   <input type="text" name="name" id="name" required="" v-model="name" onChange={levelAdd} />
                 </>
               }
@@ -145,7 +145,7 @@ export default function Basicinputs() {
             <div>
               {id ? <input label="Title" variant="outlined" onChange={titleAdd} value={title} /> :
                 <>
-                  <label className="label" for="name">Должность</label>
+                  <label className="label" htmlFor="name">Должность</label>
                   <input type="text" name="name" id="name" required="" v-model="name" onChange={titleAdd} />
                 </>
               }
@@ -154,7 +154,7 @@ export default function Basicinputs() {
             <div>
               {id ? <input label="Description" variant="outlined" onChange={descriptionAdd} value={description} /> :
                 <>
-                  <label className="label" for="name">Описание вакансии</label>
+                  <label className="label" htmlFor="name">Описание вакансии</label>
                   <input type="text" name="name" id="name" required="" v-model="name" onChange={descriptionAdd} />
                 </>
               }
@@ -162,7 +162,7 @@ export default function Basicinputs() {
 
 
             <div>
-              <label className="label" for="name">Категория </label>
+              <label className="label" htmlFor="name">Категория </label>
               <p className="select">
                 <select
                   className="budget"

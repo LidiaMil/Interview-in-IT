@@ -48,7 +48,7 @@ function Question() {
           <div >
             <form onSubmit={handleSubmit} className='filter-form'>
               <div>
-                <label className="label" for="name"><h4>Категория</h4></label>
+                <label className="label" htmlFor="name"><h4>Категория</h4></label>
                 <select id="fruits" value={cat} onChange={(event) => {
                   setCat(event.target.value);
                 }}>
@@ -57,7 +57,7 @@ function Question() {
                 </select>
               </div>
               <div>
-                <label className="label" for="name"><h4>Компания</h4></label>
+                <label className="label" htmlFor="name"><h4>Компания</h4></label>
                 <select id="fruits" value={company} label="Company" onChange={(event) => {
                   setCompany(event.target.value);
                 }}>

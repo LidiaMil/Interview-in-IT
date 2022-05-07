@@ -6,9 +6,9 @@ export default function BasicTextFields({ index, lang }) {
 
   return (
     <>
-      <label className="label" for="name">Текст вопроса</label>
+      <label className="label" htmlFor="name">Текст вопроса</label>
       <input type="text" id="name" required="" v-model="name" name={index} />
-      <label className="label" for="name">Язык программирования </label>
+      <label className="label" htmlFor="name">Язык программирования </label>
       <p className="select">
         <select
           name={`select-${index}`}
