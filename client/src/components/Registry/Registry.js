@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {useHistory, Link} from 'react-router-dom'
+import React from 'react'
+import {useHistory, } from 'react-router-dom'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { setAuth } from '../../redux/actions/auth.action'
@@ -23,26 +23,18 @@ function Registry(){
         password: input_data.password
     }).then((response)=> 
     {
-
       //удалить эту логику кроме push
-      dispatch(setAuth())
-      localStorage.setItem('user_id', response.data.id);
-      history.push('/')
-  
+      // dispatch(setAuth())
+      // localStorage.setItem('user_id', response.data.id);
+      history.push('/login')
     })
 
     } catch(e){
       alert(e.response.data.message)
     }
-   
-  
-  
-
-  }
-                               
+  }                     
   
   return (
-
 
 <div className="login">
 	<h1>Регистрация пользователя</h1>

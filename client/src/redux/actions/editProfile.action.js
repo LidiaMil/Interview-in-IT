@@ -7,7 +7,6 @@ import { setImg } from "../reducers/userauth.reducer";
 
 /////////  NICKNAME  ////////
 export const setNicknameProfile = (formData) => (dispatch) => {
-
   fetch("http://localhost:3000/edit/upload", {
     method: 'POST',
     body: formData,

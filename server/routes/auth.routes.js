@@ -66,7 +66,8 @@ router.post('/registration', [
   check('email', 'email некорректен').isEmail(),
   check('password', 'пароль от 3 до 12').isLength({ options: { min: 3, max: 12 } })
 ], async (req, res) => {
-  const errors = validationResult(req)
+  console.log(req,'req')
+  const errors = validationResult(req.body)
   if (!errors.isEmpty()) {
     return res.status(400).json({ message: 'некорректный запрос', errors })
   }
