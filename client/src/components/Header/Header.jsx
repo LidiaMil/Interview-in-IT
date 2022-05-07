@@ -26,7 +26,7 @@ export default function Header() {
       {!isAuntificated &&
         <div className="forLogin">
           <Link style={{ marginRight: '10px' }} className="nav-link search-buttons" to="/login">Логин</Link>
-          <Link className="nav-link search-buttons" to="/registry">Регистрация</Link>
+          <Link className="nav-link search-buttons" to="/registration">Регистрация</Link>
         </div>
       }
       {isAuntificated &&
