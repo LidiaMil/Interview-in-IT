@@ -34,7 +34,9 @@ router.post("/upload", function (req, res, next) {
         res.json({ message: err, });
       } else {
         User.update({ firstName }, { where: { id } })
-        res.status(201).end()
+        const usersData = await User.findOne({ where: { id } })
+        res.json(usersData)
+        // res.status(201).end()
       }
     } else {
       res.status(404).end()
