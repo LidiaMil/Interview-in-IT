@@ -31,7 +31,6 @@ function Profile() {
   const ref = useRef(null)
   const [nick, setNick] = useState(nickname)
   const [tmpImg, setTmpImg] = useState(nickname)
-
   useEffect(() => dispatch(getMyFavoriteInterviews()), [])
   useEffect(() => {
     setNick(nickname)
@@ -91,8 +90,7 @@ function Profile() {
             <div className="job-overview-card avatar">
               {(img || tmpImg) ?
                 <img
-
-                  src={ tmpImg || img} ref={ref}
+                  src={ nickname===tmpImg? img : tmpImg } ref={ref}
                   alt="Avatar"
                 />
                 :
